@@ -56,6 +56,7 @@ class InscripcionController extends Controller
         //registrar la inscripcion del usuario
         $programa = Inscripcion::create($request->all());
         return redirect()->route('registrar.index');
+        /*este es un comentario haber si gitgu funciona*/
     }
 
     /**
