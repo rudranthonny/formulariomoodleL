@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class InscripcionController extends Controller
 {
-    private $token = 'ff63b816357ee3098eb0504de43be96c';
-    private $domainname = 'https://jademlearning.com/aula5';
+    private $token = 'fc410318b59368f9245b394b209c644e';
+    private $domainname = 'https://learclass.com';
     /**
      * Display a listing of the resource.
      *
