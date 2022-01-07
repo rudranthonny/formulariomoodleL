@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group mb-5">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
+                                <input class="form-check-input" type="checkbox" name="politicas">
                                 <label class="form-check-label text-muted">Al seleccionar esta casilla aceptas nuestro aviso de privacidad y los términos y condiciones</label>
                             </div>
                         </div>
