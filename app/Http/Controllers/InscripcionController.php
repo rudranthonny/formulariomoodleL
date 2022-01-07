@@ -44,6 +44,7 @@ class InscripcionController extends Controller
             'lastname'=> 'required',
             'email' => 'required',
             'phone' => 'required',
+            'dni' => 'required',
         ]);
         //crear usuario en moodle
         $functionname = 'core_user_create_users';
