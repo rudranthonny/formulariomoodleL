@@ -14,6 +14,10 @@ class Matricula extends Model
         'user_id',
         'costo',
         'programa_id',
+        'agente',
+        'comprobante',
+        'tipo',
+        'fechapago',
     ];
 
     //rel 1 a n

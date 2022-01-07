@@ -19,7 +19,12 @@ class CreateMatriculasTable extends Migration
             $table->string('lastname');
             $table->integer('user_id');
             $table->double('costo');
-            $table->unsignedBigInteger('programa_id');
+            $table->string('agente')->nullable();
+            $table->string('tipo')->nullable();
+            $table->date('fechapago')->nullable();
+            $table->string('comprobante')->nullable();
+            $table->string('imagenpago')->nullable();
+            $table->unsignedBigInteger('programa_id')->nullable();
             $table->foreign('programa_id')->references('id')->on('programas')->onDelete('cascade');
             $table->timestamps();
         });

@@ -62,7 +62,7 @@ class MatriculaController extends Controller
      */
     public function edit(Matricula $matricula)
     {
-        //
+        return view('admin.matricula.edit',compact('matricula'));
     }
 
     /**
@@ -74,7 +74,19 @@ class MatriculaController extends Controller
      */
     public function update(Request $request, Matricula $matricula)
     {
-        //
+        //return $matricula;
+        $request->validate([
+            'costo' => 'required',
+            'agente'=> 'required',
+            'tipo' => 'required',
+            'fechapago' => 'required',
+            'comprobante' => 'required',
+        ]);
+        //return $request->input('comprobante');
+        $matricula->update($request->all());
+        //return 'se actualizo correctamente';
+        return redirect()->route('admin.usuarios.agregarprograma',$matricula->user_id)->with('info','se modifico correctamente el pago');
+
     }
 
     /**

@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('inscripcion');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('dashboard');*/
 
 Route::resource('registrar', InscripcionController::class)->names('registrar');

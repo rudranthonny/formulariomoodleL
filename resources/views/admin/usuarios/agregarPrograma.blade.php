@@ -78,6 +78,7 @@ foreach(json_decode($usuario)->users as $estudiante){
                 <td>{{$matricula->programa->name}}</td>
                 <td>{{$matricula->costo}}</td>
                 <td>
+                    <a class="btn btn-info" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button">Modificar</a>
                     <a class="btn btn-danger" href="#" onclick="document.getElementById('form2-{{$matricula->id}}').submit()" role="button">Eliminar</a>
                 </td>
                 <form action="{{route('admin.matriculas.eliminarprograma',$matricula->id)}}" method="POST" id="form2-{{$matricula->id}}">

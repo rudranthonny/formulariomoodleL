@@ -32,7 +32,7 @@ class ProgramaController extends Controller
     {
         $functionname = 'core_cohort_get_cohorts';
         $serverurl = $this->domainname . '/webservice/rest/server.php'. '?wstoken=' . $this->token . '&wsfunction='.$functionname.'&moodlewsrestformat=json';
-        return $serverurl;
+        //return $serverurl;
         $cohortes = Http::get($serverurl);
         return view('admin.programa.create',compact('cohortes'));
 
