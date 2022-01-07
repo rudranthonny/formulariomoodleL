@@ -105,7 +105,7 @@
             Swal.fire({
   title: 'Confirmar su Inscripción',
   text: "Estudia Sin Limites",
-  imageUrl: 'https://unsplash.it/400/200',
+  imageUrl: '../images/confirmar.jpg',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
