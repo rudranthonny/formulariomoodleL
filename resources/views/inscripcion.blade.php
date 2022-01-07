@@ -18,7 +18,7 @@
        <div class="row no-gutters bg-dark">
            <div class="col-xl-5 col-lg-12 register-bg">
             <div class="position-absolute testiomonial p-4">
-                <h3 class="font-weight-bold text-light">Centro de Aprendizaje Learclass</h3>
+                <h3 class="font-weight-bold text-light">Centro de Aprendizaje Learclass aaaa</h3>
                 <p class="lead text-light">Estudia Sin Limites</p>
             </div>
            </div>
