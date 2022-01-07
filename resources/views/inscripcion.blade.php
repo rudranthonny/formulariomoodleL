@@ -18,13 +18,13 @@
        <div class="row no-gutters bg-dark">
            <div class="col-xl-5 col-lg-12 register-bg">
             <div class="position-absolute testiomonial p-4">
-                <h3 class="font-weight-bold text-light">Centro de Aprendizaje Learclass aaaa</h3>
+                <h3 class="font-weight-bold text-light">Centro de Aprendizaje Learclass</h3>
                 <p class="lead text-light">Estudia Sin Limites</p>
             </div>
            </div>
            <div class="col-xl-7 col-lg-12 d-flex">
                 <div class="container align-self-center p-6">
-                    <h1 class="font-weight-bold mb-3">Inscripción</h1>
+                    <h1 class="font-weight-bold mb-3">Inscripsción 242526</h1>
                     <form action="{{route('registrar.store')}}" method="POST">
                         @csrf
                         <div class="form-row mb-2">
@@ -89,7 +89,7 @@
                             <div class="form-group col-md-5">
                                 <select class="form-select" name="tipo">
                                     <option value="soles"selected>Elegir Moneda</option>
-                                    <option value="soles">Solos</option>
+                                    <option value="soles">Soles</option>
                                     <option value="dolares">Dolares</option>
                                 </select>
                             </div>
