@@ -11,8 +11,8 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class UsuarioController extends Controller
 {
-    private $token = 'fc410318b59368f9245b394b209c644e';
-    private $domainname = 'https://learclass.com';
+    private $token = 'ff63b816357ee3098eb0504de43be96c';
+    private $domainname = 'https://jademlearning.com/aula5';
     /**
      * Display a listing of the resource.
      *

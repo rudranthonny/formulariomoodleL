@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Http;
 
 class ProgramaController extends Controller
 {
-    private $token = 'fc410318b59368f9245b394b209c644e';
-    private $domainname = 'https://learclass.com';
+    private $token = 'ff63b816357ee3098eb0504de43be96c';
+    private $domainname = 'https://jademlearning.com/aula5';
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +32,7 @@ class ProgramaController extends Controller
     {
         $functionname = 'core_cohort_get_cohorts';
         $serverurl = $this->domainname . '/webservice/rest/server.php'. '?wstoken=' . $this->token . '&wsfunction='.$functionname.'&moodlewsrestformat=json';
-        //return $serverurl;
+        return $serverurl;
         $cohortes = Http::get($serverurl);
         return view('admin.programa.create',compact('cohortes'));
 
