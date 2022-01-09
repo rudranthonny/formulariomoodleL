@@ -16,6 +16,7 @@ class Inscripcion extends Model
         'phone',
         'dni',
         'user_id',
-        'politicas'
+        'politicas',
+        'country',
     ];
 }
