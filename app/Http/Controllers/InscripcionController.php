@@ -104,6 +104,7 @@ class InscripcionController extends Controller
             'phone' => 'required',
             'dni' => 'required',
             'politicas' => 'required',
+            'country' => 'required',
         ]);
         $emaila = strtolower($request->input('email'));
         //verificar si ya se realizo la inscripción
