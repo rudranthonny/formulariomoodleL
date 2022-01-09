@@ -17,6 +17,18 @@
             border-color: #ff1053;
             font-size: x-large;
         }
+        .form-control {
+            color: white;
+        }
+        input#search {
+    background: white;
+    border: 2px solid var(--color-dark-xx);
+    border-radius: 1rem;
+    padding: 15px;
+    font-family: cursive;
+    font-size: larger;
+    color : #495057;
+}
     </style>
     <title>LearClass</title>
   </head>
@@ -29,88 +41,8 @@
                 <p class="lead text-light"><!--descripcion--></p>
             </div>
            </div>
-           <div class="col-xl-7 col-lg-12 d-flex">
-                <div class="container align-self-center p-6">
-                    <h1 class="font-weight-bold mb-3">Inscripsción 2022</h1>
-                    <form action="{{route('inscripcion.registrar')}}" method="POST" class="formulario-inscripcion">
-                        @csrf
-                        <div class="form-row mb-2">
-                            <div class="form-group col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Nombres">
-                            </div>
-                            @error('name')
-                            <span class="text-light">{{$message}}</span>
-                            @enderror
-                            <div class="form-group col-md-6">
-                                <input type="text" name="lastname" class="form-control" placeholder="Apellidos">
-                            </div>
-                            @error('lastname')
-                            <span class="text-light">{{$message}}</span>
-                            @enderror
-                            
-                        </div>
-                        <div class="form-row mb-2">
-                            <div class="form-group col-md-6">
-                                <input type="text" name="email" class="form-control" placeholder="Email">
-                            </div>
-                            @error('email')
-                            <span class="text-lightr">{{$message}}</span>
-                            @enderror
-                            <div class="form-group col-md-6">
-                                <input type="text" name="dni" class="form-control" placeholder="DNI/CURP/DUI">
-                            </div>
-                            @error('dni')
-                            <span class="text-lightr">{{$message}}</span>
-                            @enderror
-                        </div> 
-                        <div class="form-row mb-2">
-                            <div class="form-group col-md-6">
-                                <select class="form-select" name="country">
-                                    <option value="PE"selected>Elegir el País</option>
-                                    <option value="AR">Argentina</option>
-                                    <option value="BO">Bolivia</option>
-                                    <option value="CL">Chile</option>                                    
-                                    <option value="CO">Colombia</option>
-                                    <option value="CR">CR</option>
-                                    <option value="EC">Ecuador</option>
-                                    <option value="SV">El Salvador</option>
-                                    <option value="GT">Guatemala</option>
-                                    <option value="HN">Hondura</option>
-                                    <option value="NI">Nicaragua</option>
-                                    <option value="PA">Panama</option>
-                                    <option value="PY">Paraguay</option>
-                                    <option value="PE">Perú</option>
-                                    <option value="CR">Puerto Rico</option>
-                                    <option value="DO">Republica Dominicana</option>
-                                    <option value="UY">Uruguay</option>
-                                    <option value="VE">Venezuela</option>
-                                    <option value="EU">E.E.U.U</option>
-                                  </select>
-                            	  </div>
-                            @error('country')
-                                    <span class="text-lightr">{{$message}}</span>
-                                    @enderror
-                            <div class="form-group col-md-6">
-                                <input type="text" name="phone" class="form-control" placeholder="Celular">
-                            </div>
-                            @error('phone')
-                            <span class="text-lightr">{{$message}}</span>
-                            @enderror
-                        </div> 
-                        <div class="form-group mb-5">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" name="politicas" id="politicas">
-                                <label class="form-check-label text-muted" for="politicas"><a onclick="document.getElementById('politicas').checked">Al seleccionar esta casilla aceptas nuestro aviso de privacidad y los términos y condiciones</a></label>
-                                @error('politicas')
-                                    <span class="text-lightr">aceptar nuestras politicas para realizar la inscripción</span>
-                                    @enderror
-                            </div>  
-                        </div>
-                        <button class="btn btn-primary width-100" type="submit">Regístrate</button>
-                    </form>
-                    <small class="d-inline-block text-muted mt-5">Todos los derechos reservados | ©2022 Learclass</small>
-                </div>
-           </div>
+           @livewire('consultar-inscripcion')
+           @livewireScripts
        </div>
    </section>
 
