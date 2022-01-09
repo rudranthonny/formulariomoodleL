@@ -128,8 +128,6 @@
             <!--mostrar imagen-->
                 @if ($matricula->comprobante_imagen != "")
                 <div class="mb-3"> 
-                    ssss
-                    {{$matricula->comprobante_imagen}}
                     <img src="{{asset($matricula->comprobante_imagen) }}" alt="">
                 </div>
                 @endif
