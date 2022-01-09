@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
     <title>LearClass</title>
   </head>
   <body>
@@ -25,55 +24,79 @@
            <div class="col-xl-7 col-lg-12 d-flex">
                 <div class="container align-self-center p-6">
                     <h1 class="font-weight-bold mb-3">Inscripsción 2022</h1>
-                    <form action="{{route('registrar.store')}}" method="POST" class="formulario-inscripcion">
+                    <form action="{{route('inscripcion.registrar')}}" method="POST" class="formulario-inscripcion">
                         @csrf
                         <div class="form-row mb-2">
-                            <div class="form-group col-md-4">
-                                <input type="text" name="name" class="form-control" placeholder="Tu nombre">
+                            <div class="form-group col-md-6">
+                                <input type="text" name="name" class="form-control" placeholder="Nombres">
                             </div>
-                            <div class="form-group col-md-4">
-                                <input type="text" name="lastname" class="form-control" placeholder="Tu apellido">
+                            @error('name')
+                            <span class="text-light">{{$message}}</span>
+                            @enderror
+                            <div class="form-group col-md-6">
+                                <input type="text" name="lastname" class="form-control" placeholder="Apellidos">
                             </div>
-                            <div class="form-group col-md-4">
-                                <input type="text" name="dni" class="form-control" placeholder="DNI">
-                            </div>
+                            @error('lastname')
+                            <span class="text-light">{{$message}}</span>
+                            @enderror
+                            
                         </div>
                         <div class="form-row mb-2">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <input type="text" name="email" class="form-control" placeholder="Email">
                             </div>
-                            <div class="form-group col-md-4">
-                                <input type="text" name="phone" class="form-control" placeholder="Celular">
+                            @error('email')
+                            <span class="text-lightr">{{$message}}</span>
+                            @enderror
+                            <div class="form-group col-md-6">
+                                <input type="text" name="dni" class="form-control" placeholder="DNI/CURP/DUI">
                             </div>
-                            <div class="form-group col-md-4">
+                            @error('dni')
+                            <span class="text-lightr">{{$message}}</span>
+                            @enderror
+                        </div> 
+                        <div class="form-row mb-2">
+                            <div class="form-group col-md-6">
                                 <select class="form-select" name="country">
                                     <option value="PE"selected>Elegir el País</option>
                                     <option value="AR">Argentina</option>
                                     <option value="BO">Bolivia</option>
-                                    <option value="CL">Chile</option>                                    <option value="3">Chile</option>
+                                    <option value="CL">Chile</option>                                    
                                     <option value="CO">Colombia</option>
                                     <option value="CR">CR</option>
                                     <option value="EC">Ecuador</option>
                                     <option value="SV">El Salvador</option>
-                                    <option value="GT">Guatamala</option>
+                                    <option value="GT">Guatemala</option>
                                     <option value="HN">Hondura</option>
                                     <option value="NI">Nicaragua</option>
                                     <option value="PA">Panama</option>
                                     <option value="PY">Paraguay</option>
-                                    <option value="PE">Peru</option>
+                                    <option value="PE">Perú</option>
                                     <option value="CR">Puerto Rico</option>
                                     <option value="DO">Republica Dominicana</option>
                                     <option value="UY">Uruguay</option>
                                     <option value="VE">Venezuela</option>
                                     <option value="EU">E.E.U.U</option>
                                   </select>
+                            	  </div>
+                            @error('country')
+                                    <span class="text-lightr">{{$message}}</span>
+                                    @enderror
+                            <div class="form-group col-md-6">
+                                <input type="text" name="phone" class="form-control" placeholder="Celular">
                             </div>
-                        </div>
+                            @error('phone')
+                            <span class="text-lightr">{{$message}}</span>
+                            @enderror
+                        </div> 
                         <div class="form-group mb-5">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="politicas">
+                                <input class="form-check-input" type="checkbox" value="1" name="politicas">
                                 <label class="form-check-label text-muted">Al seleccionar esta casilla aceptas nuestro aviso de privacidad y los términos y condiciones</label>
-                            </div>
+                                @error('politicas')
+                                    <span class="text-lightr">aceptar nuestras politicas para realizar la inscripción</span>
+                                    @enderror
+                            </div>  
                         </div>
                         <button class="btn btn-primary width-100" type="submit">Regístrate</button>
                     </form>
@@ -94,7 +117,16 @@
     <script>
     Swal.fire(
     '!Felicidades¡',
-    'Se Inscripción se realizo Correctamente',
+    'Su Inscripción se realizo Correctamente',
+    'Visitanos : https://learclass.com'
+    )
+    </script>
+     @endif
+    @if (session('crear') == 'actualización')
+    <script>
+    Swal.fire(
+    '!Felicidades¡',
+    'Su actualizo su Inscripcion',
     'Visitanos : https://learclass.com'
     )
     </script>
@@ -116,7 +148,6 @@
   }
 })
        });
-
        
    </script>
 </body>

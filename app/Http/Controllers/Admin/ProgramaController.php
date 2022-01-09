@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Matricula;
 use App\Models\Programa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -102,7 +103,15 @@ class ProgramaController extends Controller
      */
     public function destroy(Programa $programa)
     {
+        /*verificar que no haya matriculas*/
+        $matriculas = Matricula::where('programa_id',$programa->id)->count();
+        /*eliminar porgrama*/
+        if($matriculas == 0){
         $programa->delete();
         return redirect()->route('admin.programas.index')->with('info','el programa se elimino correctamente');
+        }
+        else{
+        return redirect()->route('admin.programas.index')->with('info','el programa tiene matriculas no se puede eliminar');
+        }
     }
 }

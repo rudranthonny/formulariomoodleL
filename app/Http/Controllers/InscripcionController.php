@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class InscripcionController extends Controller
 {
-    private $token = 'fc410318b59368f9245b394b209c644e';
-    private $domainname = 'https://learclass.com';
+    private $token = 'ff63b816357ee3098eb0504de43be96c';
+    private $domainname = 'https://jademlearning.com/aula5';
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +17,8 @@ class InscripcionController extends Controller
      */
     public function index()
     {
-        return view('inscripcion');
+        $inscripciones = Inscripcion::all();
+        return view('admin.inscripcion.index',compact('inscripciones'));
     }
 
     /**
@@ -38,24 +39,6 @@ class InscripcionController extends Controller
      */
     public function store(Request $request)
     {
-        //validación
-        $request->validate([
-            'name' => 'required',
-            'lastname'=> 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'dni' => 'required',
-            'politicas' => 'required',
-        ]);
-        //crear usuario en moodle
-        $functionname = 'core_user_create_users';
-        $serverurl = $this->domainname . '/webservice/rest/server.php'
-        . '?wstoken=' . $this->token 
-        . '&wsfunction='.$functionname
-        .'&moodlewsrestformat=json
-        &users[0][username]='.$request->input('email').'&users[0][password]=123456789&users[0][firstname]='.$request->input('name').'&users[0][lastname]='.$request->input('lastname').'&users[0][email]='.$request->input('email').'&users[0][phone1]='.$request->input('phone').'&users[0][country]='.$request->input('country');
-        $usuario = Http::get($serverurl);
-        return redirect()->route('registrar.index')->with('crear','Se Inscribio Correctamente');
     }
 
     /**
@@ -77,7 +60,7 @@ class InscripcionController extends Controller
      */
     public function edit($inscripcion)
     {
-        //
+        return "estoy en edit";
     }
 
     /**
@@ -98,8 +81,71 @@ class InscripcionController extends Controller
      * @param  \App\Models\Inscripcion  $inscripcion
      * @return \Illuminate\Http\Response
      */
-    public function destroy($inscripcion)
+    public function destroy($id)
     {
-        //
+        $inscripcion = Inscripcion::find($id);
+        $inscripcion->delete();
+        return redirect()->route('admin.inscripciones.index')->with('eliminado','individual');
+    }
+
+    public function eliminarall($eliminar)
+    {
+        Inscripcion::truncate();
+        return redirect()->route('admin.inscripciones.index')->with('eliminado','eliminado');
+    }
+
+    public function registrar(Request $request)
+    {   
+        //validación
+        $request->validate([
+            'name' => 'required',
+            'lastname'=> 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'dni' => 'required',
+            'politicas' => 'required',
+        ]);
+        //verificar si ya se realizo la inscripción
+        $rinscripcion = Inscripcion::where('email',$request->input('email'))->first();
+        if($rinscripcion == false){
+        //return $request->input('politicas');
+        //crear usuario en moodle
+        $functionname = 'core_user_create_users';
+        $serverurl = $this->domainname. '/webservice/rest/server.php'
+        . '?wstoken=' . $this->token 
+        . '&wsfunction='.$functionname
+        .'&moodlewsrestformat=json&users[0][username]='.$request->input('email').'&users[0][password]=123456789&users[0][firstname]='.$request->input('name').'&users[0][lastname]='.$request->input('lastname').'&users[0][email]='.$request->input('email').'&users[0][phone1]='.$request->input('phone').'&users[0][country]='.$request->input('country');
+        $usuario = Http::get($serverurl);
+        /*registrar el estudiante en laravel*/
+        //obtener el id del usuario
+        $functionname2 = 'core_user_get_users';
+        $serverurl2 = $this->domainname. '/webservice/rest/server.php'
+        . '?wstoken=' . $this->token 
+        . '&wsfunction='.$functionname2
+        .'&moodlewsrestformat=json&criteria[0][key]=email&criteria[0][value]='.$request->input('email');
+        
+        $consulta = Http::get($serverurl2);
+        foreach (json_decode($consulta)->users as $user) {
+        }
+        //realizar la instancia
+        $inscripcion= new Inscripcion();
+        $inscripcion->create($request->all()+['user_id' => $user->id]);
+
+        return redirect()->route('registrar.inicio')->with('crear','Se Inscribio Correctamente');
+        }
+        else{
+        /*actualizar inscripcion*/
+        $actualizar = Inscripcion::find($rinscripcion->id);
+        $actualizar->update($request->all());
+        /*actualizar en el moodle*/
+        $functionname = 'core_user_update_users';
+        $serverurl = $this->domainname. '/webservice/rest/server.php'
+        . '?wstoken=' . $this->token 
+        . '&wsfunction='.$functionname
+        .'&moodlewsrestformat=json&users[0][id]='.$actualizar->user_id.'&users[0][password]=123456789&users[0][firstname]='.$request->input('name').'&users[0][lastname]='.$request->input('lastname').'&users[0][email]='.$request->input('email').'&users[0][phone1]='.$request->input('phone').'&users[0][country]='.$request->input('country');
+        Http::get($serverurl);
+        /*mandar mensaje*/
+        return redirect()->route('registrar.inicio')->with('crear','actualización');
+        }
     }
 }

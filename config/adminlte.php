@@ -238,8 +238,8 @@ return [
 
         ['header' => 'account_settings'],
         [
-            'text' => 'categorias',
-            'route'  => 'admin.categorias.index',
+            'text' => 'inscripciones',
+            'route'  => 'admin.inscripciones.index',
             'icon' => 'fab fa-accusoft',
         ],
         [
@@ -251,16 +251,6 @@ return [
             'text' => 'programas',
             'route'  => 'admin.programas.index',
             'icon' => 'fas fa-book',
-        ],
-        [
-            'text' => 'plantillas',
-            'route'  => 'admin.plantillas.index',
-            'icon' => 'fas fa-list',
-        ],
-        [
-            'text' => 'Inicios',
-            'route'  => 'admin.inicios.index',
-            'icon' => 'fab fa-affiliatetheme',
         ],
     ],
 

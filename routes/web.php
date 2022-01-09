@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('inscripcion');
-});
+})->name('registrar.inicio');
 
 /*Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');*/
 
-Route::resource('registrar', InscripcionController::class)->names('registrar');
+Route::post('registrar', [InscripcionController::class,'registrar'])->name('inscripcion.registrar');

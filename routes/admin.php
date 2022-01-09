@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\InicioController;
 use App\Http\Controllers\Admin\MatriculaController;
 use App\Http\Controllers\Admin\PlantillaController;
 use App\Http\Controllers\Admin\UsuarioController;
+use App\Http\Controllers\InscripcionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,4 +34,8 @@ Route::get('usuarios/{username}/consultapdf',[UsuarioController::class,'consulta
 Route::resource('matriculas', MatriculaController::class)->names('admin.matriculas');
 Route::post('matriculas/{id}/agregarprograma',[MatriculaController::class,'agregarmatricula'])->name('admin.matriculas.agregarmatricula');
 Route::delete('matriculas/{id}/eliminarprograma',[MatriculaController::class,'eliminarprograma'])->name('admin.matriculas.eliminarprograma');
+//inscripciones
+Route::resource('inscripciones', InscripcionController::class)->names('admin.inscripciones');
+Route::get('inscripciones/{eliminar}/eliminarall', [InscripcionController::class,'eliminarall'])->name('admin.inscripciones.eliminarall');
+
 
