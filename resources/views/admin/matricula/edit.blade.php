@@ -129,7 +129,7 @@
                 @if ($matricula->comprobante_imagen != "")
                 <div class="mb-3"> 
                     ssss
-                    {{asset($matricula->comprobante_imagen) }}
+                    {{$matricula->comprobante_imagen}}
                     <img src="{{asset($matricula->comprobante_imagen) }}" alt="">
                 </div>
                 @endif
