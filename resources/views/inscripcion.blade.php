@@ -10,6 +10,14 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #ff1053;
+            border-color: #ff1053;
+            font-size: x-large;
+        }
+    </style>
     <title>LearClass</title>
   </head>
   <body>
@@ -91,8 +99,8 @@
                         </div> 
                         <div class="form-group mb-5">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" name="politicas">
-                                <label class="form-check-label text-muted">Al seleccionar esta casilla aceptas nuestro aviso de privacidad y los términos y condiciones</label>
+                                <input class="form-check-input" type="checkbox" value="1" name="politicas" id="politicas">
+                                <label class="form-check-label text-muted" for="politicas"><a onclick="document.getElementById('politicas').checked">Al seleccionar esta casilla aceptas nuestro aviso de privacidad y los términos y condiciones</a></label>
                                 @error('politicas')
                                     <span class="text-lightr">aceptar nuestras politicas para realizar la inscripción</span>
                                     @enderror
