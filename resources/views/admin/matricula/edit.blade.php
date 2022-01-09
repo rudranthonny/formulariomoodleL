@@ -12,7 +12,7 @@
         <center><h3>Rellene Correctenemte el formulario</h3></center>
     </div>
     <div class="card-body">
-        <form action="{{route('admin.matriculas.update',$matricula->id)}}" method="POST">
+        <form action="{{route('admin.matriculas.update',$matricula->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <!--Agencia-->
@@ -125,9 +125,19 @@
                 <span class="text-danger">{{$message}}</span>
              @enderror
             </div>
+            <!--mostrar imagen-->
+                @if ($matricula->comprobante_imagen != "")
+                <div class="mb-3"> 
+                    <img src="{{asset($matricula->comprobante_imagen) }}" alt="">
+                </div>
+                @endif
             <!--comprobante imagen-->
-            @livewire('cambiar-comprobante')
-            @livewireScripts
+            <div class="mb-3">
+                <input type="file" name="comprobante_imagen" accept="image/*">
+                @error('comprobante_imagen')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
             <!---->
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Modificar Pago</button>

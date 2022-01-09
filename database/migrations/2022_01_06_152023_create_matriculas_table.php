@@ -24,7 +24,7 @@ class CreateMatriculasTable extends Migration
             $table->date('fechapago')->nullable();
             $table->string('comprobante')->nullable();
             $table->string('imagenpago')->nullable();
-            $table->string('comprobante_imagen')->unique();
+            $table->string('comprobante_imagen')->unique()->nullable();
             $table->unsignedBigInteger('programa_id')->nullable();
             $table->foreign('programa_id')->references('id')->on('programas')->onDelete('cascade');
             $table->timestamps();

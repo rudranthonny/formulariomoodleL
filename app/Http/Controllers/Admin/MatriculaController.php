@@ -7,6 +7,7 @@ use App\Models\Matricula;
 use App\Models\Programa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class MatriculaController extends Controller
 {
@@ -83,8 +84,18 @@ class MatriculaController extends Controller
             'comprobante' => 'required',
             'comprobante_imagen' => 'required',
         ]);
-        //return $request->input('comprobante');
-        $matricula->update($request->all());
+        //actualizar el comprobante_imagen de la tabla matricula
+        if($request->file('comprobante_imagen') != null)
+            {
+                $extension = $request->comprobante_imagen->extension();
+                $eliminar = str_replace('storage','public',$matricula->comprobante_imagen);
+                Storage::delete([$eliminar]);
+                $imagenenu = $request->file('comprobante_imagen')->storeAs('public/comprobantes',$matricula->user_id."-.".$extension);
+                $url = Storage::url($imagenenu);
+                $matricula->update(['comprobante_imagen' => $url]);
+        }
+        //acutalizar matricula
+        $matricula->update($request->only('costo','agente','tipo','fechapago','comprobante'));
         //return 'se actualizo correctamente';
         return redirect()->route('admin.usuarios.agregarprograma',$matricula->user_id)->with('info','se modifico correctamente el pago');
     }
