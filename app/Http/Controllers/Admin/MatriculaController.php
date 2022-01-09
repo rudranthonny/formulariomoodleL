@@ -90,7 +90,7 @@ class MatriculaController extends Controller
                 $extension = $request->comprobante_imagen->extension();
                 $eliminar = str_replace('storage','public',$matricula->comprobante_imagen);
                 Storage::delete([$eliminar]);
-                $imagenenu = $request->file('comprobante_imagen')->storeAs('public/comprobantes',$matricula->user_id."-.".$extension);
+                $imagenenu = $request->file('comprobante_imagen')->storeAs('public/comprobantes',$matricula->user_id."-".str_replace(' ', '', $matricula->comprobante).".".$extension);
                 $url = Storage::url($imagenenu);
                 $matricula->update(['comprobante_imagen' => $url]);
         }
