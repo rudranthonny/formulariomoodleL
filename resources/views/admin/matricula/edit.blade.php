@@ -128,7 +128,7 @@
             <!--mostrar imagen-->
                 @if ($matricula->comprobante_imagen != "")
                 <div class="mb-3"> 
-                    <img src="{{asset($matricula->comprobante_imagen) }}" alt="" width="400px">
+                    <center><img src="{{asset($matricula->comprobante_imagen) }}" alt="" width="300px"></center>
                 </div>
                 @endif
             <!--comprobante imagen-->
