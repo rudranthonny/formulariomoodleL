@@ -125,6 +125,10 @@
                 <span class="text-danger">{{$message}}</span>
              @enderror
             </div>
+            <!--comprobante imagen-->
+            @livewire('cambiar-comprobante')
+            @livewireScripts
+            <!---->
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Modificar Pago</button>
                 <a class="btn btn-dark" href="#" role="button">Cancelar</a>

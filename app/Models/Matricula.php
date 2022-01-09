@@ -18,6 +18,7 @@ class Matricula extends Model
         'comprobante',
         'tipo',
         'fechapago',
+        'comprobante_imagen',
     ];
 
     //rel 1 a n

@@ -81,12 +81,12 @@ class MatriculaController extends Controller
             'tipo' => 'required',
             'fechapago' => 'required',
             'comprobante' => 'required',
+            'comprobante_imagen' => 'required',
         ]);
         //return $request->input('comprobante');
         $matricula->update($request->all());
         //return 'se actualizo correctamente';
         return redirect()->route('admin.usuarios.agregarprograma',$matricula->user_id)->with('info','se modifico correctamente el pago');
-
     }
 
     /**
