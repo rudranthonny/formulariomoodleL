@@ -141,7 +141,7 @@
             <!---->
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Modificar Pago</button>
-                <a class="btn btn-dark" href="#" role="button">Cancelar</a>
+                <a class="btn btn-dark" href="{{route('admin.usuarios.agregarprograma',$matricula->user_id)}}"role="button">Cancelar</a>
             </div>
         </form>
     </div>
