@@ -83,7 +83,17 @@
   confirmButtonText: 'Confirmar'
 }).then((result) => {
   if (result.isConfirmed) {
+    var checkbox = document.getElementById('politicas');
+    var aceptar = checkbox.checked;
+    if(aceptar){ 
     this.submit();
+    }
+    else {
+      Swal.fire(
+    '!Para Continuar¡',
+    'Es nesario aceptar los terminos y condiciones de learclass',
+    )
+    }
   }
 })
        });
