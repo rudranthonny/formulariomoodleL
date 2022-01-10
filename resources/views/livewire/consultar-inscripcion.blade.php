@@ -1,13 +1,22 @@
 <div class="col-xl-7 col-lg-12 d-flex">
     <div class="container align-self-center p-6">
         <h1 class="font-weight-bold mb-3">Inscripsción 2022</h1>
-        <div class="form-row mb-2">
-        <div class="form-group col-md-12">
-            <input type="text" name="search" id="search" wire:model="search" class="form-control" placeholder="si te inscribiste escribe tu correo">
-        </div>
-        </div>
         <form action="{{route('inscripcion.registrar')}}" method="POST" class="formulario-inscripcion">
             @csrf
+            <div class="form-row mb-2">
+                <div class="form-group col-md-6">
+                    <input type="text"  wire:model="search" name="email" class="form-control" placeholder="Email" >
+                </div>
+                @error('email')
+                <span class="text-lightr">{{$message}}</span>
+                @enderror
+                <div class="form-group col-md-6">
+                    <input type="text" name="dni" class="form-control" placeholder="DNI/CURP/DUI" @if ($inscripcion) value="{{$inscripcion->dni}}"@endif>
+                </div>
+                @error('dni')
+                <span class="text-lightr">{{$message}}</span>
+                @enderror
+            </div> 
             <div class="form-row mb-2">
                 <div class="form-group col-md-6">
                     <input type="text" name="name" class="form-control" placeholder="Nombres"  @if ($inscripcion) value="{{$inscripcion->name}}"@endif>
@@ -23,20 +32,7 @@
                 @enderror
                 
             </div>
-            <div class="form-row mb-2">
-                <div class="form-group col-md-6">
-                    <input type="text" name="email" class="form-control" placeholder="Email" @if ($inscripcion) value="{{$inscripcion->email}}"@endif>
-                </div>
-                @error('email')
-                <span class="text-lightr">{{$message}}</span>
-                @enderror
-                <div class="form-group col-md-6">
-                    <input type="text" name="dni" class="form-control" placeholder="DNI/CURP/DUI" @if ($inscripcion) value="{{$inscripcion->dni}}"@endif>
-                </div>
-                @error('dni')
-                <span class="text-lightr">{{$message}}</span>
-                @enderror
-            </div> 
+            
             <div class="form-row mb-2">
                 <div class="form-group col-md-6">
                     <select class="form-select" name="country">
@@ -175,7 +171,7 @@
                     <input class="form-check-input" type="checkbox" value="1" name="politicas" id="politicas">
                     <label class="form-check-label text-muted" for="politicas"><a onclick="document.getElementById('politicas').checked">Al seleccionar esta casilla aceptas nuestro aviso de privacidad y los términos y condiciones</a></label>
                     @error('politicas')
-                        <span class="text-lightr">aceptar nuestras politicas para realizar la inscripción</span>
+                        <span class="text-lightr">Aceptar nuestras políticas para realizar la inscripción.</span>
                         @enderror
                 </div>  
             </div>

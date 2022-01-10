@@ -76,7 +76,6 @@
             e.preventDefault();
             Swal.fire({
   title: 'Confirmar su Inscripción',
-  text: "Estudia Sin Limites",
   imageUrl: '../images/confirmar.jpg',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',

@@ -102,7 +102,6 @@ class InscripcionController extends Controller
             'lastname'=> 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'dni' => 'required',
             'politicas' => 'required',
             'country' => 'required',
         ]);
