@@ -32,7 +32,6 @@
                 @enderror
                 
             </div>
-            
             <div class="form-row mb-2">
                 <div class="form-group col-md-6">
                     <select class="form-select" name="country">
@@ -160,7 +159,7 @@
                         <span class="text-lightr">{{$message}}</span>
                         @enderror
                 <div class="form-group col-md-6">
-                    <input type="text" name="phone" class="form-control" placeholder="Celular" @if ($inscripcion) value="{{$inscripcion->phone}}"@endif>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="Celular" @if ($inscripcion) value="{{$inscripcion->phone}}"@endif>
                 </div>
                 @error('phone')
                 <span class="text-lightr">{{$message}}</span>

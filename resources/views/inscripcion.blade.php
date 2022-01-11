@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/intlTelInput.css">
     <style>
         .btn-primary {
             color: #fff;
@@ -29,6 +30,12 @@
     font-size: larger;
     color : #495057;
 }
+
+    .iti__flag-box, .iti__country-name {
+    margin-right: 6px;
+    color: black;
+    }
+  
     </style>
     <title>LearClass</title>
   </head>
@@ -98,6 +105,33 @@
 })
        });
        
+   </script>
+   <script src="js/intlTelInput.js"></script>
+   <script>
+     var input = document.querySelector("#phone");
+     window.intlTelInput(input, {
+       // allowDropdown: false,
+       // autoHideDialCode: false,
+       // autoPlaceholder: "off",
+       // dropdownContainer: document.body,
+       // excludeCountries: ["us"],
+       // formatOnDisplay: false,
+       // geoIpLookup: function(callback) {
+       //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+       //     var countryCode = (resp && resp.country) ? resp.country : "";
+       //     callback(countryCode);
+       //   });
+       // },
+       // hiddenInput: "full_number",
+       // initialCountry: "auto",
+       // localizedCountries: { 'de': 'Deutschland' },
+       // nationalMode: false,
+       // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+       // placeholderNumberType: "MOBILE",
+       // preferredCountries: ['cn', 'jp'],
+       // separateDialCode: true,
+       utilsScript: "js/utils.js",
+     });
    </script>
 </body>
 </html>
