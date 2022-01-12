@@ -19,7 +19,7 @@ class CreateInscripcionsTable extends Migration
             $table->string('lastname');
             $table->string('email');
             $table->string('phone');
-            $table->string('dni');
+            $table->string('dni')->nullable();
             $table->string('country');
             $table->string('politicas')->nullable();
             $table->integer('user_id');
