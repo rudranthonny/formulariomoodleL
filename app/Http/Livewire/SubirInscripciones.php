@@ -17,7 +17,7 @@ class SubirInscripciones extends Component
 
     public function subirinscripciones(){
         
-        if (isset($this->usuarios)) {
+        if (isset($this->inscripciones)) {
             try{
                 //realizar la importacioón
                 Excel::import(new InscripcionesImport,$this->inscripciones);
