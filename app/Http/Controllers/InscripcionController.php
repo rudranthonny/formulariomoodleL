@@ -107,31 +107,31 @@ class InscripcionController extends Controller
             'politicas' => 'required',
             'country' => 'required',
         ]);
-        $emaila = strtolower($request->input('email'));
-        //verificar si ya se realizo la inscripción
-        $rinscripcion = Inscripcion::where('email',$emaila)->first();
-        if($rinscripcion == false){
-        //return $request->input('politicas');
-        //crear usuario en moodle
-        $functionname = 'core_user_create_users';
-        $serverurl = $this->domainname. '/webservice/rest/server.php'
-        . '?wstoken=' . $this->token 
-        . '&wsfunction='.$functionname
-        .'&moodlewsrestformat=json&users[0][username]='.$emaila.'&users[0][password]=123456789&users[0][firstname]='.$request->input('name').'&users[0][lastname]='.$request->input('lastname').'&users[0][email]='.$emaila.'&users[0][phone1]='.$request->input('phone').'&users[0][country]='.$request->input('country');
-        $usuario = Http::get($serverurl);
-        /*registrar el estudiante en laravel*/
-        //obtener el id del usuario
-        $functionname2 = 'core_user_get_users';
-        $serverurl2 = $this->domainname. '/webservice/rest/server.php'
-        . '?wstoken=' . $this->token 
-        . '&wsfunction='.$functionname2
-        .'&moodlewsrestformat=json&criteria[0][key]=email&criteria[0][value]='.$emaila;
-        
-        $consulta = Http::get($serverurl2);
-        foreach (json_decode($consulta)->users as $user) {
-        }
-        //realizar la instancia
-        $inscripcion= new Inscripcion();
+            $emaila = strtolower($request->input('email'));
+            //verificar si ya se realizo la inscripción
+            $rinscripcion = Inscripcion::where('email',$emaila)->first();
+            if($rinscripcion == false){
+            //return $request->input('politicas');
+            //crear usuario en moodle
+            $functionname = 'core_user_create_users';
+            $serverurl = $this->domainname. '/webservice/rest/server.php'
+            . '?wstoken=' . $this->token 
+            . '&wsfunction='.$functionname
+            .'&moodlewsrestformat=json&users[0][username]='.$emaila.'&users[0][password]=123456789&users[0][firstname]='.$request->input('name').'&users[0][lastname]='.$request->input('lastname').'&users[0][email]='.$emaila.'&users[0][phone1]='.$request->input('phone').'&users[0][country]='.$request->input('country');
+            $usuario = Http::get($serverurl);
+            /*registrar el estudiante en laravel*/
+            //obtener el id del usuario
+            $functionname2 = 'core_user_get_users';
+            $serverurl2 = $this->domainname. '/webservice/rest/server.php'
+            . '?wstoken=' . $this->token 
+            . '&wsfunction='.$functionname2
+            .'&moodlewsrestformat=json&criteria[0][key]=email&criteria[0][value]='.$emaila;
+            
+            $consulta = Http::get($serverurl2);
+            foreach (json_decode($consulta)->users as $user) {
+            }
+            //realizar la instancia
+            $inscripcion= new Inscripcion();
         $inscripcion->create($request->all()+['user_id' => $user->id]);
 
         return redirect()->route('registrar.inicio')->with('crear','Se Inscribio Correctamente');
