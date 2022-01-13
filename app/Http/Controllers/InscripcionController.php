@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InscripcionesExport;
 use App\Models\Inscripcion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InscripcionController extends Controller
 {
@@ -148,5 +150,10 @@ class InscripcionController extends Controller
         /*mandar mensaje*/
         return redirect()->route('registrar.inicio')->with('crear','actualización');
         }
+    }
+
+    public function inscripcionesexport() 
+    {
+        return Excel::download(new InscripcionesExport, 'inscripciones.xlsx');
     }
 }

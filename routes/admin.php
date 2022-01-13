@@ -37,5 +37,7 @@ Route::delete('matriculas/{id}/eliminarprograma',[MatriculaController::class,'el
 //inscripciones
 Route::resource('inscripciones', InscripcionController::class)->names('admin.inscripciones');
 Route::get('inscripciones/{eliminar}/eliminarall', [InscripcionController::class,'eliminarall'])->name('admin.inscripciones.eliminarall');
+Route::get('inscripciones/export',[InscripcionController::class,'inscripcionesexport'])->name('admin.inscripciones.export');
+
 
 
