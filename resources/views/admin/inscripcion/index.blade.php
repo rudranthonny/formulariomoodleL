@@ -10,7 +10,7 @@
 <div class="card">
     <div class="card-header">
         <button type="button"  class="btn btn-danger" onclick="eliminartodo()">Eliminar Inscritos</button>
-            <a class="btn btn-success" href="{{route('admin.inscripciones.export')}}" role="button" >Exportar</a>
+            <a class="btn btn-success" href="{{route('admin.inscripciones.export',"variable")}}" role="button" >Exportar</a>
     </div>
     <div class="card-body">
         @if ($inscripciones->count())
