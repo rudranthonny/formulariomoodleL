@@ -18,10 +18,13 @@
         </div>   
         <div class="col-sm-4">
                 @livewire('subir-inscripciones')
-                @livewireScripts
+        </div>
+        <div class="col-sm-4">
+            @livewire('registrar-usuarios')
         </div>
         </div>
-        </div>
+        @livewireScripts
+    </div>
     <div class="card-body">
         @if ($inscripciones->count())
         <table class="table" id="tabla-m" class="table table-striped">
