@@ -14,7 +14,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ssss                      
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp">
+                    </div>               
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger" data-dismiss="modal">
