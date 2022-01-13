@@ -6,7 +6,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">    
                 <div class="modal-header">
-                    <h5 id="tituloVentana">Subir Usuarios</h5>
+                    <h5 id="tituloVentana">Agregar Alumno</h5>
                     <button class="close" data-dismiss="modal" arial-label="cerrar">
                         <span aria-hidden="true">
                             &times;

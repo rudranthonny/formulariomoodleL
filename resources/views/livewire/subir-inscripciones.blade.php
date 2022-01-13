@@ -21,7 +21,8 @@
                     <div class="alert alert-danger text-end"  wire:loading wire:target="inscripciones" style="display:none">
                         por favor espere
                     </div>
-                    <strong>{{$resultado2}}</strong>                      
+                    <strong>{{$resultado2}}</strong> 
+                    <p class="alert alert-secondary"><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vS4C3c8lCJ2a0_yO8cWYQD20xWq98hch0KhodXzjwzAQgnRGeVRyk3hL2t8k5is8fQyyzerGvOtaYM5/pubhtml" target="_blank">Fomato para subir inscripciones "Clic Aqu&iacute;"</a></p>                     
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger" data-dismiss="modal2">
