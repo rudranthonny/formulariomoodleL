@@ -126,7 +126,7 @@
        // initialCountry: "auto",
        // localizedCountries: { 'de': 'Deutschland' },
         nationalMode: false,
-        onlyCountries: ['ar', 'bo','co', 'cl', 'cr', 'ec' , 'mx','sv','gt','hn','ni','pa','py','pe','do','ur','ve','eu'],
+        onlyCountries: ['ar', 'bo','co', 'cl', 'cr', 'ec' , 'mx','sv','gt','hn','ni','pa','py','pe','do','ur','ve','eu','uy'],
        // placeholderNumberType: "MOBILE",
        // preferredCountries: ['cn', 'jp'],
        // separateDialCode: true,

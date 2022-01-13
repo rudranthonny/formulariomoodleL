@@ -71,6 +71,11 @@
                         @else
                         <option value="SV">El Salvador</option>
                         @endif
+                        @if ($inscripcion->country == 'ES')
+                        <option value="ES" selected>España</option>
+                        @else
+                        <option value="ES">España</option>
+                        @endif
                         @if ($inscripcion->country == 'GT')
                         <option value="GT" selected>Guatemala</option>
                         @else
@@ -142,6 +147,7 @@
                         <option value="EC">Ecuador</option>
                         <option value="MX">Mexico</option>
                         <option value="SV">El Salvador</option>
+                        <option value="ES">España</option>
                         <option value="GT">Guatemala</option>
                         <option value="HN">Hondura</option>
                         <option value="NI">Nicaragua</option>
