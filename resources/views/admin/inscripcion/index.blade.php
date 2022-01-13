@@ -22,7 +22,7 @@
         <div class="col-sm-3">
             @livewire('registrar-usuarios')
         </div>
-        </div>
+    </div>
         @livewireScripts
     </div>
     <div class="card-body">
