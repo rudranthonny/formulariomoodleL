@@ -16,7 +16,7 @@
         <a class="btn btn-success" href="{{route('admin.inscripciones.export',"variable")}}" role="button" >Exportar</a>
         </div>   
         <div class="col-sm-4">
-                @livewire('subir-usuarios')
+                @livewire('subir-inscripciones')
                 @livewireScripts
         </div>
         </div>
