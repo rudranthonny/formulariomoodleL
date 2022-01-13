@@ -1,5 +1,5 @@
 <div>
-    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ventanaModal2">
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ventanaModal2" style="color : white">
         <i class="fas fa-upload"></i> Subir Inscripciones
     </button>
 <div wire:ignore.self class="modal face" id="ventanaModal2" tabindex="-2" role="dialog" aria-labelledby="tituloVentana2" aria-hidden="true">
