@@ -9,6 +9,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
+        <div class="row">
         <div class="col-sm-4">
             <button type="button"  class="btn btn-danger" onclick="eliminartodo()">Eliminar Inscritos</button>
         </div>
@@ -18,6 +19,7 @@
         <div class="col-sm-4">
                 @livewire('subir-inscripciones')
                 @livewireScripts
+        </div>
         </div>
         </div>
     <div class="card-body">
