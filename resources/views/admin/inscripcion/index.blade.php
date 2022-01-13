@@ -11,10 +11,10 @@
     <div class="card-header">
         <div class="row">
         <div class="col-sm-4">
-            <button type="button"  class="btn btn-danger" onclick="eliminartodo()">Eliminar Inscritos</button>
+            <button type="button"  class="btn btn-danger" onclick="eliminartodo()"><i class="fas fa-trash-alt p-1">Eliminar Inscritos</button>
         </div>
         <div class="col-sm-4">
-        <a class="btn btn-success" href="{{route('admin.inscripciones.export',"variable")}}" role="button" >Exportar</a>
+        <a class="btn btn-success" href="{{route('admin.inscripciones.export',"variable")}}" role="button" ><i class="fas fa-download p-1"></i>Exportar</a>
         </div>   
         <div class="col-sm-4">
                 @livewire('subir-inscripciones')
