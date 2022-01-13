@@ -153,7 +153,7 @@ class InscripcionController extends Controller
     }
 
     public function inscripcionesexport($variable) 
-    {   return 'estoy aca';
+    {   //return 'estoy aca';
         return Excel::download(new InscripcionesExport, 'inscripciones.xlsx');
     }
 }
