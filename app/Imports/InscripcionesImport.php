@@ -36,7 +36,7 @@ class InscripcionesImport implements ToCollection
                 $serverurl = $this->domainname. '/webservice/rest/server.php'
                 . '?wstoken=' . $this->token 
                 . '&wsfunction='.$functionname
-                .'&moodlewsrestformat=json&users[0][username]='.$emaila.'&users[0][password]=123456789&users[0][firstname]='.$row[0].'&users[0][lastname]='.$row[1].'&users[0][email]='.$emaila.'&users[0][phone1]='.$row[2].'&users[0][country]='.$row[5];
+                .'&moodlewsrestformat=json&users[0][username]='.$emaila.'&users[0][password]=123456789&users[0][firstname]='.$row[0].'&users[0][lastname]='.$row[1].'&users[0][email]='.$emaila.'&users[0][phone1]='.$row[3].'&users[0][country]='.$row[6];
                 $usuario = Http::get($serverurl);
                 /*registrar el estudiante en laravel*/
                 //obtener el id del usuario
@@ -54,11 +54,11 @@ class InscripcionesImport implements ToCollection
                     'name' => $row[0],
                     'lastname'=> $row[1],
                     'email'=> $emaila,
-                    'phone'=> $row[2],
-                    'dni'=> $row[3],
+                    'phone'=> $row[3],
+                    'dni'=> $row[4],
                     'user_id'=> $user->id,
-                    'politicas'=> $row[4],
-                    'country'=> $row[5],
+                    'politicas'=> $row[5],
+                    'country'=> $row[6],
                 ]);
             }
             else{
@@ -67,17 +67,17 @@ class InscripcionesImport implements ToCollection
             $actualizar->update([
                 'name' => $row[0],
                 'lastname'=> $row[1],
-                'phone'=> $row[2],
-                'dni'=> $row[3],
-                'politicas'=> $row[4],
-                'country'=> $row[5],
+                'phone'=> $row[3],
+                'dni'=> $row[4],
+                'politicas'=> $row[5],
+                'country'=> $row[6],
             ]);
             /*actualizar en el moodle*/
             $functionname = 'core_user_update_users';
             $serverurl = $this->domainname. '/webservice/rest/server.php'
             . '?wstoken=' . $this->token 
             . '&wsfunction='.$functionname
-            .'&moodlewsrestformat=json&users[0][id]='.$actualizar->user_id.'&users[0][password]=123456789&users[0][firstname]='.$row[0].'&users[0][lastname]='.$row[1].'&users[0][phone1]='.$row[2].'&users[0][country]='.$row[5];
+            .'&moodlewsrestformat=json&users[0][id]='.$actualizar->user_id.'&users[0][password]=123456789&users[0][firstname]='.$row[0].'&users[0][lastname]='.$row[1].'&users[0][phone1]='.$row[3].'&users[0][country]='.$row[6];
             Http::get($serverurl);
             }
             }
