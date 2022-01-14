@@ -11,7 +11,6 @@ class ConsultaUsuario extends Component
     private $domainname = 'https://jademlearning.com/aula5';
     public $username="";
     public $usuario;
-    protected $listeners =['render' => 'render'];
     
     public function render()
     {
