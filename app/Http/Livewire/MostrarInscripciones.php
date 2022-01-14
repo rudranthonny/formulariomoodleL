@@ -14,6 +14,7 @@ class MostrarInscripciones extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $bprograma;
+    public $blista;
     public $sort = "id";
     public $direction = "desc";
     protected $listeners =['render'];
@@ -26,7 +27,7 @@ class MostrarInscripciones extends Component
         ->orwhere('dni','like','%' . $this->search.'%')
         ->orwhere('phone','like','%' . $this->search.'%')
         ->orderBy($this->sort, $this->direction)
-        ->paginate(300);
+        ->paginate($this->blista);
         $matriculas = Matricula::where('programa_id','like','%' . $this->bprograma.'%')->get();
         $programas = Programa::all();
         return view('livewire.mostrar-inscripciones',compact('inscripciones','matriculas','programas'));
