@@ -1,5 +1,5 @@
 <div class="card-body">
-  <div class="container m-4">
+  <div class="container p-4">
     <div class="row">
       <div class="col-6">
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
