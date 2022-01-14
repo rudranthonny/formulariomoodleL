@@ -5,15 +5,13 @@
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
       </div>
       <div class="col-3">
-        Programa :
         <select class="form-select" aria-label="Default select example" wire:model="bprograma" style="width: 50%">
           @foreach ($programas as $programa)
           <option value="{{$programa->id}}">{{$programa->name}}</option>
           @endforeach    
         </select>
       </div>
-      <div class="col-3">
-        Pag : 
+      <div class="col-3"> 
         <select class="form-select" aria-label="Default select example" wire:model="blista" style="width: 40%">
           <option value="30">30</option>
           <option value="60">60</option>
