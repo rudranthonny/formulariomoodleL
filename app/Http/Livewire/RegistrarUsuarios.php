@@ -89,8 +89,11 @@ class RegistrarUsuarios extends Component
         $emaila = strtolower($this->email);
         $consulta = Inscripcion::where('email',$emaila)->first();
         if (isset($consulta)) {
-            $this->usuario = $consulta;
             $this->name = $consulta->name;
+            $this->lastname = $consulta->lastname;
+            $this->dni = $consulta->dni;
+            $this->phone = $consulta->phone;
+            $this->country = $consulta->country;
         }
         return view('livewire.registrar-usuarios');
     }
