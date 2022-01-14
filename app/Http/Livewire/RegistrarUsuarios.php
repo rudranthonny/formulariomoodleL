@@ -9,6 +9,7 @@ use Livewire\Component;
 class RegistrarUsuarios extends Component
 {   private $token = 'fc410318b59368f9245b394b209c644e';
     private $domainname = 'https://learclass.com';
+    public $usuario;
     public $name,$lastname,$email,$phone,$dni,$country;
     protected $rules = [
         'name' => 'required',
@@ -88,12 +89,9 @@ class RegistrarUsuarios extends Component
         $emaila = strtolower($this->email);
         $consulta = Inscripcion::where('email',$emaila)->first();
         if (isset($consulta)) {
-            $this->name = $consulta->name;
-            $this->lastname = $consulta->lastname;
-            $this->dni = $consulta->dni;
-            $this->country = $consulta->country;
-            $this->phone = $consulta->phone;
+            $this->usuario = $consulta;
+            dd($consulta);
         }
-            return view('livewire.registrar-usuarios');
+        return view('livewire.registrar-usuarios');
     }
 }
