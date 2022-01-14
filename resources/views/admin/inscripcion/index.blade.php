@@ -55,6 +55,9 @@ td button.btn.btn-danger {
 td {
     font-size: 11px;
 }
+td a{
+    font-size: 11px;
+}
     </style>
     @stop
 

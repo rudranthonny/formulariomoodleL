@@ -64,9 +64,9 @@
                @endphp
               <td>
               @if ($matriculado)
-              <a class="btn btn-success" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"> Si</a>  
+              <a class="btn btn-success" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"> Si</i></a>  
               @else
-              <a class="btn btn-danger" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"> NO</a>
+              <a class="btn btn-danger" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"> No</i></a>
               @endif
               </td>
               <td>
