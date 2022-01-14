@@ -44,20 +44,25 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
-        td a.btn.btn-dark {
+td a.btn.btn-dark {
     font-size: 11px;
 }
 
+td a.btn.btn-danger {
+    font-size: 11px;
+}
+td a.btn.btn-success {
+    font-size: 11px;
+}
 td button.btn.btn-danger {
     font-size: 11px;
 }
 
+
 td {
     font-size: 11px;
 }
-td a{
-    font-size: 11px;
-}
+
     </style>
     @stop
 
