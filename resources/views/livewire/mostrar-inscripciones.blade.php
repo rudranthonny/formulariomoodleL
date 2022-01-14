@@ -6,12 +6,9 @@
       </div>
       <div class="col-4">
         <select class="form-select" aria-label="Default select example" wire:model="bprograma">
+          <option>Elegir programa</option>
           @foreach ($programas as $programa)
-          @if ($loop->first)
-          <option value="{{$programa->id}}" selected>{{$programa->name}}</option>
-          @else
           <option value="{{$programa->id}}">{{$programa->name}}</option>
-          @endif
           @endforeach    
         </select>
       </div>
@@ -25,7 +22,7 @@
       </div>
     </div>
   </div>
-    @if ($inscripciones->count())
+    @if ($inscripciones->count() && $matriculas->count())
     <table class="table" id="tabla-m" class="table table-striped">
         <thead>
             <tr class="bg-dark">

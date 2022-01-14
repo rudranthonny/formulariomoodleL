@@ -52,7 +52,7 @@ class MostrarInscripciones extends Component
         ->orwhere('phone','like','%' . $this->search.'%')
         ->orderBy($this->sort, $this->direction)
         ->paginate($this->blista);
-        $matriculas = Matricula::where('programa_id','like','%' . $this->bprograma.'%')->get();
+        $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
         $programas = Programa::all();
         return view('livewire.mostrar-inscripciones',compact('inscripciones','matriculas','programas'));
     }
