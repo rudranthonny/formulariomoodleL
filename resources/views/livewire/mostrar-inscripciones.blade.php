@@ -69,7 +69,13 @@
               <a class="btn btn-danger" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"> NO</a>
               @endif
               </td>
-            
+              <td>
+                @if ($matricula->comprobante_imagen)
+                <a href="">si</a> 
+                @else
+                <a href="">no</a> 
+                @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
