@@ -2,7 +2,7 @@
     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ventanaModal">
         <i class="fas fa-plus-circle"></i> Nuevo Alumno
     </button>
-<div wire:ignore.self class="modal face" id="ventanaModal" tabindex="-2" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true" wire:model="true">
+<div wire:ignore.self class="modal face" id="ventanaModal" tabindex="-2" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">    
                 <div class="modal-header">
