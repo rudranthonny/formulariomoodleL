@@ -24,7 +24,7 @@
                     <div class="mb-3">
                         <label for="dni" class="form-label">dni</label>
                         <input type="text" class="form-control" id="dni" aria-describedby="emailHelp" wire:model="dni">
-                        {{$usuario->dni}}
+                        {{$usuario}}
                         @error('dni')
                             <span>{{$message}}</span>
                         @enderror
