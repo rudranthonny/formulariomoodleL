@@ -20,7 +20,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="dni" class="form-label">dni</label>
-                        <input type="text" class="form-control" id="dni" aria-describedby="emailHelp" wire:model="lastname">
+                        <input type="text" class="form-control" id="dni" aria-describedby="emailHelp" wire:model="dni">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre</label>
