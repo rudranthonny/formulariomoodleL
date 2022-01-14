@@ -19,4 +19,10 @@ class Inscripcion extends Model
         'politicas',
         'country',
     ];
+
+    //rel 1 a n
+    //rel 1 a n
+    public function matriculas(){
+        return $this->hasMany(Matricula::class);
+    }
 }
