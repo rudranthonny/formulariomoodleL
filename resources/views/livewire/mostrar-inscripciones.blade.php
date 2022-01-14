@@ -25,13 +25,14 @@
     <table class="table" id="tabla-m" class="table table-striped">
         <thead>
             <tr class="bg-dark">
-              <th scope="col">Nombres</th>
-              <th scope="col">Apellidos</th>
-              <th scope="col">email</th>
-              <th scope="col">dni</th>
-              <th scope="col">phone</th>
-              <th scope="col">Acciones</th>
-              <th scope="col">Matriculado</th>
+              <th scope="col">NOMBRES</th>
+              <th scope="col">APELLIDOS</th>
+              <th scope="col">EMAIL</th>
+              <th scope="col">DNI</th>
+              <th scope="col">PHONE</th>
+              <th scope="col">ACCIONES</th>
+              <th scope="col">MAT</th>
+              <th scope="col">COM</th>
             </tr>
         </thead>
         <tbody>
@@ -51,28 +52,30 @@
                     <button type="submit"  class="btn btn-danger">Eliminar</button>
                 </form>
               </td>
+              @php
+              foreach($matriculas as $matricula){
+                if ($inscripcion->user_id == $matricula->user_id) {
+                 $matriculado = true;
+                 break;
+                } else {
+                $matriculado = false;
+                }   
+              }
+               @endphp
               <td>
-                @php
-                    foreach($matriculas as $matricula){
-                      if ($inscripcion->user_id == $matricula->user_id) {
-                       $matriculado = true;
-                       break;
-                      } else {
-                      $matriculado = false;
-                      }   
-                    }
-                @endphp
-                
               @if ($matriculado)
-              <div class="alert alert-success p-1 text-center" role="alert" style="color:white">
-                si
-              </div>  
+              <a class="btn btn-success" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"> Si</a>  
               @else
-              <div class="alert alert-danger p-1 text-center" role="alert" style="color:white">
-                no
-              </div> 
+              <a class="btn btn-danger" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"> NO</a>
               @endif
               </td>
+              <td>
+                @if ($matriculado->comprobante_imagen)
+                <a href="">si</a> 
+                @else
+                <a href="">no</a> 
+                @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
