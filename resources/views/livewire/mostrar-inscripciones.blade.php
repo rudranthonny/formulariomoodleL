@@ -24,7 +24,7 @@
               <td>{{$inscripcion->dni}}</td>
               <td>{{$inscripcion->phone}}</td>
               <td>
-              @if ($inscripcion->matricula)
+              @if ($inscripcion->matriculas)
               <div class="alert alert-success" role="alert" style="color:white">
                 si
               </div>  
