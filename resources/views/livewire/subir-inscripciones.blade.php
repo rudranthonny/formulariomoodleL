@@ -24,7 +24,7 @@
                     <strong>{{$resultado2}}</strong>                      
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger" data-dismiss="modal2">
+                    <button class="btn btn-danger" data-dismiss="modal">
                         Cerrar
                     </button>
                     <button class="btn btn-success" wire:loading.attr="disable" wire:target="save, inscripciones" type="button" wire:click="subirinscripciones">
