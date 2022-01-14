@@ -132,7 +132,7 @@ class InscripcionController extends Controller
             }
             //realizar la instancia
             $inscripcion= new Inscripcion();
-        $inscripcion->create($request->all()+['user_id' => $user->id]);
+            $inscripcion->create($request->all()+['user_id' => $user->id]);
 
         return redirect()->route('registrar.inicio')->with('crear','Se Inscribio Correctamente');
         }

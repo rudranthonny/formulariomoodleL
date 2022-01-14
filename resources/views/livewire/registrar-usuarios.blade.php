@@ -15,15 +15,56 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp">
-                    </div>               
+                        <label for="email" class="form-label">email</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" wire:model="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dni" class="form-label">dni</label>
+                        <input type="text" class="form-control" id="dni" aria-describedby="emailHelp" wire:model="lastname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" wire:model="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp" wire:model="lastname">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" name="country" wire:model="country">
+                        <option value="PE" >Elegir el País</option>
+                        <option value="AR">Argentina</option>
+                        <option value="BO">Bolivia</option>
+                        <option value="CL">Chile</option>                                    
+                        <option value="CO">Colombia</option>
+                        <option value="CR">Costa Rica</option>
+                        <option value="EC">Ecuador</option>
+                        <option value="MX">Mexico</option>
+                        <option value="SV">El Salvador</option>
+                        <option value="ES">España</option>
+                        <option value="GT">Guatemala</option>
+                        <option value="HN">Hondura</option>
+                        <option value="NI">Nicaragua</option>
+                        <option value="PA">Panama</option>
+                        <option value="PY">Paraguay</option>
+                        <option value="PE">Perú</option>
+                        <option value="CR">Puerto Rico</option>
+                        <option value="DO">Republica Dominicana</option>
+                        <option value="UY">Uruguay</option>
+                        <option value="VE">Venezuela</option>
+                        <option value="EU">E.E.U.U</option>
+                          </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Celular</label>
+                        <input type="text" class="form-control" id="phone" aria-describedby="emailHelp" wire:model="phone">
+                    </div>         
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger" data-dismiss="modal">
                         Cerrar
                     </button>
-                    <button class="btn btn-success" wire:loading.attr="disable" wire:target="save, inscripciones" type="button" wire:click="subirinscripciones">
+                    <button class="btn btn-success" wire:loading.attr="disable" wire:target="save, inscripciones" type="button" wire:click="registrarinscripcion">
                         Subir Inscripciones
                     </button>
                 </div>
