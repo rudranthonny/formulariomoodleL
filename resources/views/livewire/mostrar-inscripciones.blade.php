@@ -5,7 +5,7 @@
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
       </div>
       <div class="col-3">
-        <select class="form-select" aria-label="Default select example" wire:model="bprograma" style="width: 50%">
+        <select class="form-select" aria-label="Default select example" wire:model="bprograma" style="width: 80%">
           @foreach ($programas as $programa)
           <option value="{{$programa->id}}">{{$programa->name}}</option>
           @endforeach    
