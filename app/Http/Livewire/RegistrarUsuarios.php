@@ -90,6 +90,9 @@ class RegistrarUsuarios extends Component
         if (isset($consulta)) {
             $this->name = $consulta->name;
             $this->lastname = $consulta->lastname;
+            $this->dni = $consulta->dni;
+            $this->country = $consulta->country;
+            $this->phone = $consulta->phone;
         }
             return view('livewire.registrar-usuarios');
     }
