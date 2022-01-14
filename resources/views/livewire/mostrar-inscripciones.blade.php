@@ -12,6 +12,7 @@
               <th scope="col">dni</th>
               <th scope="col">phone</th>
               <th scope="col">Acciones</th>
+              <th scope="col">Matriculado</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +23,17 @@
               <td>{{$inscripcion->email}}</td>
               <td>{{$inscripcion->dni}}</td>
               <td>{{$inscripcion->phone}}</td>
+              <td>
+              @if ($inscripcion->matricula)
+              <div class="alert alert-success" role="alert" style="color:white">
+                si
+              </div>  
+              @else
+              <div class="alert alert-danger" role="alert" style="color:white">
+                no
+              </div> 
+              @endif
+              </td>
               <td>
                 
                 <form action="{{route('admin.inscripciones.destroy',$inscripcion->id)}}" method="POST" id="eliminar-inscripcion" class="eliminar-inscripcion">
