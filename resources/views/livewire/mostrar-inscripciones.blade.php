@@ -49,7 +49,7 @@
                 <form action="{{route('admin.inscripciones.destroy',$inscripcion->id)}}" method="POST" id="eliminar-inscripcion" class="eliminar-inscripcion">
                     @csrf
                     @method('DELETE')
-                    <a class="btn btn-dark" href="{{route('admin.usuarios.agregarprograma',$inscripcion->user_id)}}" role="button"><i class="fas fa-plus-circle"></i> Programa</a>
+                    <a class="btn btn-dark" href="{{route('admin.usuarios.agregarprograma',$inscripcion->user_id)}}" role="button"><i class="fas fa-plus-circle"></i>Matriculas</a>
                     <button type="submit"  class="btn btn-danger">Eliminar</button>
                 </form>
               </td>
@@ -65,14 +65,14 @@
                @endphp
               <td>
               @if ($matriculado)
-              <a class="btn btn-success" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"> Si</i></a>  
+              <a class="btn btn-success" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"></i></a>  
               @else
               <a class="btn btn-dark" role="button" wire:click="matricularprograma({{$inscripcion->id}})"><i class="fas fa-plus-circle"></i></a>
               @endif
               </td>
               <td>
                 @if ($matricula->comprobante_imagen)
-                <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">si</a> 
+                <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a> 
                 @else
                 no
                 @endif
