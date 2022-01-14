@@ -13,7 +13,7 @@
         </select>
       </div>
       <div class="col-3">
-        Paginación : 
+        Pag : 
         <select class="form-select" aria-label="Default select example" wire:model="blista" style="width: 50%">
           <option value="30">30</option>
           <option value="60">60</option>
