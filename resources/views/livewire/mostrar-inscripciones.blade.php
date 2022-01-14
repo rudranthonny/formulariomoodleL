@@ -71,9 +71,9 @@
               </td>
               <td>
                 @if ($matricula->comprobante_imagen)
-                <a href="">si</a> 
+                <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">si</a> 
                 @else
-                <a href="">no</a> 
+                no
                 @endif
                 </td>
             </tr>
