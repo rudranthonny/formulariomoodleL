@@ -16,7 +16,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="email" class="form-label">email</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" wire:model.defer="email">
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" wire:model="email">
                         @error('email')
                             <span>{{$message}}</span>
                         @enderror
