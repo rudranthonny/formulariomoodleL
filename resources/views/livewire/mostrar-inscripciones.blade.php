@@ -25,7 +25,7 @@
               <td>{{$inscripcion->phone}}</td>
               <td>
                 @php
-                    foreach($matriculas as $matricula->id){
+                    foreach($matriculas as $matricula){
                       if ($inscripcion->user_id == $matricula->user_id) {
                        $matriculado = true;
                        break;
