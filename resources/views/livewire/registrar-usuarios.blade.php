@@ -16,14 +16,14 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="email" class="form-label">email</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" wire:model="email">
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" wire:model.defer="email">
                         @error('email')
                             <span>{{$message}}</span>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="dni" class="form-label">dni</label>
-                        <input type="text" class="form-control" id="dni" aria-describedby="emailHelp" wire:model="dni">
+                        <input type="text" class="form-control" id="dni" aria-describedby="emailHelp" wire:model.defer="dni">
                         @error('dni')
                             <span>{{$message}}</span>
                         @enderror
@@ -37,13 +37,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="lastname" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp" wire:model="lastname">
+                        <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp" wire:model.defer="lastname">
                         @error('lastname')
                             <span>{{$message}}</span>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <select class="form-select" name="country" wire:model="country">
+                        <select class="form-select" name="country" wire:model.defer="country">
                         <option value="AR">Argentina</option>
                         <option value="BO">Bolivia</option>
                         <option value="CL">Chile</option>                                    
@@ -71,7 +71,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Celular</label>
-                        <input type="text" class="form-control" id="phone" aria-describedby="emailHelp" wire:model="phone">
+                        <input type="text" class="form-control" id="phone" aria-describedby="emailHelp" wire:model.defer="phone">
                         @error('phone')
                             <span>{{$message}}</span>
                         @enderror
