@@ -14,7 +14,7 @@ class MostrarInscripciones extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $bprograma;
-    public $blista;
+    public $blista="30";
     public $sort = "id";
     public $direction = "desc";
     protected $listeners =['render'];
