@@ -91,6 +91,6 @@ class RegistrarUsuarios extends Component
             $this->name = $consulta->name;
             $this->lastname = $consulta->lastname;
         }
-            return view('livewire.registrar-usuarios',compact('consulta'));
+            return view('livewire.registrar-usuarios');
     }
 }
