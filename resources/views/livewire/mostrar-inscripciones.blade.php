@@ -24,6 +24,15 @@
               <td>{{$inscripcion->dni}}</td>
               <td>{{$inscripcion->phone}}</td>
               <td>
+                
+                <form action="{{route('admin.inscripciones.destroy',$inscripcion->id)}}" method="POST" id="eliminar-inscripcion" class="eliminar-inscripcion">
+                    @csrf
+                    @method('DELETE')
+                    <a class="btn btn-dark" href="{{route('admin.usuarios.agregarprograma',$inscripcion->user_id)}}" role="button">Agregar Programa</a>
+                    <button type="submit"  class="btn btn-danger">Eliminar</button>
+                </form>
+              </td>
+              <td>
                 @php
                     foreach($matriculas as $matricula){
                       if ($inscripcion->user_id == $matricula->user_id) {
@@ -44,15 +53,6 @@
                 no
               </div> 
               @endif
-              </td>
-              <td>
-                
-                <form action="{{route('admin.inscripciones.destroy',$inscripcion->id)}}" method="POST" id="eliminar-inscripcion" class="eliminar-inscripcion">
-                    @csrf
-                    @method('DELETE')
-                    <a class="btn btn-dark" href="{{route('admin.usuarios.agregarprograma',$inscripcion->user_id)}}" role="button">Agregar Programa</a>
-                    <button type="submit"  class="btn btn-danger">Eliminar</button>
-                </form>
               </td>
             </tr>
             @endforeach
