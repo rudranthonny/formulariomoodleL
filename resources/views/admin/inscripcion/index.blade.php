@@ -28,6 +28,15 @@
     @livewire('mostrar-inscripciones')
 </div>
 @livewireScripts
+<script>
+    Livewire.on('crearinscripcion',function(){
+        Swal.fire(
+            'Registro Correctamente',
+            'Felicidades',
+            'success',
+        )
+    })
+</script>
 @stop
 
 @section('css')

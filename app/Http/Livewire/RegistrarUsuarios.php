@@ -68,6 +68,7 @@ class RegistrarUsuarios extends Component
        
         $this->reset('name','lastname','email','phone','dni','country');
         $this->emit('render');
+        $this->emit('crearinscripcion');
     }
     public function render()
     {
