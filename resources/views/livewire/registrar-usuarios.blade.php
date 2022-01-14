@@ -2,7 +2,7 @@
     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ventanaModal">
         <i class="fas fa-plus-circle"></i> Nuevo Alumno
     </button>
-<div wire:ignore.self class="modal face" id="ventanaModal" tabindex="-2" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true">
+<div wire:ignore.self class="modal face" id="ventanaModal" tabindex="-2" role="dialog" aria-labelledby="tituloVentana" aria-hidden="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">    
                 <div class="modal-header">
@@ -32,7 +32,6 @@
                     </div>
                     <div class="mb-3">
                         <select class="form-select" name="country" wire:model="country">
-                        <option value="PE" >Elegir el País</option>
                         <option value="AR">Argentina</option>
                         <option value="BO">Bolivia</option>
                         <option value="CL">Chile</option>                                    
