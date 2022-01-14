@@ -45,11 +45,11 @@
                 @endphp
                 
               @if ($matriculado)
-              <div class="alert alert-success" role="alert" style="color:white" style="padding : 0px">
+              <div class="alert alert-success" role="alert" style="color:white">
                 si
               </div>  
               @else
-              <div class="alert alert-danger" role="alert" style="color:white" style="padding : 0px">
+              <div class="alert alert-danger" role="alert" style="color:white">
                 no
               </div> 
               @endif
