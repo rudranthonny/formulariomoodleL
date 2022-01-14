@@ -24,14 +24,13 @@
                     <div class="mb-3">
                         <label for="dni" class="form-label">dni</label>
                         <input type="text" class="form-control" id="dni" aria-describedby="emailHelp" wire:model="dni">
-                        {{$usuario}}
                         @error('dni')
                             <span>{{$message}}</span>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" wire:model="name">
+                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" wire:model="name" value="{{$usuario}}">
                         @error('name')
                             <span>{{$message}}</span>
                         @enderror
