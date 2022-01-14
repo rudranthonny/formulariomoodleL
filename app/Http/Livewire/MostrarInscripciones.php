@@ -12,7 +12,7 @@ class MostrarInscripciones extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = "id";
-    public $direction = "asc";
+    public $direction = "des";
     protected $listeners =['render' => 'render'];
     
     public function render()
