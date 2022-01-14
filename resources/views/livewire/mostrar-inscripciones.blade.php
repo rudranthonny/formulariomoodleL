@@ -1,4 +1,7 @@
 <div class="card-body">
+  <div class="m-4">
+    <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
+  </div>
     @if ($inscripciones->count())
     <table class="table" id="tabla-m" class="table table-striped">
         <thead>
@@ -38,6 +41,6 @@
         </div>
     @endif
     <div class="d-flex justify-content-end">
-        
-    </div>
+      {{ $inscripciones->links() }}
+  </div>
 </div>
