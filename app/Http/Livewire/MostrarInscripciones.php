@@ -25,6 +25,7 @@ class MostrarInscripciones extends Component
     public function matricularprograma($id_usuario){
         /*obtener datos*/
         $usuario = Inscripcion::find($id_usuario);
+        dd($this->bprograma);
         $sprograma = Programa::find($this->bprograma);
         /*realizar matricula*/
         $matricula = new Matricula();
