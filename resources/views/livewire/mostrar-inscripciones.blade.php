@@ -1,6 +1,13 @@
 <div class="card-body">
-  <div class="m-4">
-    <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
+  <div class="container m-4">
+    <div class="row">
+      <div class="col-8">
+        <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
+      </div>
+      <div class="col-4">
+        Osssssssss
+      </div>
+    </div>
   </div>
     @if ($inscripciones->count())
     <table class="table" id="tabla-m" class="table table-striped">
