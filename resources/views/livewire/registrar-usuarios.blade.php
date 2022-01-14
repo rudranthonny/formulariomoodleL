@@ -30,7 +30,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" wire:model="name">
+                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" wire:model="name" value="{{$usuario->name}}">
                         @error('name')
                             <span>{{$message}}</span>
                         @enderror
@@ -44,7 +44,6 @@
                     </div>
                     <div class="mb-3">
                         <select class="form-select" name="country" wire:model="country">
-
                         <option value="AR">Argentina</option>
                         <option value="BO">Bolivia</option>
                         <option value="CL">Chile</option>                                    
@@ -65,7 +64,7 @@
                         <option value="UY">Uruguay</option>
                         <option value="VE">Venezuela</option>
                         <option value="EU">E.E.U.U</option>
-                          </select>
+                        </select>
                         @error('country')
                             <span>{{$message}}</span>
                         @enderror

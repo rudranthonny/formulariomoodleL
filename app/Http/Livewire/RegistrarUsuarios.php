@@ -10,10 +10,11 @@ class RegistrarUsuarios extends Component
 {   private $token = 'fc410318b59368f9245b394b209c644e';
     private $domainname = 'https://learclass.com';
     public $name,$lastname,$email,$phone,$dni,$country;
+    public $usuario;
     protected $rules = [
         'name' => 'required',
         'lastname' => 'required',
-        'email' => 'required',
+        'email' => 'required|email',
         'phone' => 'required',
         'dni' => 'required',
         'country' => 'required',
@@ -85,6 +86,8 @@ class RegistrarUsuarios extends Component
     }
     public function render()
     {
+        $emaila = strtolower($this->email);
+        $this->usuario = Inscripcion::where('email',$emaila)->first();
         return view('livewire.registrar-usuarios');
     }
 }
