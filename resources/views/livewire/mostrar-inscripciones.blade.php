@@ -7,7 +7,11 @@
       <div class="col-4">
         <select class="form-select" aria-label="Default select example" wire:model="bprograma">
           @foreach ($programas as $programa)
+          @if ($loop->first)
+          <option value="{{$programa->id}}" selected>{{$programa->name}}</option>
+          @else
           <option value="{{$programa->id}}">{{$programa->name}}</option>
+          @endif
           @endforeach    
         </select>
       </div>
