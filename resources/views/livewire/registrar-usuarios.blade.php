@@ -17,18 +17,30 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">email</label>
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" wire:model="email">
+                        @error('email')
+                            <span>{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="dni" class="form-label">dni</label>
                         <input type="text" class="form-control" id="dni" aria-describedby="emailHelp" wire:model="dni">
+                        @error('dni')
+                            <span>{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="name" aria-describedby="emailHelp" wire:model="name">
+                        @error('name')
+                            <span>{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="lastname" class="form-label">Apellido</label>
                         <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp" wire:model="lastname">
+                        @error('lastname')
+                            <span>{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <select class="form-select" name="country" wire:model="country">
@@ -54,10 +66,16 @@
                         <option value="VE">Venezuela</option>
                         <option value="EU">E.E.U.U</option>
                           </select>
+                        @error('country')
+                            <span>{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Celular</label>
                         <input type="text" class="form-control" id="phone" aria-describedby="emailHelp" wire:model="phone">
+                        @error('phone')
+                            <span>{{$message}}</span>
+                        @enderror
                     </div>         
                 </div>
                 <div class="modal-footer">

@@ -13,7 +13,7 @@ class MostrarInscripciones extends Component
     public $search;
     public $sort = "id";
     public $direction = "desc";
-    protected $listeners =['render' => 'render'];
+    protected $listeners =['render'];
     
     public function render()
     {

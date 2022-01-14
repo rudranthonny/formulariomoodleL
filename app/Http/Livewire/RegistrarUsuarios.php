@@ -10,7 +10,20 @@ class RegistrarUsuarios extends Component
 {   private $token = 'fc410318b59368f9245b394b209c644e';
     private $domainname = 'https://learclass.com';
     public $name,$lastname,$email,$phone,$dni,$country;
+    protected $rules = [
+        'name' => 'required',
+        'lastname' => 'required',
+        'email' => 'required',
+        'phone' => 'required',
+        'dni' => 'required',
+        'country' => 'required',
+    ];
+    public function updated($propertyName){
+        $this->validateOnly($propertyName);
+    }
+
     public function registrarinscripcion(){
+        $this->validate();
         //convertir en minusculas
         $emaila = strtolower($this->email);
         /*verificar si ya se realizo la inscripción*/
@@ -67,7 +80,7 @@ class RegistrarUsuarios extends Component
         }
        
         $this->reset('name','lastname','email','phone','dni','country');
-        $this->emit('render');
+        $this->emitTo('mostrar-inscripciones','render');
         $this->emit('crearinscripcion');
     }
     public function render()
