@@ -89,6 +89,6 @@ class RegistrarUsuarios extends Component
         $emaila = strtolower($this->email);
         $consulta = Inscripcion::where('email',$emaila)->first();
         $this->usuario = isset($consulta) ? $consulta : $this->usuario;
-        return view('livewire.registrar-usuarios');
+        return view('livewire.registrar-usuarios',compact('consulta'));
     }
 }
