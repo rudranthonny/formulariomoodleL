@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Inscripcion;
+use App\Models\Matricula;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -24,6 +25,7 @@ class MostrarInscripciones extends Component
         ->orwhere('phone','like','%' . $this->search.'%')
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
-        return view('livewire.mostrar-inscripciones',compact('inscripciones'));
+        $matriculas = Matricula::all();
+        return view('livewire.mostrar-inscripciones',compact('inscripciones','matriculas'));
     }
 }

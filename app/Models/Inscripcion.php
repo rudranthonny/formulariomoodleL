@@ -21,8 +21,4 @@ class Inscripcion extends Model
     ];
 
     //rel 1 a n
-    //rel 1 a n
-    public function matriculas(){
-        return $this->hasMany(Matricula::class);
-    }
 }

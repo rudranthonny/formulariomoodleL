@@ -24,7 +24,18 @@
               <td>{{$inscripcion->dni}}</td>
               <td>{{$inscripcion->phone}}</td>
               <td>
-              @if ($inscripcion->matriculas)
+                @php
+                    foreach($matriculas as $matricula->id){
+                      if ($inscripcion->user_id == $matricula->user_id) {
+                       $matriculado = true;
+                       break;
+                      } else {
+                      $matriculado = false;
+                      }   
+                    }
+                @endphp
+                
+              @if ($matriculado)
               <div class="alert alert-success" role="alert" style="color:white">
                 si
               </div>  
