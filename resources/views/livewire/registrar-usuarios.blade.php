@@ -17,7 +17,6 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">email</label>
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" wire:model="email">
-                        {{$usuario->name}}
                         @error('email')
                             <span>{{$message}}</span>
                         @enderror
@@ -31,7 +30,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" wire:model="name" @if ($usuario) value="{{$usuario->name}}"@endif>
+                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" wire:model="name"  value="{{$usuario->name}}">
                         @error('name')
                             <span>{{$message}}</span>
                         @enderror
