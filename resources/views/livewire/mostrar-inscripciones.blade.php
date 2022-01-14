@@ -1,5 +1,5 @@
 <div class="card-body">
-  <div>
+  <div class="m-4">
     <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
   </div>
     @if ($inscripciones->count())

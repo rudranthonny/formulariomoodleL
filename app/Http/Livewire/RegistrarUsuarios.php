@@ -65,6 +65,8 @@ class RegistrarUsuarios extends Component
         .'&moodlewsrestformat=json&users[0][id]='.$actualizar->user_id.'&users[0][firstname]='.$this->name.'&users[0][lastname]='.$this->lastname.'&users[0][phone1]='.$this->phone.'&users[0][country]='.$this->country;
         Http::get($serverurl);
         }
+       
+        $this->reset('name','lastname','email','phone','dni','country');
         $this->emit('render');
     }
     public function render()
