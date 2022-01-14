@@ -4,15 +4,15 @@
       <div class="col-6">
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
       </div>
-      <div class="col-3">
-        <select class="form-select" aria-label="Default select example" wire:model="bprograma" style="width: 80%">
+      <div class="col-4">
+        <select class="form-select" aria-label="Default select example" wire:model="bprograma">
           @foreach ($programas as $programa)
           <option value="{{$programa->id}}">{{$programa->name}}</option>
           @endforeach    
         </select>
       </div>
-      <div class="col-3"> 
-        <select class="form-select" aria-label="Default select example" wire:model="blista" style="width: 40%">
+      <div class="col-2"> 
+        <select class="form-select" aria-label="Default select example" wire:model="blista">
           <option value="30">30</option>
           <option value="60">60</option>
           <option value="90">90</option>
