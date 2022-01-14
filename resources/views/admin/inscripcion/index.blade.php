@@ -47,7 +47,9 @@
 td a.btn.btn-dark {
     font-size: 11px;
 }
-
+td a.btn.btn-info {
+    font-size: 11px;
+}
 td a.btn.btn-danger {
     font-size: 11px;
 }
