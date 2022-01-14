@@ -67,7 +67,7 @@
               @if ($matriculado)
               <a class="btn btn-success" href="{{route('admin.matriculas.edit',$matricula->id)}}" role="button"><i class="fas fa-edit"> Si</i></a>  
               @else
-              <a class="btn btn-danger" role="button"><i class="fas fa-edit" wire:click="matricularprograma({{$inscripcion->id}})"> No</i></a>
+              <a class="btn btn-danger" role="button" wire:click="matricularprograma({{$inscripcion->id}})"><i class="fas fa-plus-circle"></i></a>
               @endif
               </td>
               <td>
