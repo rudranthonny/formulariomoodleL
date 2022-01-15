@@ -60,8 +60,8 @@ class InscripcionesImport implements ToCollection
                     'phone'=> $row[3],
                     'dni'=> $row[4],
                     'user_id'=> $user->id,
-                    'politicas'=> $row[5],
-                    'country'=> $row[6],
+                    'politicas'=> $row[6],
+                    'country'=> $row[5],
                     'inicio_id' => $row[7],
                 ]);
             }
@@ -73,9 +73,10 @@ class InscripcionesImport implements ToCollection
                 'lastname'=> $row[1],
                 'phone'=> $row[3],
                 'dni'=> $row[4],
-                'politicas'=> $row[5],
-                'country'=> $row[6],
+                'politicas'=> $row[6],
+                'country'=> $row[5],
                 'inicio_id' => $row[7],
+                'user_id'=> $row[8],
             ]);
             /*actualizar en el moodle*/
             $functionname = 'core_user_update_users';
