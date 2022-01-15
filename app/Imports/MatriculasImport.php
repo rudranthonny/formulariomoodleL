@@ -33,7 +33,7 @@ class MatriculasImport implements ToCollection
             'fechapago'=> $row[6],
             'comprobante'=> $row[7],
             'comprobante_imagen' => $row[8],
-            'Programa_id' => $row[9],
+            'programa_id' => $row[9],
         ]);
             }
         }

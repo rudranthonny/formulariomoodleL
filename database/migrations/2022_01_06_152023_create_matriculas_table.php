@@ -25,7 +25,7 @@ class CreateMatriculasTable extends Migration
             $table->string('comprobante')->nullable();
             $table->string('comprobante_imagen')->unique()->nullable();
             $table->unsignedBigInteger('programa_id')->nullable();
-            $table->foreign('programa_id')->references('id')->on('programas')->onDelete('cascade');
+            $table->foreign('programa_id')->references('id')->on('programas')->onDelete('set null');
             $table->timestamps();
         });
     }
