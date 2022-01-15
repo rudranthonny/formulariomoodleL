@@ -66,6 +66,7 @@ class RegistrarUsuarios extends Component
         {
             /*actualizar inscripcion*/
         $actualizar = Inscripcion::find($rinscripcion->id);
+        dd($this->inicio_id);
         $actualizar->update([
             'name' => $this->name,
             'lastname' => $this->lastname,
