@@ -136,7 +136,7 @@ class InicioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Inicio $inicio)
-    {
+    { return $inicio;
         if ($inicio->estado == "1") {$est = true;}else{$est=false;}
         $inicio->delete();
         $uinicio = Inicio::all()->first();
