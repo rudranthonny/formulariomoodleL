@@ -143,7 +143,13 @@ class InicioController extends Controller
         if ($est && ($uinicio != "[]")) {
             $uinicio->estado = 1;
             $uinicio->save();
-        }        
+        }
+        elseif($est && ($uinicio == "[]")){
+            $cinicio = new Inicio;
+            $cinicio->name = "Programa 0";
+            $cinicio->estado = "1";
+            $cinicio->save();
+        }    
         return redirect()->route('admin.inicios.index')->with('info','el Inicio se elimino correctamente');
     }
 
