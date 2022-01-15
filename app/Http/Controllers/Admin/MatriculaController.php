@@ -22,7 +22,8 @@ class MatriculaController extends Controller
      */
     public function index()
     {
-        //
+        return "estoy aca";
+        return view('admin.matricula.subirmatricula');
     }
 
     /**
@@ -53,8 +54,7 @@ class MatriculaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Matricula $matricula)
-    {   return "estoy aca";
-        return view('admin.matricula.subirmatricula');
+    {   
     }
 
     /**
