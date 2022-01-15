@@ -90,7 +90,7 @@ class RegistrarUsuarios extends Component
     }
     public function render()
     {
-        dd($this->inicio_id);
+        //dd($this->inicio_id);
         if($this->inicio_id == false){
             $sinicio = Inicio::where('estado',1)->first();
             $this->inicio_id = $sinicio->id;
