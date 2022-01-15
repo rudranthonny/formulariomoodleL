@@ -24,7 +24,7 @@ class RegistrarUsuarios extends Component
     public function updated($propertyName){
         $this->validateOnly($propertyName);
     }
-
+    
     public function registrarinscripcion(){
         $this->validate();
         //convertir en minusculas
@@ -66,7 +66,6 @@ class RegistrarUsuarios extends Component
         {
             /*actualizar inscripcion*/
         $actualizar = Inscripcion::find($rinscripcion->id);
-        dd($this->inicio_id);
         $actualizar->update([
             'name' => $this->name,
             'lastname' => $this->lastname,
@@ -91,10 +90,11 @@ class RegistrarUsuarios extends Component
     }
     public function render()
     {
-        /*if($this->inicio_id == false){
+        dd($this->inicio_id);
+        if($this->inicio_id == false){
             $sinicio = Inicio::where('estado',1)->first();
             $this->inicio_id = $sinicio->id;
-        }*/
+        }
         $emaila = strtolower($this->email);
         $inicios = Inicio::all();
         $consulta = Inscripcion::where('email',$emaila)->first();
