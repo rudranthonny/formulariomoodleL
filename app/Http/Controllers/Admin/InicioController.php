@@ -140,7 +140,7 @@ class InicioController extends Controller
         if ($inicio->estado == "1") {$est = true;}else{$est=false;}
         $inicio->delete();
         $uinicio = Inicio::all()->first();
-        if ($est && $uinicio == "[]") {
+        if ($est && ($uinicio != "[]")) {
             $uinicio->estado = 1;
             $uinicio->save();
         }        
