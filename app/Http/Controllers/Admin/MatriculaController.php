@@ -22,7 +22,7 @@ class MatriculaController extends Controller
      */
     public function index()
     {
-        return "estoy aca";
+        //return "estoy aca";
         return view('admin.matricula.subirmatricula');
     }
 
