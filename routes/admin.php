@@ -35,7 +35,7 @@ Route::get('usuarios/{username}/consultapdf',[UsuarioController::class,'consulta
 Route::resource('matriculas', MatriculaController::class)->names('admin.matriculas');
 Route::post('matriculas/{id}/agregarprograma',[MatriculaController::class,'agregarmatricula'])->name('admin.matriculas.agregarmatricula');
 Route::delete('matriculas/{id}/eliminarprograma',[MatriculaController::class,'eliminarprograma'])->name('admin.matriculas.eliminarprograma');
-Route::get('matriculas/{variable}/export',[InscripcionController::class,'matriculasexport'])->name('admin.matriculas.export');
+Route::get('matriculas/{variable}/export',[MatriculaController::class,'matriculasexport'])->name('admin.matriculas.export');
 
 //inscripciones
 Route::resource('inscripciones', InscripcionController::class)->names('admin.inscripciones');
