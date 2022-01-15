@@ -16,9 +16,13 @@ class MatriculasImport implements ToCollection
     * @return \Illuminate\Database\Eloquent\Model|null
     */
     public function collection(Collection $rows)
-    {
+    {   $contador = 0;
         foreach ($rows as $row) 
         {  
+            $contador = $contador +1;
+            if ($contador == 1) {} 
+            else 
+            {
         Matricula::create([
             'name' => $row[0],
             'lastname'=> $row[1],
@@ -31,6 +35,7 @@ class MatriculasImport implements ToCollection
             'comprobante_imagen' => $row[8],
             'Programa_id' => $row[9],
         ]);
+            }
         }
     }
 }
