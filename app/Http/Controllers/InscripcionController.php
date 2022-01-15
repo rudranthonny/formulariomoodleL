@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\InscripcionesExport;
+use App\Models\Inicio;
 use App\Models\Inscripcion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -107,6 +108,14 @@ class InscripcionController extends Controller
             'politicas' => 'required',
             'country' => 'required',
         ]);
+            $inicio = Inicio::where('estado',1)->first();
+            if($inicio == false){
+               $cinicio = new Inicio;
+               $cinicio->name = "Programa 0";
+               $cinicio->estado = "1";
+               $cinicio->save();
+            $inicio = Inicio::where('estado',1)->first();
+            }
             $emaila = strtolower($request->input('email'));
             //verificar si ya se realizo la inscripción
             $rinscripcion = Inscripcion::where('email',$emaila)->first();
@@ -132,14 +141,14 @@ class InscripcionController extends Controller
             }
             //realizar la instancia
             $inscripcion= new Inscripcion();
-            $inscripcion->create($request->all()+['user_id' => $user->id]);
+            $inscripcion->create($request->all()+['user_id' => $user->id,'inicio_id' => $inicio->id]);
 
         return redirect()->route('registrar.inicio')->with('crear','Se Inscribio Correctamente');
         }
         else{
         /*actualizar inscripcion*/
         $actualizar = Inscripcion::find($rinscripcion->id);
-        $actualizar->update($request->all());
+        $actualizar->update($request->all()+['inicio_id' => $inicio->id]);
         /*actualizar en el moodle*/
         $functionname = 'core_user_update_users';
         $serverurl = $this->domainname. '/webservice/rest/server.php'

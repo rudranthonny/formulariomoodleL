@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Inicio;
 use App\Models\Inscripcion;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
@@ -20,6 +21,8 @@ class InscripcionesImport implements ToCollection
     public function collection(Collection $rows)
     {   
         $contador = 0;
+         //instaciar inicio
+         $inicio = Inicio::where('estado',1)->first();
         foreach ($rows as $row) 
         {   
             $contador = $contador +1;
@@ -59,6 +62,7 @@ class InscripcionesImport implements ToCollection
                     'user_id'=> $user->id,
                     'politicas'=> $row[5],
                     'country'=> $row[6],
+                    'inicio_id' => $row[7],
                 ]);
             }
             else{
@@ -71,6 +75,7 @@ class InscripcionesImport implements ToCollection
                 'dni'=> $row[4],
                 'politicas'=> $row[5],
                 'country'=> $row[6],
+                'inicio_id' => $row[7],
             ]);
             /*actualizar en el moodle*/
             $functionname = 'core_user_update_users';

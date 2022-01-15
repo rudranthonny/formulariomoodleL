@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Inicio;
 use App\Models\Inscripcion;
 use App\Models\Matricula;
 use App\Models\Programa;
@@ -17,6 +18,7 @@ class MostrarInscripciones extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $bprograma;
+    public $binicio;
     public $blista="30";
     public $sort = "id";
     public $direction = "desc";
@@ -43,16 +45,14 @@ class MostrarInscripciones extends Component
         $usuario = Http::get($serverurl);
     }
     public function render()
-    {
+    {   
         $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
-        ->orwhere('lastname','like','%' . $this->search.'%')
-        ->orwhere('email','like','%' . $this->search.'%')
-        ->orwhere('dni','like','%' . $this->search.'%')
-        ->orwhere('phone','like','%' . $this->search.'%')
-        ->orderBy($this->sort, $this->direction)
+        ->where('inicio_id',$this->binicio)
+        
         ->paginate($this->blista);
         $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
         $programas = Programa::all();
-        return view('livewire.mostrar-inscripciones',compact('inscripciones','matriculas','programas'));
+        $inicios = Inicio::all();
+        return view('livewire.mostrar-inscripciones',compact('inscripciones','matriculas','programas','inicios'));
     }
 }

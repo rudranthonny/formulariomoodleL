@@ -75,7 +75,13 @@
                         @error('phone')
                             <span>{{$message}}</span>
                         @enderror
-                    </div>         
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" name="inicio" wire:model.defer="inicio_id">
+                        @foreach ($inicios as $inicio)
+                        <option value="{{$inicio->id}}">{{$inicio->name}}</option>
+                        @endforeach                                    
+                        </select>        
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger" data-dismiss="modal">

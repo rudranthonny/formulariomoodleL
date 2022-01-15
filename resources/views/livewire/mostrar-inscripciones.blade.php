@@ -1,8 +1,16 @@
 <div class="card-body">
   <div class="container p-4">
     <div class="row">
-      <div class="col-6">
+      <div class="col-3">
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
+      </div>
+      <div class="col-3">
+        <select class="form-select" aria-label="Default select example" wire:model="binicio">
+          <option>Elegir Inicio</option>
+          @foreach ($inicios as $inicio)
+          <option value="{{$inicio->id}}">{{$inicio->name}}</option>
+          @endforeach    
+        </select>
       </div>
       <div class="col-4">
         <select class="form-select" aria-label="Default select example" wire:model="bprograma">
@@ -22,7 +30,7 @@
       </div>
     </div>
   </div>
-    @if ($inscripciones->count() && $matriculas->count())
+    @if ($inscripciones->count() && ($bprograma))
     <table class="table" id="tabla-m" class="table table-striped">
         <thead>
             <tr class="bg-dark">
@@ -54,6 +62,7 @@
                 </form>
               </td>
               @php
+              if($matriculas->count()){
               foreach($matriculas as $matricula){
                 if ($inscripcion->user_id == $matricula->user_id) {
                  $matriculado = true;
@@ -61,6 +70,10 @@
                 } else {
                 $matriculado = false;
                 }   
+              }
+              }
+              else{
+                $matriculado = false;
               }
                @endphp
               <td>
@@ -71,8 +84,12 @@
               @endif
               </td>
               <td>
+                @if($matriculas->count())
                 @if ($matricula->comprobante_imagen)
                 <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a> 
+                @else
+                no
+                @endif
                 @else
                 no
                 @endif

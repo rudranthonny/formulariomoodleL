@@ -18,7 +18,11 @@ class Inscripcion extends Model
         'user_id',
         'politicas',
         'country',
+        'inicio_id'
     ];
 
-    //rel 1 a n
+    //rel 1 a n inverso
+    public function inicio(){
+        return $this->belongsTo(Inicio::class);
+    }
 }

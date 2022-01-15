@@ -22,20 +22,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="shortname" class="form-label">Nombre corto del Inicio</label>
-                <input type="text" class="form-control" id="shortname" name="shortname">
-                @error('shortname')
-                <span class="text-danger">{{$message}}</span>
-             @enderror
-            </div>
-            <div class="mb-3">
-                <label for="plantila_lt" class="form-label">Elige la plantilla para tu inicio</label>
-                <select class="form-select" aria-label="Default select example" id="plantila_lt" name="plantilla_id">
-                @foreach ($plantillas as $plantilla)
-                <option value="{{$plantilla->id}}">{{$plantilla->name}}</option>
-                @endforeach
-                </select>
-
+                Activar Inicio <input type="checkbox" class="mr-1" name="estado" value='1'>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Crear Inicio</button>

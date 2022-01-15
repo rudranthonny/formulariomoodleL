@@ -238,6 +238,11 @@ return [
 
         ['header' => 'account_settings'],
         [
+            'text' => 'Inicios',
+            'route'  => 'admin.inicios.index',
+            'icon' => 'fas fa-bookmark',
+        ],
+        [
             'text' => 'inscripciones',
             'route'  => 'admin.inscripciones.index',
             'icon' => 'fab fa-accusoft',

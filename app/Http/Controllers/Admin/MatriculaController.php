@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\MatriculasExport;
 use App\Http\Controllers\Controller;
 use App\Models\Matricula;
 use App\Models\Programa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MatriculaController extends Controller
 {
@@ -52,7 +54,7 @@ class MatriculaController extends Controller
      */
     public function show(Matricula $matricula)
     {
-        //
+        return view('admin.matricula.subirmatricula');
     }
 
     /**
@@ -147,5 +149,10 @@ class MatriculaController extends Controller
         $matricula->delete();
         //redireccionamiento
         return redirect()->route('admin.usuarios.agregarprograma',$request->input('estudiante_id'))->with('info','se elimino correctamente la matricula');
+    }
+
+    public function matriculasexport($variable) 
+    {   //return 'estoy aca';
+        return Excel::download(new MatriculasExport, 'matriculas.xlsx');
     }
 }

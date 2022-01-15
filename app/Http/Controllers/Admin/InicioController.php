@@ -30,8 +30,7 @@ class InicioController extends Controller
      */
     public function create()
     {
-        $plantillas = Plantilla::all();
-        return view('admin.inicio.create',compact('plantillas'));
+        return view('admin.inicio.create');
     }
 
     /**
@@ -43,47 +42,34 @@ class InicioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'shortname'=> 'required|unique:inicios|alpha_dash', 
+            'name' => 'required', 
         ]);
-        $inicio = Inicio::create($request->all());
+        $inicios = Inicio::all();
+        if ($request->input('estado') != null) {
+            foreach ($inicios as $inicio) {
+                $inicio->estado = "0";
+                $inicio->update();
+            }
+            $inicio = Inicio::create($request->all());
+        } else {
+            if ($inicios == "[]") {
+                $inicio = Inicio::create(
+                    [
+                        'name' => $request->input('name'),
+                        'estado' => '1',
+                    ]
+                );
+            }
+            else{
+                $inicio = Inicio::create(
+                    [
+                        'name' => $request->input('name'),
+                        'estado' => '0',
+                    ]
+                );
+            }
+        }
         //crear inicio en moodle - categoria
-        $name =$request->input('shortname');
-        $plantilla_id = $request->input('plantilla_id');
-        $parent = 0;
-        $idnumber = null;
-        $description ='Esto es una categoria del sistema laravel';
-        $descriptionformat = 1;
-        //declarar funcion
-        $functionname = 'core_course_create_categories';
-        $serverurl = $this->domainname . '/webservice/rest/server.php'. '?wstoken=' . $this->token 
-        . '&wsfunction='.$functionname.'&moodlewsrestformat=json&categories[0][name]='.$name
-        .'&categories[0][parent]='.$parent
-        .'&categories[0][idnumber]='.$idnumber
-        .'&categories[0][description]='.$description
-        .'&categories[0][descriptionformat]='.$descriptionformat;
-        Http::get($serverurl);
-         //obtener información de la categoria creada
-        $functionname = 'core_course_get_categories';
-        $serverurl2 = $this->domainname . '/webservice/rest/server.php'
-        . '?wstoken=' . $this->token 
-        . '&wsfunction='.$functionname
-        .'&moodlewsrestformat=json&addsubcategories=0&criteria[0][key]=name&criteria[0][value]='.$name;
-        $categoria = Http::get($serverurl2);
-        foreach (json_decode($categoria) as $cat){   
-        }
-        //crear los cursos en base a la plantilla solicitada
-        $functionname = 'core_course_create_courses';
-        $plantilla = Plantilla::find($plantilla_id);
-        foreach ($plantilla->cursos as $curso) {
-            $serverurl3 = $this->domainname . '/webservice/rest/server.php'
-            . '?wstoken=' . $this->token 
-            . '&wsfunction='.$functionname
-            .'&moodlewsrestformat=json&courses[0][fullname]='.$curso->name
-            .'&courses[0][shortname]='.$name.'-'.$curso->name
-            .'&courses[0][categoryid]='.$cat->id;
-            $crearcurso = Http::get($serverurl3);
-        }
         return redirect()->route('admin.inicios.index')->with('info','el Inicio se creo correctamente');
     }
 
@@ -151,23 +137,26 @@ class InicioController extends Controller
      */
     public function destroy(Inicio $inicio)
     {
-        //obtenar información de la categoria que se va a eliminar
-        $functionname = 'core_course_get_categories';
-         $serverurl2 = $this->domainname . '/webservice/rest/server.php'
-         . '?wstoken=' . $this->token 
-         . '&wsfunction='.$functionname
-         .'&moodlewsrestformat=json&addsubcategories=0&criteria[0][key]=name&criteria[0][value]='.$inicio->shortname;
-         $categoria = Http::get($serverurl2);
-         foreach (json_decode($categoria) as $cat){   
-         }
-         //eliminar la categoria obtenida
-         $functionname = 'core_course_delete_categories';
-         $serverurl3 = $this->domainname . '/webservice/rest/server.php'
-         . '?wstoken=' . $this->token 
-         . '&wsfunction='.$functionname.'&moodlewsrestformat=json&categories[0][id]='.$cat->id
-         .'&categories[0][newparent]=0&categories[0][recursive]=1';
-         $categoria = Http::get($serverurl3);
+        if ($inicio->estado == "1") {$est = true;}else{$est=false;}
         $inicio->delete();
+        $uinicio = Inicio::all()->first();
+        if ($est && $uinicio == "[]") {
+            $uinicio->estado = 1;
+            $uinicio->save();
+        }        
         return redirect()->route('admin.inicios.index')->with('info','el Inicio se elimino correctamente');
+    }
+
+    public function activar($inicio)
+    {   $inicio = Inicio::find($inicio);
+        $uinicios = Inicio::all();
+        foreach ($uinicios as $uinicio) {
+            $uinicio->estado = 0;
+            $uinicio->save();
+        }
+        $inicio->estado = 1;
+        $inicio->save();
+        //crear inicio en moodle - categoria
+        return redirect()->route('admin.inicios.index')->with('info','se cambio el programa');
     }
 }

@@ -25,6 +25,7 @@ Route::post('plantillas/agregarcurso',[PlantillaController::class,'agregarcurso'
 Route::post('plantillas/eliminarcurso',[PlantillaController::class,'eliminarcurso'])->name('admin.plantillas.eliminarcurso');
 //modulo inicio
 Route::resource('inicios', InicioController::class)->names('admin.inicios');
+Route::get('inicios/{id}/activar', [InicioController::class,'activar'])->name('admin.inicios.activar');
 //modulo usuarios
 Route::resource('usuarios', UsuarioController::class)->names('admin.usuarios');
 Route::post('usuarios/consulta',[UsuarioController::class,'consulta'])->name('admin.usuarios.consulta');
@@ -34,6 +35,8 @@ Route::get('usuarios/{username}/consultapdf',[UsuarioController::class,'consulta
 Route::resource('matriculas', MatriculaController::class)->names('admin.matriculas');
 Route::post('matriculas/{id}/agregarprograma',[MatriculaController::class,'agregarmatricula'])->name('admin.matriculas.agregarmatricula');
 Route::delete('matriculas/{id}/eliminarprograma',[MatriculaController::class,'eliminarprograma'])->name('admin.matriculas.eliminarprograma');
+Route::get('matriculas/{variable}/export',[InscripcionController::class,'matriculasexport'])->name('admin.matriculas.export');
+
 //inscripciones
 Route::resource('inscripciones', InscripcionController::class)->names('admin.inscripciones');
 Route::get('inscripciones/{eliminar}/eliminarall', [InscripcionController::class,'eliminarall'])->name('admin.inscripciones.eliminarall');

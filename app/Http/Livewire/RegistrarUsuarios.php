@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Inicio;
 use App\Models\Inscripcion;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
@@ -11,6 +12,7 @@ class RegistrarUsuarios extends Component
     private $domainname = 'https://learclass.com';
     public $usuario;
     public $name,$lastname,$email,$phone,$dni,$country;
+    public $inicio_id;
     protected $rules = [
         'name' => 'required',
         'lastname' => 'required',
@@ -57,6 +59,7 @@ class RegistrarUsuarios extends Component
                 'user_id' => $user->id,
                 'politicas' => '1',
                 'country' => $this->country,
+                'inicio_id' => $this->inicio_id,
             ]);
         }
         else 
@@ -70,6 +73,7 @@ class RegistrarUsuarios extends Component
             'phone' => $this->phone,
             'dni' => $this->dni,
             'country' => $this->country,
+            'inicio_id' => $this->inicio_id,
         ]);
         /*actualizar en el moodle*/
         $functionname = 'core_user_update_users';
@@ -86,7 +90,12 @@ class RegistrarUsuarios extends Component
     }
     public function render()
     {
+        if($this->inicio_id == false){
+            $sinicio = Inicio::where('estado',1)->first();
+            $this->inicio_id = $sinicio->id;
+        }
         $emaila = strtolower($this->email);
+        $inicios = Inicio::all();
         $consulta = Inscripcion::where('email',$emaila)->first();
         if (isset($consulta)) {
             $this->name = $consulta->name;
@@ -94,7 +103,8 @@ class RegistrarUsuarios extends Component
             $this->dni = $consulta->dni;
             $this->phone = $consulta->phone;
             $this->country = $consulta->country;
+            $this->inicio_id = $consulta->inicio_id;
         }
-        return view('livewire.registrar-usuarios');
+        return view('livewire.registrar-usuarios',compact('inicios'));
     }
 }

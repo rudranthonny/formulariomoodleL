@@ -20,8 +20,7 @@
         <table class="table">
             <thead>
               <tr class="bg-dark">
-                <th scope="col">Nombre Largo</th>
-                <th scope="col">Nombre Corto</th>
+                <th scope="col">Name</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -29,15 +28,17 @@
               @foreach ($inicios as $inicio)
               <tr>
                 <th scope="row">{{$inicio->name}}</th>
-                <td>{{$inicio->shortname}}</td>
                 <td>
                 <form action="{{route('admin.inicios.destroy',$inicio->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <a class="btn btn-info" href="{{route('admin.inicios.edit',$inicio->id)}}" role="button">Editar</a>
-                <a class="btn btn-success" href="#" role="button">Agregar Usuario</a>
-    
-                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <a class="btn btn-info" href="{{route('admin.inicios.edit',$inicio->id)}}" role="button"><i class="fas fa-edit"></i></a>
+                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                @if ($inicio->estado == "1")
+                <button  class="btn btn-success" disabled><i class="fas fa-eye"></i></button>
+                @else
+                <a class="btn btn-secondary" href="{{route('admin.inicios.activar',$inicio->id)}}" role="button"><i class="fas fa-eye-slash"></i></a>   
+                @endif
                 </form>
                 </td>
               </tr>
