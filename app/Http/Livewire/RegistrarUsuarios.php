@@ -90,10 +90,10 @@ class RegistrarUsuarios extends Component
     }
     public function render()
     {
-        if($this->inicio_id == false){
+        /*if($this->inicio_id == false){
             $sinicio = Inicio::where('estado',1)->first();
             $this->inicio_id = $sinicio->id;
-        }
+        }*/
         $emaila = strtolower($this->email);
         $inicios = Inicio::all();
         $consulta = Inscripcion::where('email',$emaila)->first();
