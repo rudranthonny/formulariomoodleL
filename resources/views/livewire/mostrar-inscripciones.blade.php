@@ -14,7 +14,7 @@
       </div>
       <div class="col-4">
         <select class="form-select" aria-label="Default select example" wire:model="bprograma">
-          <option>Elegir programa</option>
+          <option value="0">Elegir programa</option>
           @foreach ($programas as $programa)
           <option value="{{$programa->id}}">{{$programa->name}}</option>
           @endforeach    

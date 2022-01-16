@@ -48,7 +48,6 @@ class MostrarInscripciones extends Component
     {   
         $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
         ->where('inicio_id',$this->binicio)
-        
         ->paginate($this->blista);
         $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
         $programas = Programa::all();
