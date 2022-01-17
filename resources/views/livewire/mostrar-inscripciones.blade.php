@@ -94,7 +94,7 @@
                 No existe ningun registro coincidente
         </div>
     @endif
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-betwee">
       {{ $inscripciones->count() }}
       {{ $inscripciones->links() }}
   </div>
