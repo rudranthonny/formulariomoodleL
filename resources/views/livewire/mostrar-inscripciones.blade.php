@@ -54,12 +54,10 @@
               <td>{{$inscripcion->phone}}</td>
               <td>
                 
-                <form action="{{route('admin.inscripciones.destroy',$inscripcion->id)}}" method="POST" id="eliminar-inscripcion" class="eliminar-inscripcion">
                     @csrf
                     @method('DELETE')
                     <a class="btn btn-info" href="{{route('admin.usuarios.agregarprograma',$inscripcion->user_id)}}" role="button">Matriculas</a>
-                    <button type="submit"  class="btn btn-danger">Eliminar</button>
-                </form>
+                    <button  class="btn btn-danger">Eliminar</button>
               </td>
               @php
               if($matriculas->count()){
