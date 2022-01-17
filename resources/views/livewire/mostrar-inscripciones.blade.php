@@ -80,8 +80,11 @@
               </td>
               <td>
                 @if ($matriculado)
-                {{$matricula->comprobante_imagen}}
-                <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a> 
+                @if ($matricula->comprobante_imagen)
+                <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a>   
+                @else
+                no
+                @endif
                 @else
                 no
                 @endif
