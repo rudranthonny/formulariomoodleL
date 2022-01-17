@@ -79,12 +79,8 @@
               @endif
               </td>
               <td>
-                @if($matriculas->count())
-                @if ($matricula->comprobante_imagen)
+                @if ($matriculado)
                 <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a> 
-                @else
-                no
-                @endif
                 @else
                 no
                 @endif
