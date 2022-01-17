@@ -99,7 +99,7 @@
         </div>
     @endif
     <div class="d-flex justify-content-between">
-      {{ Nº : $inscripciones->count() }}
+      {{"Nº : ".$inscripciones->count() }}
       {{ $inscripciones->links() }}
   </div>
 </div>
