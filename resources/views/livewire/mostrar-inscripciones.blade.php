@@ -95,6 +95,7 @@
         </div>
     @endif
     <div class="d-flex justify-content-end">
+      {{ $inscripciones->count() }}
       {{ $inscripciones->links() }}
   </div>
 </div>
