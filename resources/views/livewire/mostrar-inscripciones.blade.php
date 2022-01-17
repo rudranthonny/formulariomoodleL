@@ -80,6 +80,7 @@
               </td>
               <td>
                 @if ($matriculado)
+                {{$matricula->comprobante_imagen}}
                 <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a> 
                 @else
                 no
@@ -95,7 +96,7 @@
         </div>
     @endif
     <div class="d-flex justify-content-between">
-      {{ $inscripciones->count() }}
+      {{ Nº : $inscripciones->count() }}
       {{ $inscripciones->links() }}
   </div>
 </div>
