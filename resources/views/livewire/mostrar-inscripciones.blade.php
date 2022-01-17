@@ -53,9 +53,6 @@
               <td>{{$inscripcion->dni}}</td>
               <td>{{$inscripcion->phone}}</td>
               <td>
-                
-                    @csrf
-                    @method('DELETE')
                     <a class="btn btn-info" href="{{route('admin.usuarios.agregarprograma',$inscripcion->user_id)}}" role="button">Matriculas</a>
                     <button  class="btn btn-danger">Eliminar</button>
               </td>
