@@ -54,7 +54,7 @@
               <td>{{$inscripcion->phone}}</td>
               <td>
                     <a class="btn btn-info" href="{{route('admin.usuarios.agregarprograma',$inscripcion->user_id)}}" role="button">Matriculas</a>
-                    <button  class="btn btn-danger">Eliminar</button>
+                    <button  class="btn btn-danger" wire:click="eliminar_inscripcion({{$inscripcion->id}})"><i class="fas fa-user-minus"></i></button>
               </td>
               @php
               if($matriculas->count()){

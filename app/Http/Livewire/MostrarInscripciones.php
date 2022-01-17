@@ -24,6 +24,10 @@ class MostrarInscripciones extends Component
     public $direction = "desc";
     protected $listeners =['render'];
     
+    public function eliminar_inscripcion($id_inscripcion){
+        $e_inscripcion = Inscripcion::find($id_inscripcion);
+        $e_inscripcion->delete();
+    }
     public function matricularprograma($id_usuario){
         /*obtener datos*/
         $usuario = Inscripcion::find($id_usuario);
