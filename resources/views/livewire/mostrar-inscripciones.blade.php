@@ -124,6 +124,7 @@
               @endif
             </tr>   
             @elseif($bestado == "pagantes" or $bestado == "deudores")
+              @foreach ($matriculas as $matricula)
               @if ($inscripcion->user_id == $matricula->user_id)
               <tr>
                 <td>{{$inscripcion->name." ".$inscripcion->lastname}}</td>
@@ -190,8 +191,8 @@
                 @endif
               </tr>  
               @endif
+              @endforeach 
             @endif
-    
             @endforeach
             <tr>
               <td>{{"Nº : ".$inscripciones->count() }}</td>
