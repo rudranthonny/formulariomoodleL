@@ -141,6 +141,7 @@
                 <div class="modal-body">
                     <!--Agencia-->
                   <div class="mb-3">
+                    <label for="agente" class="form-label">Agente</label>
                     <select class="form-select" name="agente" aria-label="Default select example" wire:model.defer="eagente">
                     <option value="BancoNacion">Banco de la Nación</option> 
                     <option value="BBVA">BBVA</option>
@@ -160,6 +161,7 @@
                   </div>
                   <!--tipo de soles-->
                   <div class="mb-3">
+                  <label for="tipo" class="form-label">Tipo</label>
                   <select class="form-select" name="tipo" aria-label="Default select example" wire:model.defer="etipo">
                   <option value="Soles">Soles</option>    
                   <option value="Dolares">Dolares</option>    
@@ -167,22 +169,22 @@
                   <span class="text-danger">{{$message}}</span>
                   @enderror
                   </div>
-          <!--monto-->
-          <div class="mb-3">
-              <label for="costo" class="form-label">Costo</label>
-              <input type="text" class="form-control" id="costo" name="costo" wire:model.defer="ecosto">
-              @error('costo')
-              <span class="text-danger">{{$message}}</span>
-              @enderror
-          </div>
-          <!--fecha-->
-          <div class="mb-3">
-              <label for="fechapago" class="form-label">Fecha</label>
-              <input type="date" class="form-control" id="fechapago" name="fechapago" wire:model.defer="efechapago">
-              @error('fechapago')
-              <span class="text-danger">{{$message}}</span>
-              @enderror
-          </div>
+                  <!--monto-->
+                  <div class="mb-3">
+                  <label for="costo" class="form-label">Costo</label>
+                  <input type="text" class="form-control" id="costo" name="costo" wire:model.defer="ecosto">
+                  @error('costo')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
+                  </div>
+                  <!--fecha-->
+                  <div class="mb-3">
+                  <label for="fechapago" class="form-label">Fecha</label>
+                  <input type="date" class="form-control" id="fechapago" name="fechapago" wire:model.defer="efechapago">
+                  @error('fechapago')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
+                  </div>
            <!--numero de comprobante-->
            <div class="mb-3">
               <label for="comprobante" class="form-label">Numero de Comprobante</label>
