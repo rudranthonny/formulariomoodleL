@@ -62,6 +62,7 @@ class MostrarInscripciones extends Component
                 $imagenenu = $this->ecomprobante_imagen_file->storeAs('public/comprobantes',$mmatricula->user_id."-".rand(1,2000).str_replace(' ', '', $mmatricula->comprobante).".".$extension);
                 $url = Storage::url($imagenenu);
                 $mmatricula->update(['comprobante_imagen' => $url]);
+                $this->ecomprobante_imagen = $mmatricula->comprobante_imagen;
         }
     }
 
