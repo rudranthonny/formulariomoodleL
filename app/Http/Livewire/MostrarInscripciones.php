@@ -9,10 +9,12 @@ use App\Models\Programa;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class MostrarInscripciones extends Component
 {
+    use WithFileUploads;
     use WithPagination;
     private $token = 'fc410318b59368f9245b394b209c644e';
     private $domainname = 'https://learclass.com';
