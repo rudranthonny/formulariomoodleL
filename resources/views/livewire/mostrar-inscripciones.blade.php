@@ -164,7 +164,8 @@
                   <label for="tipo" class="form-label">Tipo</label>
                   <select class="form-select" name="tipo" aria-label="Default select example" wire:model.defer="etipo">
                   <option value="Soles">Soles</option>    
-                  <option value="Dolares">Dolares</option>    
+                  <option value="Dolares">Dolares</option>
+                  </select>  
                   @error('tipo')
                   <span class="text-danger">{{$message}}</span>
                   @enderror
@@ -174,8 +175,8 @@
                   <label for="costo" class="form-label">Costo</label>
                   <input type="text" class="form-control" id="costo" name="costo" wire:model.defer="ecosto">
                   @error('costo')
-                  <span class="text-danger">{{$message}}</span>
-                  @enderror
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror
                   </div>
                   <!--fecha-->
                   <div class="mb-3">
