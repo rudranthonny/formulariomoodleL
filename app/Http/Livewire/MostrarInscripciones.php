@@ -54,6 +54,7 @@ class MostrarInscripciones extends Component
         $mmatricula->save();
         //actualizar el comprobante_imagen de la tabla matricula
         $mmatricula = Matricula::find($this->eid);
+        dd($this->ecomprobante_imagen_file);
         if($this->ecomprobante_imagen_file != null)
         {
                 $extension = $this->ecomprobante_imagen_file->extension();
