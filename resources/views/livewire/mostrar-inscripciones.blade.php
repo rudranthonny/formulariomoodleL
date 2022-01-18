@@ -79,23 +79,17 @@
               <a class="btn btn-dark" role="button" wire:click="matricularprograma({{$inscripcion->id}})"><i class="fas fa-plus-circle"></i></a>
               @endif
               </td>
-              @if ($matriculado)
               <td>
+                @if ($matriculado)
                 @if ($matricula->comprobante_imagen)
-                  <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a>   
+                <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a>   
                 @else
-                  no
+                no
                 @endif
-              @else
-                  no
-              </td>
-              <td>
-                --
-              </td>
-              <td>
-                --
-              </td>
-              @endif
+                @else
+                no
+                @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
