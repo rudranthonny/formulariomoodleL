@@ -89,7 +89,14 @@
                 @else
                 no
                 @endif
-                </td>
+              </td>
+              @if ($matricula->comprobante_imagen)
+                  <td>{{$matricula->costo}}</td>
+                  <td>{{$matricula->costo}}</td>
+              @else
+                  <td>....</td>
+                  <td>....</td>
+              @endif
             </tr>
             @endforeach
         </tbody>
