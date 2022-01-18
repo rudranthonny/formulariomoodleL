@@ -92,8 +92,16 @@
               </td>
               @if ($matriculado) 
               @if ($matricula->comprobante_imagen)
-                  <td>{{$matricula->costo}}</td>
-                  <td>{{$matricula->costo}}</td>
+                  @if ($matricula->tipo == "Soles")
+                  <td>{{$matricula->costo}}</td>  
+                  @else
+                  <td>-</td>
+                  @endif
+                  @if ($matricula->tipo == "Dolares")
+                  <td>{{$matricula->costo}}</td>  
+                  @else
+                  <td>-</td>
+                  @endif  
               @else
                   <td>....</td>
                   <td>....</td>
