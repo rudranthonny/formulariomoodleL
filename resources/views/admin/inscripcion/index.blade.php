@@ -72,6 +72,7 @@ td {
     <script> console.log('Hi!')</script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>  
+    /*advertencia de eliminar todo*/
     function eliminartodo()
     {
         Swal.fire({
@@ -88,7 +89,7 @@ td {
         }
         })
     } 
-
+    
     $('.eliminar-inscripcion').submit(function(e){
             e.preventDefault();
             Swal.fire({
@@ -111,14 +112,6 @@ td {
     Swal.fire(
     '!Eliminación Completada¡',
     'Se elimino todos los registros satisfactoriamente',
-    )
-    </script>
-    @endif
-    @if (session('eliminado') == 'individual')
-    <script>
-    Swal.fire(
-    '!Eliminación Completada¡',
-    'Se elimino el usuario seleccionado',
     )
     </script>
     @endif

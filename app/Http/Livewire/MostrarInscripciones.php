@@ -22,7 +22,7 @@ class MostrarInscripciones extends Component
     public $blista="30";
     public $sort = "id";
     public $direction = "desc";
-    protected $listeners =['render'];
+    protected $listeners =['render','eliminar_inscripcion'];
     
     public function eliminar_inscripcion($id_inscripcion){
         $e_inscripcion = Inscripcion::find($id_inscripcion);

@@ -54,7 +54,7 @@
               <td>{{$inscripcion->phone}}</td>
               <td>
                     <a class="btn btn-info" href="{{route('admin.usuarios.agregarprograma',$inscripcion->user_id)}}" role="button" style="color: white"><i class="fas fa-book"></i></a>
-                    <button  class="btn btn-danger" wire:click="eliminar_inscripcion({{$inscripcion->id}})"><i class="fas fa-user-minus"></i></button>
+                    <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$inscripcion->id}})"><i class="fas fa-user-minus"></i></button>
               </td>
               @php
               if($matriculas->count()){
@@ -99,6 +99,31 @@
         </div>
     @endif
     <div class="d-flex justify-content-between">
+      {{"Nº : ".$inscripciones->count() }}
       {{ $inscripciones->links() }}
   </div>
+
+  @push('js')
+  <script>
+    livewire.on('deleteInscripcion', iscID =>{
+      Swal.fire({
+      title: '¿Esta seguro?',
+      text: "Se eliminaran esta inscripcion",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar'
+      }).then((result) => {
+      if (result.isConfirmed) {
+            livewire.emitTo('mostrar-inscripciones','eliminar_inscripcion',iscID)
+            Swal.fire(
+            '!Eliminación Completada¡',
+          'Se elimino el usuario seleccionado',
+            )
+          }
+      })
+    });
+  </script>
+  @endpush
 </div>
