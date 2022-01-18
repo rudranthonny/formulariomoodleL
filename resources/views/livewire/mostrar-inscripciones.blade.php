@@ -91,10 +91,15 @@
                 no
                 @endif
                 </td>
-                @if ($matricula->agente == "soles")
+                @if ($matricula->tipo == "soles")
                 <td>{{$matricula->costo}}</td>
-                @elseif($matricula->agente == "dolares")
-                <td>{{$matricula->costo}}</td> 
+                @else
+                <td></td>
+                @endif
+                @if($matricula->tipo == "dolares")
+                <td>{{$matricula->costo}}</td>
+                @else
+                <td></td> 
                 @endif 
             </tr>
             @endforeach
