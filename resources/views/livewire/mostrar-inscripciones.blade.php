@@ -124,7 +124,6 @@
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
               <td>{{"s/. ".$tsoles}}</td>
               <td>{{"$/. ".$tdolares}}</td>
             </tr>
