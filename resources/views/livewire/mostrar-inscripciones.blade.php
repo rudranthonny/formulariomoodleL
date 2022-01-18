@@ -38,8 +38,7 @@
     <table class="table" id="tabla-m" class="table table-striped">
         <thead>
             <tr class="bg-dark">
-              <th scope="col">NOMBRES</th>
-              <th scope="col">APELLIDOS</th>
+              <th scope="col">ESTUDIANTE</th>
               <th scope="col">EMAIL</th>
               <th scope="col">DNI</th>
               <th scope="col">PHONE</th>
@@ -53,8 +52,7 @@
         <tbody>
             @foreach ($inscripciones as $inscripcion)
             <tr>
-              <td>{{$inscripcion->name}}</td>
-              <td>{{$inscripcion->lastname}}</td>
+              <td>{{$inscripcion->name." ".{{$inscripcion->lastname}}}}</td>
               <td>{{$inscripcion->email}}</td>
               <td>{{$inscripcion->dni}}</td>
               <td>{{$inscripcion->phone}}</td>
