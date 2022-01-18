@@ -97,13 +97,13 @@
               @if ($matriculado) 
               @if ($matricula->comprobante_imagen)
                   @if ($matricula->tipo == "Soles")
-                  <td>$/. {{$matricula->costo}}</td>
+                  <td>{{"s/. ".$matricula->costo}}</td>
                   @php $tsoles = $tsoles + $matricula->costo;@endphp  
                   @else
                   <td>-</td>
                   @endif
                   @if ($matricula->tipo == "Dolares")
-                  <td>$/. {{$matricula->costo}}</td>  
+                  <td>{{"$/. ".$matricula->costo}}</td>  
                   @php $tdolares = $tdolares + $matricula->costo;@endphp 
                   @else
                   <td>-</td>
@@ -127,8 +127,8 @@
               <td></td>
               <td></td>
               <td></td>
-              <td>s/. {{$tsoles}}</td>
-              <td>$/. {{$tdolares}}</td>
+              <td>{{"s/. ".$tsoles}}</td>
+              <td>{{"$/. ".$tdolares}}</td>
             </tr>
         </tbody>
     </table>
