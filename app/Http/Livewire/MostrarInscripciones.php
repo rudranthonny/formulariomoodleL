@@ -26,7 +26,7 @@ class MostrarInscripciones extends Component
     public $sort = "id";
     public $direction = "desc";
     /**editar**/
-    public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$etipo,$efechapago,$ecomprobante,$ecomprobante_imagen,$eprograma_id;
+    public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$etipo,$efechapago,$ecomprobante,$ecomprobante_imagen,$ecomprobante_imagen_file,$eprograma_id;
     /**end**/
     protected $listeners =['render','eliminar_inscripcion'];
     
@@ -54,12 +54,12 @@ class MostrarInscripciones extends Component
         $mmatricula->save();
         //actualizar el comprobante_imagen de la tabla matricula
         $mmatricula = Matricula::find($this->eid);
-        if($this->ecomprobante_imagen != null)
+        if($this->ecomprobante_imagen_file != null)
         {
-                $extension = $this->ecomprobante_imagen->extension();
+                $extension = $this->ecomprobante_imagen_file->extension();
                 $eliminar = str_replace('storage','public',$mmatricula->comprobante_imagen);
                 Storage::delete([$eliminar]);
-                $imagenenu = $this->ecomprobante_imagen->storeAs('public/comprobantes',$mmatricula->user_id."-".rand(1,2000).str_replace(' ', '', $mmatricula->comprobante).".".$extension);
+                $imagenenu = $this->ecomprobante_imagen_file->storeAs('public/comprobantes',$mmatricula->user_id."-".rand(1,2000).str_replace(' ', '', $mmatricula->comprobante).".".$extension);
                 $url = Storage::url($imagenenu);
                 $mmatricula->update(['comprobante_imagen' => $url]);
         }
