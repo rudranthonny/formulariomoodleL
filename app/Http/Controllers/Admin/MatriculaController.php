@@ -95,7 +95,7 @@ class MatriculaController extends Controller
                 $imagenenu = $request->file('comprobante_imagen')->storeAs('public/comprobantes',$matricula->user_id."-".rand(1,2000).str_replace(' ', '', $matricula->comprobante).".".$extension);
                 $url = Storage::url($imagenenu);
                 $matricula->update(['comprobante_imagen' => $url]);
-        }
+            }
         //acutalizar matricula
         $matricula->update($request->only('costo','agente','tipo','fechapago','comprobante'));
         //return 'se actualizo correctamente';
