@@ -1,4 +1,8 @@
 <div class="card-body">
+  @php
+      $tsoles = 0;
+      $tdolares = 0;
+  @endphp
   <div class="container p-4">
     <div class="row">
       <div class="col-3">
@@ -94,13 +98,13 @@
               @if ($matricula->comprobante_imagen)
                   @if ($matricula->tipo == "Soles")
                   <td>{{$matricula->costo}}</td>
-                  @php $tsoles = $tsoles + 0;@endphp  
+                  @php $tsoles = $tsoles + $matricula->costo;@endphp  
                   @else
                   <td>-</td>
                   @endif
                   @if ($matricula->tipo == "Dolares")
                   <td>{{$matricula->costo}}</td>  
-                  @php $tdolares = $tdolares + 0;@endphp 
+                  @php $tdolares = $tdolares + $matricula->costo;@endphp 
                   @else
                   <td>-</td>
                   @endif  
