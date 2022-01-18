@@ -7,6 +7,7 @@ use App\Models\Inscripcion;
 use App\Models\Matricula;
 use App\Models\Programa;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -23,12 +24,13 @@ class MostrarInscripciones extends Component
     public $sort = "id";
     public $direction = "desc";
     /**editar**/
-    public $ename,$elastname,$euser_id,$ecosto,$eagente,$etipo,$efechapago,$ecomprobante,$ecomprobante_imagen,$eprograma_id;
+    public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$etipo,$efechapago,$ecomprobante,$ecomprobante_imagen,$eprograma_id;
     /**end**/
     protected $listeners =['render','eliminar_inscripcion'];
     
     public function editarmatricula($id_matricula){
        $ematricula = Matricula::find($id_matricula);
+       $this->eid = $ematricula->id;
        $this->ename = $ematricula->name;
        $this->elastname = $ematricula->lastname;
        $this->euser_id = $ematricula->user_id;
@@ -39,6 +41,26 @@ class MostrarInscripciones extends Component
        $this->ecomprobante  = $ematricula->comprobante;
        $this->ecomprobante_imagen = $ematricula->comprobante_imagen;
        $this->eprograma_id = $ematricula->programa_id;
+    }
+    public function actualizarmatriculas(){
+        $mmatricula = Matricula::find($this->eid);
+        $mmatricula->costo = $this->ecosto;
+        $mmatricula->agente = $this->eagente;
+        $mmatricula->tipo =$this->etipo;
+        $mmatricula->fechapago = $this->efechapago;
+        $mmatricula->comprobante = $this->ecomprobante;
+        $mmatricula->save();
+        //actualizar el comprobante_imagen de la tabla matricula
+        $mmatricula = Matricula::find($this->eid);
+        if($this->ecomprobante_imagen != null)
+        {
+                $extension = $this->ecomprobante_imagen->extension();
+                $eliminar = str_replace('storage','public',$mmatricula->comprobante_imagen);
+                Storage::delete([$eliminar]);
+                $imagenenu = $this->ecomprobante_imagen->storeAs('public/comprobantes',$mmatricula->user_id."-".rand(1,2000).str_replace(' ', '', $mmatricula->comprobante).".".$extension);
+                $url = Storage::url($imagenenu);
+                $mmatricula->update(['comprobante_imagen' => $url]);
+        }
     }
 
     public function eliminar_inscripcion($id_inscripcion){

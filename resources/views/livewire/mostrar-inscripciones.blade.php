@@ -213,10 +213,10 @@
                     <button class="btn btn-danger" data-dismiss="modal">
                         Cerrar
                     </button>
-                    <button class="btn btn-success" wire:loading.attr="disable" wire:target="save, gastos" type="button" wire:click="actualizargasto">
+                    <button class="btn btn-success" wire:loading.attr="disable" wire:target="save, matriculas" type="button" wire:click="actualizarmatriculas">
                         Modificar Matricula
                     </button>
-                </div>
+          </div>
         </div>
     </div>
 </div>
