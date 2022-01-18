@@ -123,8 +123,8 @@
               <td></td>
               <td></td>
               <td></td>
-              <td>sss</td>
-              <td>sss</td>
+              <td>{{$tsoles}}</td>
+              <td>{{$tdolares}}</td>
             </tr>
         </tbody>
     </table>
