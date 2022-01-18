@@ -93,12 +93,12 @@
                 @if ($matricula->tipo == "Soles")
                 <td>{{$matricula->costo}}</td>
                 @else
-                <td></td>
+                <td>0</td>
                 @endif
                 @if($matricula->tipo == "Dolares")
                 <td>{{$matricula->costo}}</td>
                 @else
-                <td></td> 
+                <td>0</td> 
                 @endif 
             </tr>
             @endforeach
