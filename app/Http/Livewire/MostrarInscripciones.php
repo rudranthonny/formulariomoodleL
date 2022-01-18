@@ -18,11 +18,16 @@ class MostrarInscripciones extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $bprograma;
+    public $ematricula;
     public $binicio;
     public $blista="30";
     public $sort = "id";
     public $direction = "desc";
     protected $listeners =['render','eliminar_inscripcion'];
+    
+    public function editarmatricula($id_matricula){
+       $this->ematricula = Matricula::find($id_matricula); 
+    }
     
     public function eliminar_inscripcion($id_inscripcion){
         $e_inscripcion = Inscripcion::find($id_inscripcion);
