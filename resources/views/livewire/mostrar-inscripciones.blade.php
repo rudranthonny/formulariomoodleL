@@ -52,7 +52,7 @@
         <tbody>
             @foreach ($inscripciones as $inscripcion)
             <tr>
-              <td>{{$inscripcion->name." ".{{$inscripcion->lastname}}}}</td>
+              <td>{{$inscripcion->name." ".$inscripcion->lastname}}</td>
               <td>{{$inscripcion->email}}</td>
               <td>{{$inscripcion->dni}}</td>
               <td>{{$inscripcion->phone}}</td>
