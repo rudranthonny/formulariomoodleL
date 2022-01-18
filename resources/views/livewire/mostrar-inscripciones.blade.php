@@ -90,9 +90,14 @@
                 no
                 @endif
               </td>
+              @if ($matriculado) 
               @if ($matricula->comprobante_imagen)
                   <td>{{$matricula->costo}}</td>
                   <td>{{$matricula->costo}}</td>
+              @else
+                  <td>....</td>
+                  <td>....</td>
+              @endif
               @else
                   <td>....</td>
                   <td>....</td>
