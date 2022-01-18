@@ -141,63 +141,18 @@
                 <div class="modal-body">
                     <!--Agencia-->
                   <div class="mb-3">
-                    <select class="form-select" name="agente" aria-label="Default select example">
-                    <option>Banco/Agencia</option>
-                    @if ($ematricula->agente == 'BancoNacion')
-                    <option value="BancoNacion" selected>Banco de la Nación</option> 
-                    @else
-                    <option value="BancoNacion">Banco de la Nación</option>
-                    @endif
-                    @if ($ematricula->agente == 'BBVA')
-                    <option value="BBVA" selected>BBVA</option>
-                    @else
-                    <option value="BBVA">BBVA</option> 
-                    @endif
-                    @if ($ematricula->agente == 'BCP')
-                    <option value="BCP" selected>BCP</option>  
-                    @else
-                    <option value="BCP">BCP</option>
-                    @endif
-                    @if ($ematricula->agente == 'DirectoPago')
-                    <option value="DirectoPago" selected>Directo Pago</option>  
-                    @else
-                    <option value="DirectoPago">Directo Pago</option>
-                    @endif
-                    @if ($ematricula->agente == 'Interbank')
-                    <option value="Interbank" selected>Interbank</option>  
-                    @else
+                    <select class="form-select" name="agente" aria-label="Default select example" wire:model.defer="eagente">
+                    <option value="BancoNacion">Banco de la Nación</option> 
+                    <option value="BBVA">BBVA</option>
+                    <option value="BCP">BCP</option>  
+                    <option value="DirectoPago">Directo Pago</option>  
                     <option value="Interbank">Interbank</option>  
-                    @endif
-                    @if ($ematricula->agente == 'MoneyGram')
-                    <option value="MoneyGram" selected>MoneyGram</option>  
-                    @else
-                    <option value="MoneyGram">MoneyGram</option> 
-                    @endif
-                    @if ($ematricula->agente == 'Paypal')
-                    <option value="Paypal" selected>Paypal</option>   
-                    @else
-                    <option value="Paypal">Paypal</option>  
-                    @endif
-                    @if ($ematricula->agente == 'Plim')
-                    <option value="Plim" selected>Plim</option>  
-                    @else
-                    <option value="Plim">Plim</option> 
-                    @endif
-                    @if ($ematricula->agente == 'Scotiabank')
-                    <option value="Scotiabank" selected>Scotiabank</option>  
-                    @else
-                    <option value="Scotiabank">Scotiabank</option> 
-                    @endif
-                    @if ($ematricula->agente == 'WesterUnion')
-                    <option value="WesterUnion" selected>Wester Unión</option>   
-                    @else
-                    <option value="WesterUnion">Wester Unión</option>  
-                    @endif
-                    @if ($ematricula->agente == 'Yape')
-                    <option value="Yape" selected>Yape</option>   
-                    @else
-                    <option value="Yape">Yape</option> 
-                    @endif      
+                    <option value="MoneyGram">MoneyGram</option>  
+                    <option value="Paypal">Paypal</option>   
+                    <option value="Plim">Plim</option>  
+                    <option value="Scotiabank">Scotiabank</option>  
+                    <option value="WesterUnion">Wester Unión</option>   
+                    <option value="Yape">Yape</option>       
                     </select>
                     @error('agente')
                     <span class="text-danger">{{$message}}</span>
@@ -205,21 +160,9 @@
                   </div>
                   <!--tipo de soles-->
                   <div class="mb-3">
-                  <select class="form-select" name="tipo" aria-label="Default select example">
-                  <option value="soles">Elegir Moneda</option>    
-                  <!--soles-->
-                  @if ($ematricula->tipo == 'Soles')
-                  <option value="Soles" selected>Soles</option>    
-                  @else
-                  <option value="Soles">Soles</option>
-                  @endif
-                  <!--dolares-->
-                  @if ($ematricula->tipo == 'Dolares')
-                  <option value="Dolares" selected>Dolares</option>    
-                  @else
-                  <option value="Dolares" >Dolares</option>    
-                  @endif
-                  </select>
+                  <select class="form-select" name="tipo" aria-label="Default select example" wire:model.defer="etipo">
+                  <option value="Soles">Soles</option>    
+                  <option value="Dolares">Dolares</option>    
                   @error('tipo')
                   <span class="text-danger">{{$message}}</span>
                   @enderror
@@ -227,7 +170,7 @@
           <!--monto-->
           <div class="mb-3">
               <label for="costo" class="form-label">Costo</label>
-              <input type="text" class="form-control" id="costo" name="costo" value="{{$ematricula->costo}}">
+              <input type="text" class="form-control" id="costo" name="costo" wire:model.defer="ecosto">
               @error('costo')
               <span class="text-danger">{{$message}}</span>
               @enderror
@@ -235,23 +178,23 @@
           <!--fecha-->
           <div class="mb-3">
               <label for="fechapago" class="form-label">Fecha</label>
-              <input type="date" class="form-control" id="fechapago" name="fechapago" value="{{$ematricula->fechapago}}">
+              <input type="date" class="form-control" id="fechapago" name="fechapago" wire:model.defer="efechapago">
               @error('fechapago')
               <span class="text-danger">{{$message}}</span>
-           @enderror
+              @enderror
           </div>
            <!--numero de comprobante-->
            <div class="mb-3">
               <label for="comprobante" class="form-label">Numero de Comprobante</label>
-              <input type="text" class="form-control" id="ncomprobante" name="comprobante" value="{{$ematricula->comprobante}}">
+              <input type="text" class="form-control" id="ncomprobante" name="comprobante" wire:model.defer="ecomprobante">
               @error('comprobante')
               <span class="text-danger">{{$message}}</span>
-           @enderror
+              @enderror
           </div>
           <!--mostrar imagen-->
-              @if ($ematricula->comprobante_imagen != "")
+              @if ($ecomprobante_imagen != "")
               <div class="mb-3"> 
-                  <center><img src="{{asset($ematricula->comprobante_imagen) }}" alt="" width="300px"></center>
+                  <center><img src="{{asset($ecomprobante_imagen) }}" alt="" width="300px"></center>
               </div>
               @endif
           <!--comprobante imagen-->
@@ -262,13 +205,13 @@
               @enderror
           </div>
           <!---->
-                </div>
-                <div class="modal-footer">
+          </div>
+          <div class="modal-footer">
                     <button class="btn btn-danger" data-dismiss="modal">
                         Cerrar
                     </button>
                     <button class="btn btn-success" wire:loading.attr="disable" wire:target="save, gastos" type="button" wire:click="actualizargasto">
-                        Modificar Gasto
+                        Modificar Matricula
                     </button>
                 </div>
         </div>

@@ -18,17 +18,29 @@ class MostrarInscripciones extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $bprograma;
-    public $ematricula;
     public $binicio;
     public $blista="30";
     public $sort = "id";
     public $direction = "desc";
+    /**editar**/
+    public $ename,$elastname,$euser_id,$ecosto,$eagente,$etipo,$efechapago,$ecomprobante,$ecomprobante_imagen,$eprograma_id;
+    /**end**/
     protected $listeners =['render','eliminar_inscripcion'];
     
     public function editarmatricula($id_matricula){
-       $this->ematricula = Matricula::find($id_matricula); 
+       $ematricula = Matricula::find($id_matricula);
+       $this->ename = $ematricula->name;
+       $this->elastname = $ematricula->lastname;
+       $this->euser_id = $ematricula->user_id;
+       $this->ecosto = $ematricula->costo;
+       $this->eagente = $ematricula->agente;
+       $this->etipo = $ematricula->tipo;
+       $this->efechapago = $ematricula->fechapago;
+       $this->ecomprobante  = $ematricula->comprobante;
+       $this->ecomprobante_imagen = $ematricula->comprobante_imagen;
+       $this->eprograma_id = $ematricula->programa_id;
     }
-    
+
     public function eliminar_inscripcion($id_inscripcion){
         $e_inscripcion = Inscripcion::find($id_inscripcion);
         $e_inscripcion->delete();
