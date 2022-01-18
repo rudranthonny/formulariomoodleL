@@ -42,6 +42,8 @@
               <th scope="col">ACCIONES</th>
               <th scope="col">MAT</th>
               <th scope="col">COM</th>
+              <th scope="col">s/.</th>
+              <th scope="col">$/.</th>
             </tr>
         </thead>
         <tbody>
@@ -89,6 +91,8 @@
                 no
                 @endif
                 </td>
+                <td>{{$matricula->costo}}</td>
+                <td>{{$matricula->costo}}</td>
             </tr>
             @endforeach
         </tbody>
