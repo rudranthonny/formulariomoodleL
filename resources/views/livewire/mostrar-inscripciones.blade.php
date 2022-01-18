@@ -117,7 +117,7 @@
             </tr>
             @endforeach
             <tr>
-              <td></td>
+              <td>{{"Nº : ".$inscripciones->count() }}</td>
               <td></td>
               <td></td>
               <td></td>
@@ -135,9 +135,8 @@
         </div>
     @endif
     <div class="d-flex justify-content-between">
-      {{"Nº : ".$inscripciones->count() }}
       {{ $inscripciones->links() }}
-  </div>
+    </div>
 
   @push('js')
   <script>
