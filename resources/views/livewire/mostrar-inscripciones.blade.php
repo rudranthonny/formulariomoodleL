@@ -174,7 +174,7 @@
                   <div class="mb-3">
                   <label for="costo" class="form-label">Costo</label>
                   <input type="text" class="form-control" id="costo" name="costo" wire:model.defer="ecosto">
-                  @error('costo')
+                    @error('costo')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                   </div>
