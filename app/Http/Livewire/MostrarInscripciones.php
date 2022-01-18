@@ -21,6 +21,7 @@ class MostrarInscripciones extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $bprograma;
+    public $bestado = "todos";
     public $binicio;
     public $blista="30";
     public $sort = "id";
@@ -95,7 +96,18 @@ class MostrarInscripciones extends Component
         $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
         ->where('inicio_id',$this->binicio)
         ->paginate($this->blista);
-        $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
+        
+        if ($this->bestado == "deudores") {
+            $matriculas = Matricula::where('programa_id',$this->bprograma)
+            ->where('comprobante_imagen',null)->get();
+        } 
+        elseif($this->bestado == "pagantes"){
+            $matriculas = Matricula::where('programa_id',$this->bprograma)
+            ->where('comprobante_imagen','!=',null)->get();
+        }
+        elseif($this->bestado == "todos") {
+            $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
+        }
         $programas = Programa::all();
         $inicios = Inicio::all();
         return view('livewire.mostrar-inscripciones',compact('inscripciones','matriculas','programas','inicios'));

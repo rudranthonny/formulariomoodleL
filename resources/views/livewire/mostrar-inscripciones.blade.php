@@ -16,12 +16,19 @@
           @endforeach    
         </select>
       </div>
-      <div class="col-4">
+      <div class="col-2">
         <select class="form-select" aria-label="Default select example" wire:model="bprograma">
           <option value="0">Elegir programa</option>
           @foreach ($programas as $programa)
           <option value="{{$programa->id}}">{{$programa->name}}</option>
           @endforeach    
+        </select>
+      </div>
+      <div class="col-2"> 
+        <select class="form-select" aria-label="Default select example" wire:model="bestado">
+          <option value="todos">Todos</option>
+          <option value="pagantes">Pagantes</option>
+          <option value="deudores">Deudores</option>
         </select>
       </div>
       <div class="col-2"> 
@@ -42,9 +49,9 @@
               <th scope="col">EMAIL</th>
               <th scope="col">DNI</th>
               <th scope="col">PHONE</th>
-              <th scope="col">ACCIONES</th>
-              <th scope="col">MAT</th>
-              <th scope="col">COM</th>
+              <th scope="col">DEL</th>
+              <th scope="col">M</th>
+              <th scope="col">C</th>
               <th scope="col">s/.</th>
               <th scope="col">$/.</th>
             </tr>
