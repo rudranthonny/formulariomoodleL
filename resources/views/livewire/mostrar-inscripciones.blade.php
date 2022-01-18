@@ -55,7 +55,6 @@
               <td>{{$inscripcion->dni}}</td>
               <td>{{$inscripcion->phone}}</td>
               <td>
-                    <a class="btn btn-info" href="{{route('admin.usuarios.agregarprograma',$inscripcion->user_id)}}" role="button" style="color: white"><i class="fas fa-book"></i></a>
                     <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$inscripcion->id}})"><i class="fas fa-user-minus"></i></button>
               </td>
               @php
@@ -91,12 +90,12 @@
                 no
                 @endif
                 </td>
-                @if ($matricula->tipo == "soles")
+                @if ($matricula->tipo == "Soles")
                 <td>{{$matricula->costo}}</td>
                 @else
                 <td></td>
                 @endif
-                @if($matricula->tipo == "dolares")
+                @if($matricula->tipo == "Dolares")
                 <td>{{$matricula->costo}}</td>
                 @else
                 <td></td> 
