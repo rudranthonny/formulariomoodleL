@@ -40,6 +40,17 @@
         </select>
       </div>
     </div>
+    @if ($bmatriculado == "matriculados")
+    <div class="row">
+      <div class="col-3">   
+        <select class="form-select" aria-label="Default select example" wire:model="bestado">
+          <option>elegir</option>
+          <option value="pagante">Pagante</option>
+          <option value="deudor">Deudor</option>
+        </select>
+      </div>
+    </div>
+    @endif
   </div>
     @if ($inscripciones->count() && ($bprograma))
     <table class="table" id="tabla-m" class="table table-striped">

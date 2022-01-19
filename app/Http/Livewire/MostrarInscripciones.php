@@ -24,6 +24,7 @@ class MostrarInscripciones extends Component
     public $bprograma;
     public $bmatriculado;
     public $binicio;
+    public $bestado;
     public $blista="30";
     public $sort = "id";
     public $direction = "desc";
@@ -71,6 +72,7 @@ class MostrarInscripciones extends Component
                 $url = Storage::url($imagenenu);
                 $mmatricula->update(['comprobante_imagen' => $url]);
                 $this->ecomprobante_imagen = $mmatricula->comprobante_imagen;
+                $this->ecomprobante_imagen_file = null;
         }
     }
 
@@ -116,6 +118,26 @@ class MostrarInscripciones extends Component
                 $query->select(DB::raw('*'))
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id');
+            })->paginate($this->blista);
+        }
+        elseif($this->bestado == "pagante" && $this->bmatriculado == "matriculados"){
+            $inscripciones = DB::table('inscripcions')
+            ->where('inicio_id',$this->binicio)
+            ->whereExists(function ($query) {
+                $query->select(DB::raw('*'))
+                      ->from('matriculas')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
+                      ->wherenotnull('matriculas.comprobante_imagen');
+            })->paginate($this->blista);
+        }
+        elseif($this->bestado == "deudor" && $this->bmatriculado == "matriculados"){
+            $inscripciones = DB::table('inscripcions')
+            ->where('inicio_id',$this->binicio)
+            ->whereExists(function ($query) {
+                $query->select(DB::raw('*'))
+                      ->from('matriculas')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
+                      ->wherenull('matriculas.comprobante_imagen');
             })->paginate($this->blista);
         }
         else{
