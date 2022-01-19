@@ -44,7 +44,7 @@
     <div class="row">
       <div class="col-3">   
         <select class="form-select" aria-label="Default select example" wire:model="bestado">
-          <option volue="todos">todos</option>
+          <option>todos</option>
           <option value="pagante">Pagante</option>
           <option value="deudor">Deudor</option>
         </select>

@@ -133,7 +133,7 @@ class MostrarInscripciones extends Component
                       ->wherenull('matriculas.comprobante_imagen');
             })->paginate($this->blista);
         }
-        elseif ($this->bmatriculado == "matriculados") {
+        elseif ($this->bmatriculado == "matriculados" && $this->bestado == false) {
             $inscripciones = DB::table('inscripcions')
             ->where('inicio_id',$this->binicio)
             ->whereExists(function ($query) {
