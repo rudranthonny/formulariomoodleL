@@ -111,17 +111,7 @@ class MostrarInscripciones extends Component
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id');
             })->paginate($this->blista);
         }
-        elseif ($this->bmatriculado == "matriculados") {
-            $inscripciones = DB::table('inscripcions')
-            ->where('inicio_id',$this->binicio)
-            ->whereExists(function ($query) {
-                $query->select(DB::raw('*'))
-                      ->from('matriculas')
-                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id');
-            })->paginate($this->blista);
-        }
-        elseif($this->bestado == "pagante"){
-           dd('estoy aqui');
+        elseif($this->bestado == "pagante" && $this->bmatriculado == "matriculados"){
             $inscripciones = DB::table('inscripcions')
             ->where('inicio_id',$this->binicio)
             ->whereExists(function ($query) {
@@ -131,7 +121,7 @@ class MostrarInscripciones extends Component
                       ->wherenotnull('matriculas.comprobante_imagen');
             })->paginate($this->blista);
         }
-        elseif($this->bestado == "deudor"){
+        elseif($this->bestado == "deudor" && $this->bmatriculado == "matriculados"){
             $inscripciones = DB::table('inscripcions')
             ->where('inicio_id',$this->binicio)
             ->whereExists(function ($query) {
@@ -141,6 +131,16 @@ class MostrarInscripciones extends Component
                       ->wherenull('matriculas.comprobante_imagen');
             })->paginate($this->blista);
         }
+        elseif ($this->bmatriculado == "matriculados") {
+            $inscripciones = DB::table('inscripcions')
+            ->where('inicio_id',$this->binicio)
+            ->whereExists(function ($query) {
+                $query->select(DB::raw('*'))
+                      ->from('matriculas')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id');
+            })->paginate($this->blista);
+        }
+       
         else{
             $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
             ->where('inicio_id',$this->binicio)
