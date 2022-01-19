@@ -57,6 +57,7 @@ class RegistrarUsuarios extends Component
             . '?wstoken=' . $this->token 
             . '&wsfunction='.$functionname2
             .'&moodlewsrestformat=json&criteria[0][key]=username&criteria[0][value]='.$emaila;
+            dd($serverurl2);
             $consulta = Http::get($serverurl2);
             foreach (json_decode($consulta)->users as $user) {
             }
