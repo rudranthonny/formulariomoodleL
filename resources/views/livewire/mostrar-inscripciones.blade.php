@@ -142,7 +142,9 @@
         </div>
     @endif
     <div class="d-flex justify-content-between">
+      @isset($inscripciones->links())
       {{ $inscripciones->links() }}
+      @endisset
     </div>
 
   @push('js')
