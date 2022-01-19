@@ -102,7 +102,6 @@ class MostrarInscripciones extends Component
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_idAA', 'matriculas.user_id');
             })->paginate($this->blista);
-            dd($inscripciones);
         }
         else{
             $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
