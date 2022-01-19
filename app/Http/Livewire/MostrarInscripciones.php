@@ -42,6 +42,7 @@ class MostrarInscripciones extends Component
        $this->ecosto = $ematricula->costo;
        $this->eagente = $ematricula->agente;
        $this->etipo = $ematricula->tipo;
+       dd($this->etipo);
        $this->efechapago = $ematricula->fechapago;
        $this->ecomprobante  = $ematricula->comprobante;
        $this->ecomprobante_imagen = $ematricula->comprobante_imagen;
