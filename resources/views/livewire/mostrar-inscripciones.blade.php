@@ -48,6 +48,7 @@
           <option value="pagante">Pagante</option>
           <option value="deudor">Deudor</option>
         </select>
+        {{$bestado}}
       </div>
     </div>
     @endif
