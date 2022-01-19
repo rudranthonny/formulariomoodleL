@@ -29,10 +29,10 @@ class RegistrarUsuarios extends Component
         $this->validate();
         //convertir en minusculas
         $emaila = strtolower($this->email);
-        dd($emaila);
         /*verificar si ya se realizo la inscripción*/
         $rinscripcion = Inscripcion::where('email',$emaila)->first();
         if($rinscripcion == false){
+            dd("estoy aca");
             /*crear usuario en moodle*/
             $functionname = 'core_user_create_users';
             $serverurl = $this->domainname. '/webservice/rest/server.php'
