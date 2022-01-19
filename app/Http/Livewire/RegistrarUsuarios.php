@@ -39,7 +39,6 @@ class RegistrarUsuarios extends Component
             . '&wsfunction='.$functionname
             .'&moodlewsrestformat=json&users[0][username]='.$emaila.'&users[0][password]=123456789&users[0][firstname]='.$this->name.'&users[0][lastname]='.$this->lastname.'&users[0][email]='.$emaila.'&users[0][phone1]='.$this->phone.'&users[0][country]='.$this->country;
             $usuario = Http::get($serverurl);
-            dd($serverurl);
             /*registrar el estudiante en laravel*/
             //obtener el id del usuario
             $functionname2 = 'core_user_get_users';
@@ -49,6 +48,18 @@ class RegistrarUsuarios extends Component
             .'&moodlewsrestformat=json&criteria[0][key]=email&criteria[0][value]='.$emaila;
             $consulta = Http::get($serverurl2);
             foreach (json_decode($consulta)->users as $user) {
+            }
+            if ($user->id == false) {
+            /*registrar el estudiante en laravel*/
+            //obtener el id del usuario
+            $functionname2 = 'core_user_get_users';
+            $serverurl2 = $this->domainname. '/webservice/rest/server.php'
+            . '?wstoken=' . $this->token 
+            . '&wsfunction='.$functionname2
+            .'&moodlewsrestformat=json&criteria[0][key]=username&criteria[0][value]='.$emaila;
+            $consulta = Http::get($serverurl2);
+            foreach (json_decode($consulta)->users as $user) {
+            }
             }
             //realizar la instancia
             Inscripcion::create([
