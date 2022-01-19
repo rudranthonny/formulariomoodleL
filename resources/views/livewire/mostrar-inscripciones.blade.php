@@ -58,7 +58,6 @@
         </thead>
         <tbody>
             @foreach ($inscripciones as $inscripcion)
-            @if ($bestado == "todos")
             <tr>
               <td>{{$inscripcion->name." ".$inscripcion->lastname}}</td>
               <td>{{$inscripcion->email}}</td>
@@ -123,76 +122,6 @@
                   <td>....</td>
               @endif
             </tr>   
-            @elseif($bestado == "pagantes" or $bestado == "deudores")
-              @foreach ($matriculas as $matricula)
-              @if ($inscripcion->user_id == $matricula->user_id)
-              <tr>
-                <td>{{$inscripcion->name." ".$inscripcion->lastname}}</td>
-                <td>{{$inscripcion->email}}</td>
-                <td>{{$inscripcion->dni}}</td>
-                <td>{{$inscripcion->phone}}</td>
-                <td>
-                      <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$inscripcion->id}})"><i class="fas fa-user-minus"></i></button>
-                </td>
-                @php
-                if($matriculas->count()){
-                foreach($matriculas as $matricula){
-                  if ($inscripcion->user_id == $matricula->user_id) {
-                   $matriculado = true;
-                   break;
-                  } else {
-                  $matriculado = false;
-                  }   
-                }
-                }
-                else{
-                  $matriculado = false;
-                }
-                 @endphp
-                <td>
-                @if ($matriculado)
-                <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$matricula->id}})"><i class="fas fa-edit"></i></a>
-                @else
-                <a class="btn btn-dark" role="button" wire:click="matricularprograma({{$inscripcion->id}})"><i class="fas fa-plus-circle"></i></a>
-                @endif
-                </td>
-                <td>
-                  @if ($matriculado)
-                  @if ($matricula->comprobante_imagen)
-                  <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a>   
-                  @else
-                  no
-                  @endif
-                  @else
-                  no
-                  @endif
-                </td>
-                @if ($matriculado) 
-                @if ($matricula->comprobante_imagen)
-                    @if ($matricula->tipo == "Soles")
-                    <td>{{"s/. ".$matricula->costo}}</td>
-                    @php $tsoles = $tsoles + $matricula->costo;@endphp  
-                    @else
-                    <td>-</td>
-                    @endif
-                    @if ($matricula->tipo == "Dolares")
-                    <td>{{"$/. ".$matricula->costo}}</td>  
-                    @php $tdolares = $tdolares + $matricula->costo;@endphp 
-                    @else
-                    <td>-</td>
-                    @endif  
-                @else
-                    <td>....</td>
-                    <td>....</td>
-                @endif
-                @else
-                    <td>....</td>
-                    <td>....</td>
-                @endif
-              </tr>  
-              @endif
-              @endforeach 
-            @endif
             @endforeach
             <tr>
               <td>{{"Nº : ".$inscripciones->count() }}</td>
