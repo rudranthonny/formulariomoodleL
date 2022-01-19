@@ -94,9 +94,25 @@ class MostrarInscripciones extends Component
     }
     public function render()
     {   
-        $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
-        ->where('inicio_id',$this->binicio)
-        ->paginate($this->blista);
+        if ($this->bmatriculado == "nomatriculados") {
+            $inscripciones = DB::table('inscripcions')
+            ->where('inicio_id',$this->binicio)
+            ->whereNotExists(function ($query) {
+                $query->select(NULL)
+                      ->from('matriculas')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id');
+            })->paginate($this->blista);
+        }
+        else{
+            $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
+            ->where('inicio_id',$this->binicio)
+            ->paginate($this->blista);
+        }
+       
+       
+        
+       
+       
         $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
         $programas = Programa::all();
         $inicios = Inicio::all();
