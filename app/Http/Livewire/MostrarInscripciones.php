@@ -107,11 +107,7 @@ class MostrarInscripciones extends Component
                 $query->select(DB::raw('NULL'))
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id');
-            })->get();
-            dd($inscripciones);
-            $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
-            ->where('inicio_id',$this->binicio)
-            ->paginate($this->blista);
+            })->get()->paginate($this->blista);
         }
         else{
             $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
