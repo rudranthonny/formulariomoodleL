@@ -32,7 +32,6 @@ class RegistrarUsuarios extends Component
         /*verificar si ya se realizo la inscripción*/
         $rinscripcion = Inscripcion::where('email',$emaila)->first();
         if($rinscripcion == false){
-            dd("estoy aca");
             /*crear usuario en moodle*/
             $functionname = 'core_user_create_users';
             $serverurl = $this->domainname. '/webservice/rest/server.php'
@@ -40,6 +39,7 @@ class RegistrarUsuarios extends Component
             . '&wsfunction='.$functionname
             .'&moodlewsrestformat=json&users[0][username]='.$emaila.'&users[0][password]=123456789&users[0][firstname]='.$this->name.'&users[0][lastname]='.$this->lastname.'&users[0][email]='.$emaila.'&users[0][phone1]='.$this->phone.'&users[0][country]='.$this->country;
             $usuario = Http::get($serverurl);
+            dd($usuario);
             /*registrar el estudiante en laravel*/
             //obtener el id del usuario
             $functionname2 = 'core_user_get_users';
