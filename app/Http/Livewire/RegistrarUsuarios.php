@@ -28,7 +28,8 @@ class RegistrarUsuarios extends Component
     public function registrarinscripcion(){
         $this->validate();
         //convertir en minusculas
-        $emaila = $this->email;
+        $emaila = strtolower($this->email);
+        dd($emaila);
         /*verificar si ya se realizo la inscripción*/
         $rinscripcion = Inscripcion::where('email',$emaila)->first();
         if($rinscripcion == false){
