@@ -28,7 +28,8 @@ class MostrarInscripciones extends Component
     public $sort = "id";
     public $direction = "desc";
     /**editar**/
-    public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$etipo,$efechapago,$ecomprobante,$ecomprobante_imagen,$ecomprobante_imagen_file,$eprograma_id;
+    public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$efechapago,$ecomprobante,$ecomprobante_imagen,$ecomprobante_imagen_file,$eprograma_id;
+    public $etipo = "Soles";
     /**end**/
     protected $listeners =['render','eliminar_inscripcion'];
     
