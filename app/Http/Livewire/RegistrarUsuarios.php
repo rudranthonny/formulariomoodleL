@@ -49,6 +49,7 @@ class RegistrarUsuarios extends Component
             $consulta = Http::get($serverurl2);
             foreach (json_decode($consulta)->users as $user) {
             }
+            dd($user->id);
             if (isset($user->id)) {
             /*registrar el estudiante en laravel*/
             //obtener el id del usuario
