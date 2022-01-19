@@ -128,10 +128,9 @@ class MostrarInscripciones extends Component
             ->whereExists(function ($query) {
                 $query->select(DB::raw('*'))
                       ->from('matriculas')
-                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_ida')
                       ->wherenull('matriculas.comprobante_imagen');
             })->paginate($this->blista);
-            dd($inscripciones);
         }
         elseif ($this->bmatriculado == "matriculados" && $this->bestado == false) {
             $inscripciones = DB::table('inscripcions')
