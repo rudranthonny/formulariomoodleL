@@ -205,7 +205,7 @@
                   <div class="mb-3">
                   <label for="tipo" class="form-label">Tipo</label>
                   <select class="form-select" name="tipo" aria-label="Default select example" wire:model.defer="etipo">
-                  <option value="Soles">Soles</option>    
+                  <option value="Soles" selected>Soles</option>    
                   <option value="Dolares">Dolares</option>
                   </select>  
                   @error('tipo')
