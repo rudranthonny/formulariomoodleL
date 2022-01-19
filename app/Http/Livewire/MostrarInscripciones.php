@@ -112,6 +112,7 @@ class MostrarInscripciones extends Component
             })->paginate($this->blista);
         }
         elseif($this->bestado == "pagante" && $this->bmatriculado == "matriculados"){
+            dd($this->pagante);
             $inscripciones = DB::table('inscripcions')
             ->where('inicio_id',$this->binicio)
             ->whereExists(function ($query) {
