@@ -101,6 +101,7 @@ class MostrarInscripciones extends Component
         }
         elseif($this->bmatriculado = "nomatriculado"){ 
         $inscripciones = DB::select('SELECT * FROM inscripcions t1 WHERE (t1.inicio_id=?) and (NOT EXISTS (SELECT NULL FROM matriculas t2 WHERE t1.user_id = t2.user_id))',[$this->binicio]);    
+        dd($inscripciones);
         }
 
         $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
