@@ -102,6 +102,7 @@ class MostrarInscripciones extends Component
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id');
             })->get();
+            dd($inscripciones);
         }
         else{
             $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
