@@ -112,7 +112,7 @@ class MostrarInscripciones extends Component
             })->paginate($this->blista);
         }
         elseif($this->bestado == "pagante" && $this->bmatriculado == "matriculados"){
-            dd($this->bestado);
+          
             $inscripciones = DB::table('inscripcions')
             ->where('inicio_id',$this->binicio)
             ->whereExists(function ($query) {
@@ -121,6 +121,7 @@ class MostrarInscripciones extends Component
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
                       ->wherenotnull('matriculas.comprobante_imagen');
             })->paginate($this->blista);
+            dd($this->inscripciones);
         }
         elseif($this->bestado == "deudor" && $this->bmatriculado == "matriculados"){
             $inscripciones = DB::table('inscripcions')
