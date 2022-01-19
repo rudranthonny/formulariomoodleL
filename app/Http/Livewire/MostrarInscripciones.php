@@ -6,6 +6,7 @@ use App\Models\Inicio;
 use App\Models\Inscripcion;
 use App\Models\Matricula;
 use App\Models\Programa;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -21,7 +22,7 @@ class MostrarInscripciones extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $bprograma;
-    public $bestado;
+    public $bmatriculado;
     public $binicio;
     public $blista="30";
     public $sort = "id";
@@ -96,6 +97,9 @@ class MostrarInscripciones extends Component
         $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
         ->where('inicio_id',$this->binicio)
         ->paginate($this->blista);
+
+        $prueba = DB::select('SELECT * FROM inscripcions t1 WHERE (t1.inicio_id=1) and (NOT EXISTS (SELECT NULL FROM matriculas t2 WHERE t1.user_id = t2.user_id))');
+        dd($prueba);
         $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
         $programas = Programa::all();
         $inicios = Inicio::all();

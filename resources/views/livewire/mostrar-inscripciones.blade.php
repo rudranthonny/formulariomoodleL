@@ -25,10 +25,10 @@
         </select>
       </div>
       <div class="col-2"> 
-        <select class="form-select" aria-label="Default select example" wire:model="bestado">
+        <select class="form-select" aria-label="Default select example" wire:model="bmatriculado">
           <option value="todos">Todos</option>
-          <option value="pagantes">Pagantes</option>
-          <option value="deudores">Deudores</option>
+          <option value="matriculados">matriculados</option>
+          <option value="nomatriculados">no matriculados</option>
         </select>
       </div>
       <div class="col-2"> 
