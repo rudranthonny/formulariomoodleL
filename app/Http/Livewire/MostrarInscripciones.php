@@ -25,6 +25,7 @@ class MostrarInscripciones extends Component
     public $bmatriculado;
     public $binicio;
     public $bestado;
+    public $iteration;
     public $blista="30";
     public $sort = "id";
     public $direction = "desc";
@@ -52,6 +53,9 @@ class MostrarInscripciones extends Component
        $this->ecomprobante  = $ematricula->comprobante;
        $this->ecomprobante_imagen = $ematricula->comprobante_imagen;
        $this->eprograma_id = $ematricula->programa_id;
+       //clean up
+       $this->ecomprobante_imagen_file = null;
+       $this->iteration++;
     }
     public function actualizarmatriculas(){
         $mmatricula = Matricula::find($this->eid);
@@ -73,6 +77,7 @@ class MostrarInscripciones extends Component
                 $mmatricula->update(['comprobante_imagen' => $url]);
                 $this->ecomprobante_imagen = $mmatricula->comprobante_imagen;
                 $this->ecomprobante_imagen_file = null;
+                $this->iteration++;
         }
     }
 

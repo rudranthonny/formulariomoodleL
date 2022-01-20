@@ -256,7 +256,7 @@
               @endif
           <!--comprobante imagen-->
           <div class="mb-3">
-              <input type="file" name="comprobante_imagen" accept="image/*" wire:model="ecomprobante_imagen_file">
+              <input type="file" name="comprobante_imagen" accept="image/*" wire:model="ecomprobante_imagen_file" id="upload{{$iteration}}">
               @error('ecomprobante_imagen_file')
                   <span class="text-danger">{{$message}}</span>
               @enderror
