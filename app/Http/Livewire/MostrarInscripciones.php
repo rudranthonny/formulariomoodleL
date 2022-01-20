@@ -115,7 +115,7 @@ class MostrarInscripciones extends Component
                 $query->select(DB::raw('NULL'))
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
-                      ->where('agente','like','%'.$this->bagente.'&');
+                      ->where('agente','like','%'.$this->bagente.'%');
             })->paginate($this->blista);
         }
         elseif($this->bestado == "pagante" && $this->bmatriculado == "matriculados"){
@@ -128,7 +128,7 @@ class MostrarInscripciones extends Component
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
                       ->wherenotnull('matriculas.comprobante_imagen')
                       ->where('matriculas.programa_id',$this->bprograma)
-                      ->where('agente','like','%'.$this->bagente.'&');
+                      ->where('agente','like','%'.$this->bagente.'%');
             })->paginate($this->blista);
         }
         elseif($this->bestado == "deudor" && $this->bmatriculado == "matriculados"){
@@ -140,7 +140,7 @@ class MostrarInscripciones extends Component
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
                       ->wherenull('matriculas.comprobante_imagen')
                       ->where('matriculas.programa_id',$this->bprograma)
-                      ->where('agente','like','%'.$this->bagente.'&');
+                      ->where('agente','like','%'.$this->bagente.'%');
             })->paginate($this->blista);
         }
         elseif ($this->bmatriculado == "matriculados" && $this->bestado == false) {
@@ -150,7 +150,7 @@ class MostrarInscripciones extends Component
                 $query->select(DB::raw('*'))
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
-                      ->where('agente','like','%'.$this->bagente.'&');
+                      ->where('agente','like','%'.$this->bagente.'%');
             })->paginate($this->blista);
         }
        
