@@ -41,7 +41,7 @@
       </div>
     </div>
     @if ($bmatriculado == "matriculados")
-    <div class="row">
+    <div class="row pt-1">
       <div class="col-3">   
         <select class="form-select" aria-label="Default select example" wire:model="bestado">
           <option value=''>todos</option>
@@ -49,6 +49,21 @@
           <option value="deudor">Deudor</option>
         </select>
         {{$bestado}}
+      </div>
+      <div class="col-3">   
+        <select class="form-select"  aria-label="Default select example" wire:model="bagente">
+          <option value="BancoNacion">Banco de la Nación</option> 
+          <option value="BBVA">BBVA</option>
+          <option value="BCP">BCP</option>  
+          <option value="DirectoPago">Directo Pago</option>  
+          <option value="Interbank">Interbank</option>  
+          <option value="MoneyGram">MoneyGram</option>  
+          <option value="Paypal">Paypal</option>   
+          <option value="Plim">Plim</option>  
+          <option value="Scotiabank">Scotiabank</option>  
+          <option value="WesterUnion">Wester Unión</option>   
+          <option value="Yape">Yape</option>       
+        </select>
       </div>
     </div>
     @endif

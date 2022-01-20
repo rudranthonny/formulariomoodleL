@@ -25,6 +25,7 @@ class MostrarInscripciones extends Component
     public $bmatriculado;
     public $binicio;
     public $bestado;
+    public $bgente;
     public $iteration;
     public $blista="30";
     public $sort = "id";
@@ -113,7 +114,8 @@ class MostrarInscripciones extends Component
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw('NULL'))
                       ->from('matriculas')
-                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id');
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
+                      ->where('agente','like','%'.$this->bagente.'&');
             })->paginate($this->blista);
         }
         elseif($this->bestado == "pagante" && $this->bmatriculado == "matriculados"){
@@ -125,7 +127,8 @@ class MostrarInscripciones extends Component
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
                       ->wherenotnull('matriculas.comprobante_imagen')
-                      ->where('matriculas.programa_id',$this->bprograma);
+                      ->where('matriculas.programa_id',$this->bprograma)
+                      ->where('agente','like','%'.$this->bagente.'&');
             })->paginate($this->blista);
         }
         elseif($this->bestado == "deudor" && $this->bmatriculado == "matriculados"){
@@ -136,7 +139,8 @@ class MostrarInscripciones extends Component
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
                       ->wherenull('matriculas.comprobante_imagen')
-                      ->where('matriculas.programa_id',$this->bprograma);
+                      ->where('matriculas.programa_id',$this->bprograma)
+                      ->where('agente','like','%'.$this->bagente.'&');
             })->paginate($this->blista);
         }
         elseif ($this->bmatriculado == "matriculados" && $this->bestado == false) {
@@ -145,7 +149,8 @@ class MostrarInscripciones extends Component
             ->whereExists(function ($query) {
                 $query->select(DB::raw('*'))
                       ->from('matriculas')
-                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id');
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
+                      ->where('agente','like','%'.$this->bagente.'&');
             })->paginate($this->blista);
         }
        
