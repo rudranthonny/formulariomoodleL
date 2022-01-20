@@ -120,7 +120,7 @@ class MostrarInscripciones extends Component
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
                       ->wherenotnull('matriculas.comprobante_imagen')
-                      ->where('matriculas.programa_id',$this->bprograma);;
+                      ->where('matriculas.programa_id',$this->bprograma);
             })->paginate($this->blista);
         }
         elseif($this->bestado == "deudor" && $this->bmatriculado == "matriculados"){
