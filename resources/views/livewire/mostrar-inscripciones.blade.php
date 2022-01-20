@@ -66,6 +66,7 @@
               <th scope="col">C</th>
               <th scope="col">s/.</th>
               <th scope="col">$/.</th>
+              <th scope="col">Forma de Pago</th>
             </tr>
         </thead>
         <tbody>
@@ -118,18 +119,22 @@
                   @php $tsoles = $tsoles + $matricula->costo;@endphp  
                   @else
                   <td>-</td>
+                  <td>{{$matricula->agemte}}</td>
                   @endif
                   @if ($matricula->tipo == "Dolares")
                   <td>{{"$/. ".$matricula->costo}}</td>  
                   @php $tdolares = $tdolares + $matricula->costo;@endphp 
                   @else
                   <td>-</td>
-                  @endif  
+                  @endif
+                  <td>{{$matricula->agente}}</td> 
               @else
                   <td>....</td>
                   <td>....</td>
+                  <td>.....</td>
               @endif
               @else
+                  <td>....</td>
                   <td>....</td>
                   <td>....</td>
               @endif
