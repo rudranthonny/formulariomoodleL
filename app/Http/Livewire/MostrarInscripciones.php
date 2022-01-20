@@ -24,7 +24,7 @@ class MostrarInscripciones extends Component
     public $bprograma;
     public $bmatriculado;
     public $binicio;
-    public $bestado;
+    public $bestado="";
     public $bagente="";
     public $iteration;
     public $blista="30";
@@ -142,7 +142,7 @@ class MostrarInscripciones extends Component
                       ->where('matriculas.programa_id',$this->bprograma);
             })->paginate($this->blista);
         }
-        elseif ($this->bmatriculado == "matriculados" && $this->bestado == false) {
+        elseif ($this->bmatriculado == "matriculados" && $this->bestado == "") {
             $inscripciones = DB::table('inscripcions')
             ->where('inicio_id',$this->binicio)
             ->whereExists(function ($query) {
