@@ -114,7 +114,7 @@ class MostrarInscripciones extends Component
             ->whereNotExists(function ($query) {
                 $query->select(DB::raw('NULL'))
                       ->from('matriculas')
-                      ->whereColumn('inscripcions.user_id', 'matriculas.user_idaa')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
                       ->where('matriculas.programa_id',$this->programa);
             })->paginate($this->blista);
         }
