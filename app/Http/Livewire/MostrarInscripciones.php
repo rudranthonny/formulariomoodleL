@@ -25,7 +25,7 @@ class MostrarInscripciones extends Component
     public $bmatriculado;
     public $binicio;
     public $bestado;
-    public $bagente;
+    public $bagente="";
     public $iteration;
     public $blista="30";
     public $sort = "id";
