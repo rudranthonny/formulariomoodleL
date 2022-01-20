@@ -52,7 +52,8 @@
       </div>
       <div class="col-3">   
         <select class="form-select"  aria-label="Default select example" wire:model="bagente">
-          <option value="Banco de la Nación">Banco de la Nación</option> 
+          <option value="">Elegir Agente</option> 
+          <option value="BancoNacion">Banco de la Nación</option> 
           <option value="BBVA">BBVA</option>
           <option value="BCP">BCP</option>  
           <option value="DirectoPago">Directo Pago</option>  
