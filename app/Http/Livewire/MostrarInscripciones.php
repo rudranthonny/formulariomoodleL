@@ -115,7 +115,7 @@ class MostrarInscripciones extends Component
                 $query->select(DB::raw('NULL'))
                       ->from('matriculas')
                       ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
-                      ->where('matriculas.programa_id',$this->programa);
+                      ->where('matriculas.programa_id',$this->bprograma);
             })->paginate($this->blista);
         }
         elseif($this->bestado == "pagante" && $this->bmatriculado == "matriculados"){
