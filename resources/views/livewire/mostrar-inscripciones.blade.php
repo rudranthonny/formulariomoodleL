@@ -119,7 +119,6 @@
                   @php $tsoles = $tsoles + $matricula->costo;@endphp  
                   @else
                   <td>-</td>
-                  <td>{{$matricula->agemte}}</td>
                   @endif
                   @if ($matricula->tipo == "Dolares")
                   <td>{{"$/. ".$matricula->costo}}</td>  
