@@ -148,9 +148,9 @@ class InscripcionController extends Controller
         else{
         /*actualizar inscripcion*/
         $actualizar = Inscripcion::find($rinscripcion->id);
-        //$actualizar->update($request->all()+['inicio_id' => $inicio->id]);
+        $actualizar->update(['inicio_id' => $inicio->id]);
         /*actualizar en el moodle*/
-        $functionname = 'core_user_update_users';
+        /*$functionname = 'core_user_update_users';
         $serverurl = $this->domainname. '/webservice/rest/server.php'
         . '?wstoken=' . $this->token 
         . '&wsfunction='.$functionname
