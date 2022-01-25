@@ -87,7 +87,7 @@
                     <button class="btn btn-danger" data-dismiss="modal">
                         Cerrar
                     </button>
-                    <button class="btn btn-success" wire:loading.attr="disable" wire:target="save, inscripciones" type="button" wire:click="registrarinscripcion">
+                    <button class="btn btn-success" wire:loading.attr="disabled" wire:target="registrarinscripcion" type="button" wire:click="registrarinscripcion">
                         Subir Inscripciones
                     </button>
                 </div>

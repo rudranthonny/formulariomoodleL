@@ -20,7 +20,6 @@ class InscripcionController extends Controller
      */
     public function index()
     {
-        
         return view('admin.inscripcion.index');
     }
 
@@ -109,6 +108,7 @@ class InscripcionController extends Controller
             'country' => 'required',
         ]);
             $inicio = Inicio::where('estado',1)->first();
+            //crear un inicio en caso se necesita
             if($inicio == false){
                $cinicio = new Inicio;
                $cinicio->name = "Programa 0";
@@ -120,7 +120,6 @@ class InscripcionController extends Controller
             //verificar si ya se realizo la inscripción
             $rinscripcion = Inscripcion::where('email',$emaila)->first();
             if($rinscripcion == false){
-            //return $request->input('politicas');
             //crear usuario en moodle
             $functionname = 'core_user_create_users';
             $serverurl = $this->domainname. '/webservice/rest/server.php'
@@ -139,25 +138,32 @@ class InscripcionController extends Controller
             $consulta = Http::get($serverurl2);
             foreach (json_decode($consulta)->users as $user) {
             }
+             /*agregar cohorte*/
+            $functionname = 'core_cohort_add_cohort_members';
+            $serverurl = $this->domainname . '/webservice/rest/server.php'
+            . '?wstoken=' . $this->token 
+            . '&wsfunction='.$functionname
+            .'&moodlewsrestformat=json&members[0][cohorttype][type]=id&members[0][cohorttype][value]=2&members[0][usertype][type]=id&members[0][usertype][value]='.$user->id;
+            $usuario = Http::get($serverurl);
             //realizar la instancia
             $inscripcion= new Inscripcion();
-            $inscripcion->create($request->all()+['user_id' => $user->id,'inicio_id' => $inicio->id]);
+            $inscripcion->create($request->all()+['user_id' => $user->id])->inicios()->attach($inicio->id);
+            /************/
 
         return redirect()->route('registrar.inicio')->with('crear','Se Inscribio Correctamente');
         }
         else{
-        /*actualizar inscripcion*/
-        $actualizar = Inscripcion::find($rinscripcion->id);
-        $actualizar->update(['inicio_id' => $inicio->id]);
-        /*actualizar en el moodle*/
-        /*$functionname = 'core_user_update_users';
-        $serverurl = $this->domainname. '/webservice/rest/server.php'
-        . '?wstoken=' . $this->token 
-        . '&wsfunction='.$functionname
-        .'&moodlewsrestformat=json&users[0][id]='.$actualizar->user_id.'&users[0][password]=123456789&users[0][firstname]='.$request->input('name').'&users[0][lastname]='.$request->input('lastname').'&users[0][email]='.$emaila.'&users[0][phone1]='.$request->input('phone').'&users[0][country]='.$request->input('country');
-        Http::get($serverurl);
-        /*mandar mensaje*/
-        return redirect()->route('registrar.inicio')->with('crear','actualización');
+            /*actualizar inscripcion*/
+            $actualizar = Inscripcion::find($rinscripcion->id);
+            /*agregar cohorte*/
+            $functionname = 'core_cohort_add_cohort_members';
+          $serverurl = $this->domainname . '/webservice/rest/server.php'
+          . '?wstoken=' . $this->token 
+          . '&wsfunction='.$functionname
+          .'&moodlewsrestformat=json&members[0][cohorttype][type]=id&members[0][cohorttype][value]=2&members[0][usertype][type]=id&members[0][usertype][value]='.$actualizar->user_id;
+          $usuario = Http::get($serverurl);
+          $actualizar->inicios()->attach($inicio->id);
+          return redirect()->route('registrar.inicio')->with('crear','actualización');
         }
     }
 

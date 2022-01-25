@@ -21,9 +21,11 @@ class MostrarInscripciones extends Component
     private $domainname = 'https://learclass.com';
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $bprograma;
-    public $bmatriculado;
-    public $binicio;
+    public $bprograma="no";
+    public $bmatriculado="todos";
+    public $inscripciones;
+    public $inscripciones2;
+    public $binicio="no";
     public $bestado="";
     public $bagente="";
     public $iteration;
@@ -84,7 +86,7 @@ class MostrarInscripciones extends Component
 
     public function eliminar_inscripcion($id_inscripcion){
         $e_inscripcion = Inscripcion::find($id_inscripcion);
-        $e_inscripcion->delete();
+        $e_inscripcion->inicios()->detach($this->binicio);
     }
     public function matricularprograma($id_usuario){
         /*obtener datos*/
@@ -97,6 +99,8 @@ class MostrarInscripciones extends Component
         $matricula->user_id = $usuario->user_id;
         $matricula->costo = $sprograma->costo;
         $matricula->programa_id = $sprograma->id;
+        $matricula->tipo = 'Soles';
+        $matricula->inscripcion_id = $id_usuario;
         $matricula->save();
         /*agregar cohorte*/
         $functionname = 'core_cohort_add_cohort_members';
@@ -105,9 +109,10 @@ class MostrarInscripciones extends Component
         . '&wsfunction='.$functionname
         .'&moodlewsrestformat=json&members[0][cohorttype][type]=id&members[0][cohorttype][value]='.$sprograma->cohort.'&members[0][usertype][type]=id&members[0][usertype][value]='.$usuario->user_id;
         $usuario = Http::get($serverurl);
+        $this->bprograma = $this->bprograma;
     }
-    public function render()
-    {   
+    public function render()    
+    {  /* 
         if ($this->bmatriculado == "nomatriculados") {
             $inscripciones = DB::table('inscripcions')
             ->where('inicio_id',$this->binicio)
@@ -159,13 +164,42 @@ class MostrarInscripciones extends Component
             ->paginate($this->blista);
         }
        
-       
-        
-       
-       
+       */
+      if($this->binicio == "no"){
+        $this->inscripciones = "";
+       }
+
+       if(($this->binicio != "no") && ($this->bmatriculado == "todos")){
+        $inicio = Inicio::find($this->binicio);
+        $this->inscripciones = $inicio->inscripcions;
+       }
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="") {
+        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma);
+       }
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="pagante" && $this->bagente == "") {
+        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',"<>",null);
+       }
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="pagante" && $this->bagente != "" ) {
+        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',"<>",null)->where('agente',$this->bagente);
+       }
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="deudor") {
+        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',null);
+       }
+
+       if ($this->bmatriculado == "nomatriculados" && $this->binicio != null && $this->bprograma != "no") {
+        $this->inscripciones = DB::table('inscripcions')
+        ->join('inicio_inscripcion', 'inicio_inscripcion.inscripcion_id', '=', 'inscripcions.id')
+        ->where('inicio_inscripcion.inicio_id',$this->binicio)
+        ->whereNotExists(function ($query) {
+            $query->select(DB::raw('*'))
+                  ->from('matriculas')
+                  ->whereColumn('inscripcions.id', 'matriculas.inscripcion_id')
+                  ->where('matriculas.programa_id',$this->bprograma);
+        })->get();
+       }
         $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
         $programas = Programa::all();
         $inicios = Inicio::all();
-        return view('livewire.mostrar-inscripciones',compact('inscripciones','matriculas','programas','inicios'));
+        return view('livewire.mostrar-inscripciones',compact('matriculas','programas','inicios'));
     }
 }

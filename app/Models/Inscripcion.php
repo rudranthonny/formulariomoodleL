@@ -21,8 +21,13 @@ class Inscripcion extends Model
         'inicio_id'
     ];
 
-    //rel 1 a n inverso
-    public function inicio(){
-        return $this->belongsTo(Inicio::class);
+   //relacion de muchos a muchos
+   public function inicios(){
+    return $this->belongsToMany(Inicio::class);
+    }
+
+    public function matriculas(){
+    return $this->hasMany(Matricula::class);
     }
 }
+

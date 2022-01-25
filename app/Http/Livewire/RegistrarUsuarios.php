@@ -38,7 +38,7 @@ class RegistrarUsuarios extends Component
             . '?wstoken=' . $this->token 
             . '&wsfunction='.$functionname
             .'&moodlewsrestformat=json&users[0][username]='.$emaila.'&users[0][password]=123456789&users[0][firstname]='.$this->name.'&users[0][lastname]='.$this->lastname.'&users[0][email]='.$emaila.'&users[0][phone1]='.$this->phone.'&users[0][country]='.$this->country;
-            $usuario = Http::get($serverurl);
+            Http::get($serverurl);
             /*registrar el estudiante en laravel*/
             //obtener el id del usuario
             $functionname2 = 'core_user_get_users';
@@ -51,6 +51,13 @@ class RegistrarUsuarios extends Component
             }
             
             if (isset($user->id)) {
+                /*agregar cohorte*/
+                $functionname = 'core_cohort_add_cohort_members';
+                $serverurl2 = $this->domainname . '/webservice/rest/server.php'
+                . '?wstoken=' . $this->token 
+                . '&wsfunction='.$functionname
+                .'&moodlewsrestformat=json&members[0][cohorttype][type]=id&members[0][cohorttype][value]=2&members[0][usertype][type]=id&members[0][usertype][value]='.$user->id;
+                 Http::get($serverurl2);
             }
             else{
             /*registrar el estudiante en laravel*/
@@ -63,6 +70,13 @@ class RegistrarUsuarios extends Component
             $consulta = Http::get($serverurl2);
             foreach (json_decode($consulta)->users as $user) {
             }
+             /*agregar cohorte*/
+             $functionname = 'core_cohort_add_cohort_members';
+             $serverurl2 = $this->domainname . '/webservice/rest/server.php'
+             . '?wstoken=' . $this->token 
+             . '&wsfunction='.$functionname
+             .'&moodlewsrestformat=json&members[0][cohorttype][type]=id&members[0][cohorttype][value]=2&members[0][usertype][type]=id&members[0][usertype][value]='.$user->id;
+              Http::get($serverurl2);
             }
             //realizar la instancia
             Inscripcion::create([
@@ -74,13 +88,13 @@ class RegistrarUsuarios extends Component
                 'user_id' => $user->id,
                 'politicas' => '1',
                 'country' => $this->country,
-                'inicio_id' => $this->inicio_id,
-            ]);
+            ])->inicios()->attach($this->inicio_id);
         }
         else 
         {
             /*actualizar inscripcion*/
         $actualizar = Inscripcion::find($rinscripcion->id);
+        $actualizar->inicios()->attach($this->inicio_id);
         $actualizar->update([
             'name' => $this->name,
             'lastname' => $this->lastname,
@@ -88,7 +102,6 @@ class RegistrarUsuarios extends Component
             'phone' => $this->phone,
             'dni' => $this->dni,
             'country' => $this->country,
-            'inicio_id' => $this->inicio_id,
         ]);
         /*actualizar en el moodle*/
         $functionname = 'core_user_update_users';
@@ -105,8 +118,8 @@ class RegistrarUsuarios extends Component
     }
     public function render()
     {
-        //dd($this->inicio_id);
-        if($this->inicio_id == false){
+
+        if($this->inicio_id == null){
             $sinicio = Inicio::where('estado',1)->first();
             $this->inicio_id = $sinicio->id;
         }
@@ -119,7 +132,6 @@ class RegistrarUsuarios extends Component
             $this->dni = $consulta->dni;
             $this->phone = $consulta->phone;
             $this->country = $consulta->country;
-            $this->inicio_id = $consulta->inicio_id;
         }
         return view('livewire.registrar-usuarios',compact('inicios'));
     }

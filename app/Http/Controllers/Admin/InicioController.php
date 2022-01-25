@@ -7,6 +7,7 @@ use App\Models\Inicio;
 use App\Models\Plantilla;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class InicioController extends Controller
 {
@@ -44,26 +45,36 @@ class InicioController extends Controller
         $request->validate([
             'name' => 'required', 
         ]);
+        if($request->file('inicio_imagen') != null)
+                {
+                    $extension = $request->inicio_imagen->extension();
+                    $imagenenu = $request->file('inicio_imagen')->storeAs('public/inicios',str_replace(' ','',$request->input('name'))."-".rand(1,2000).".".$extension);
+                    $url = Storage::url($imagenenu);
+        }
         $inicios = Inicio::all();
         if ($request->input('estado') != null) {
             foreach ($inicios as $inicio) {
                 $inicio->estado = "0";
                 $inicio->update();
             }
-            $inicio = Inicio::create($request->all());
+            $inicio = Inicio::create($request->only(['name','estado'])+['inicio_imagen' => $url]);
         } else {
             if ($inicios == "[]") {
                 $inicio = Inicio::create(
                     [
                         'name' => $request->input('name'),
+                        'inicio_imagen' => $url,
                         'estado' => '1',
                     ]
                 );
             }
             else{
+
+                
                 $inicio = Inicio::create(
                     [
                         'name' => $request->input('name'),
+                        'inicio_imagen' => $url,
                         'estado' => '0',
                     ]
                 );
@@ -108,24 +119,20 @@ class InicioController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'shortname'=> 'required|unique:inicios,shortname,'.$inicio->id.'|alpha_dash', 
         ]);
-         //obtener información de la categoria seleccionado
-         $functionname = 'core_course_get_categories';
-         $serverurl2 = $this->domainname . '/webservice/rest/server.php'
-         . '?wstoken=' . $this->token 
-         . '&wsfunction='.$functionname
-         .'&moodlewsrestformat=json&addsubcategories=0&criteria[0][key]=name&criteria[0][value]='.$inicio->shortname;
-         $categoria = Http::get($serverurl2);
-         foreach (json_decode($categoria) as $cat){   
-         }
-         //actualizar la categoria seleccionado
-         $functionname = 'core_course_update_categories';
-         $serverurl = $this->domainname . '/webservice/rest/server.php'. '?wstoken=' 
-         . $this->token . '&wsfunction='
-         .$functionname.'&moodlewsrestformat=json&categories[0][id]='.$cat->id.'&categories[0][name]='.$request->input('shortname');
-        $categoria = Http::get($serverurl);
-        $inicio->update($request->all());
+        $inicio->name = $request->input('name');
+        $inicio->save();
+        if($request->file('inicio_imagen') != null)
+        {
+            
+                $extension = $request->file('inicio_imagen')->extension();
+                $eliminar = str_replace('storage','public',$inicio->inicio_imagen);
+                Storage::delete([$eliminar]);
+                $imagenenu = $request->file('inicio_imagen')->storeAs('public/inicios',str_replace(' ','',$request->input('name'))."-".rand(1,2000).".".$extension);
+                $url = Storage::url($imagenenu);
+                $inicio->update(['inicio_imagen' => $url]);
+        }
+
         return redirect()->route('admin.inicios.index')->with('info','el Inicio se actualizo correctamente');
     }
 

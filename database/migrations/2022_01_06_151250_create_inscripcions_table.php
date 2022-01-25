@@ -23,8 +23,6 @@ class CreateInscripcionsTable extends Migration
             $table->string('country');
             $table->string('politicas')->nullable();
             $table->integer('user_id');
-            $table->unsignedBigInteger('inicio_id')->nullable();
-            $table->foreign('inicio_id')->references('id')->on('inicios')->onDelete('set null');
             $table->timestamps();
         });
     }

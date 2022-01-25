@@ -36,6 +36,13 @@
     color: black;
     }
   
+    div#titulo-descripcion {
+    float: left;
+}
+
+form.formulario-inscripcion {
+    padding-top : 50px;
+}
     </style>
     <title>LearClass</title>
   </head>

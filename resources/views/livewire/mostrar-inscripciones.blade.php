@@ -8,37 +8,41 @@
       <div class="col-3">
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
       </div>
+      <!---->
       <div class="col-3">
         <select class="form-select" aria-label="Default select example" wire:model="binicio">
-          <option>Elegir Inicio</option>
+          <option value="no">Elegir Inicio</option>
           @foreach ($inicios as $inicio)
           <option value="{{$inicio->id}}">{{$inicio->name}}</option>
           @endforeach    
         </select>
+      <!---->
       </div>
-      <div class="col-2">
+      <div class="col-3">
         <select class="form-select" aria-label="Default select example" wire:model="bprograma">
-          <option value="0">Elegir programa</option>
+          <option value="no">Elegir programa</option>
           @foreach ($programas as $programa)
           <option value="{{$programa->id}}">{{$programa->name}}</option>
           @endforeach    
         </select>
       </div>
-      <div class="col-2"> 
+      @if ($bprograma != "no")
+      <div class="col-3"> 
         <select class="form-select" aria-label="Default select example" wire:model="bmatriculado">
           <option value="todos">Todos</option>
           <option value="matriculados">matriculados</option>
           <option value="nomatriculados">no matriculados</option>
         </select>
       </div>
-      <div class="col-2"> 
+      @endif
+      <!--<div class="col-2"> 
         <select class="form-select" aria-label="Default select example" wire:model="blista">
           <option value="30">30</option>
           <option value="60">60</option>
           <option value="90">90</option>
           <option value="1000">all</option>   
         </select>
-      </div>
+      </div>-->
     </div>
     @if ($bmatriculado == "matriculados")
     <div class="row pt-1">
@@ -48,8 +52,8 @@
           <option value="pagante">Pagante</option>
           <option value="deudor">Deudor</option>
         </select>
-        {{$bestado}}
       </div>
+      @if ($bestado == 'pagante')
       <div class="col-3">   
         <select class="form-select"  aria-label="Default select example" wire:model="bagente">
           <option value="">Elegir Agente</option> 
@@ -66,12 +70,12 @@
           <option value="WesterUnion">Wester Unión</option>   
           <option value="Yape">Yape</option>       
         </select>
-        {{$bagente}}
       </div>
+      @endif
     </div>
     @endif
   </div>
-    @if ($inscripciones->count() && ($bprograma))
+    @if ($inscripciones)
     <table class="table" id="tabla-m" class="table table-striped">
         <thead>
             <tr class="bg-dark">
@@ -87,97 +91,151 @@
               <th scope="col">Forma de Pago</th>
             </tr>
         </thead>
+        @if ($bmatriculado == "todos")
         <tbody>
-            @foreach ($inscripciones as $inscripcion)
+          @foreach ($inscripciones as $interesado)
             <tr>
-              <td>{{$inscripcion->name." ".$inscripcion->lastname}}</td>
-              <td>{{$inscripcion->email}}</td>
-              <td>{{$inscripcion->dni}}</td>
-              <td>{{$inscripcion->phone}}</td>
-              <td>
-                    <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$inscripcion->id}})"><i class="fas fa-user-minus"></i></button>
-              </td>
+              <td>{{$interesado->name." ".$interesado->lastname}}</td>
+              <td>{{$interesado->email}}</td>
+              <td>{{$interesado->dni}}</td>
+              <td>{{$interesado->phone." ".$bprograma}}</td>
+              <td><button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->id}})"><i class="fas fa-user-minus"></i></button></td>
               @php
-              if($matriculas->count()){
-              foreach($matriculas as $matricula){
-                if ($inscripcion->user_id == $matricula->user_id) {
-                 $matriculado = true;
-                 break;
-                } else {
-                $matriculado = false;
-                }   
+              $existematricula = false;
+              foreach($interesado->matriculas as $matricula){
+                if ($matricula->programa_id == $bprograma) {
+                  $existematricula = true;
+                  $id_matricula = $matricula->id;
+                  break;
+                }
               }
-              }
-              else{
-                $matriculado = false;
-              }
-               @endphp
-              <td>
-              @if ($matriculado)
-              <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$matricula->id}})"><i class="fas fa-edit"></i></a>
+              @endphp
+              @if ($bprograma != "no")
+              @if ($interesado->matriculas != "[]")
+              @if($existematricula == true)
+              <td><a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$id_matricula}})"><i class="fas fa-edit"></i></a></td>
               @else
-              <a class="btn btn-dark" role="button" wire:click="matricularprograma({{$inscripcion->id}})"><i class="fas fa-plus-circle"></i></a>
+              <td> <button class="btn btn-dark" role="button" wire:click="matricularprograma({{$interesado->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button></td>
               @endif
-              </td>
-              <td>
-                @if ($matriculado)
-                @if ($matricula->comprobante_imagen)
-                <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a>   
-                @else
-                no
-                @endif
-                @else
-                no
-                @endif
-              </td>
-              @if ($matriculado) 
               @if ($matricula->comprobante_imagen)
-                  @if ($matricula->tipo == "Soles")
-                  <td>{{"s/. ".$matricula->costo}}</td>
-                  @php $tsoles = $tsoles + $matricula->costo;@endphp  
-                  @else
-                  <td>-</td>
-                  @endif
-                  @if ($matricula->tipo == "Dolares")
-                  <td>{{"$/. ".$matricula->costo}}</td>  
-                  @php $tdolares = $tdolares + $matricula->costo;@endphp 
-                  @else
-                  <td>-</td>
-                  @endif
-                  <td>{{$matricula->agente}}</td> 
-              @else
-                  <td>....</td>
-                  <td>....</td>
-                  <td>.....</td>
-              @endif
-              @else
-                  <td>....</td>
-                  <td>....</td>
-                  <td>....</td>
-              @endif
-            </tr>   
-            @endforeach
-            <tr>
-              <td>{{"Nº : ".$inscripciones->count() }}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>{{"s/. ".$tsoles}}</td>
-              <td>{{"$/. ".$tdolares}}</td>
-            </tr>
+              <td><a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a></td>
+               @if ($matricula->tipo == "Soles")
+                 <td>{{"s/. ".$matricula->costo}}</td>
+                 @php $tsoles = $tsoles + $matricula->costo;@endphp  
+                 @else
+                 <td>-</td>
+                 @endif
+                 @if ($matricula->tipo == "Dolares")
+                 <td>{{"$/. ".$matricula->costo}}</td>  
+                 @php $tdolares = $tdolares + $matricula->costo;@endphp 
+                 @else
+                 <td>-</td>
+                 @endif
+                 <td>{{$matricula->agente}}</td>
+                @else
+                <td>no</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                @endif
+                @else
+                <td><button class="btn btn-dark" role="button" wire:click="matricularprograma({{$interesado->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button> </td>
+                <td>no</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                @endif
+                @else
+                <td>-</td>
+                @endif
+          </tr>
+          @endforeach
+          @if ($bprograma != "no")
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td>{{"s/. ".$tsoles}}</td>
+            <td>{{"$/. ".$tdolares}}</td>
+          </tr>
+          @endif
         </tbody>
-    </table>
+        @elseif($bmatriculado == "matriculados")
+        <tbody>
+          @foreach ($inscripciones as $interesado)
+            <tr>
+            <td>{{$interesado->inscripcion->name." ".$interesado->inscripcion->lastname}}</td>
+            <td>{{$interesado->inscripcion->email}}</td>
+            <td>{{$interesado->inscripcion->dni}}</td>
+            <td>{{$interesado->inscripcion->phone}}</td>
+            <td><button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->inscripcion->id}})"><i class="fas fa-user-minus"></i></button></td>
+            <td><a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$interesado->id}})"><i class="fas fa-edit"></i></a></td>
+            @if ($interesado->comprobante_imagen)
+            <td>
+              <a href="{{asset($interesado->comprobante_imagen)}}" target="_blank">ver</a>   
+            </td>
+            @if ($interesado->tipo == "Soles")
+                  <td>{{"s/. ".$interesado->costo}}</td>
+                  @php $tsoles = $tsoles + $interesado->costo;@endphp  
+                  @else
+                  <td>-</td>
+                  @endif
+                  @if ($interesado->tipo == "Dolares")
+                  <td>{{"$/. ".$interesado->costo}}</td>  
+                  @php $tdolares = $tdolares + $interesado->costo;@endphp 
+                  @else
+                  <td>-</td>
+                  @endif
+                  <td>{{$interesado->agente}}</td>
+            @else
+            <td>no</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            @endif
+          </tr>
+          @endforeach
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td>{{"s/. ".$tsoles}}</td>
+            <td>{{"$/. ".$tdolares}}</td>
+          </tr>
+        </tbody>
+        @elseif($bmatriculado == "nomatriculados")
+        <tbody>
+          @foreach ($inscripciones as $interesado)
+            <tr>
+            <td>{{$interesado->name." ".$interesado->lastname}}</td>
+            <td>{{$interesado->email}}</td>
+            <td>{{$interesado->dni}}</td>
+            <td>{{$interesado->phone}}</td>
+            <td><button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->inscripcion_id}})"><i class="fas fa-user-minus"></i></button></td>
+            <td><button class="btn btn-dark" role="button" wire:click="matricularprograma({{$interesado->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button> </td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          @endforeach
+        </tbody>
+        @endif
+      </table>
     @else
         <div class="px-6 py-4">
                 No existe ningun registro coincidente
         </div>
     @endif
-    <div class="d-flex justify-content-between">
-      {{ $inscripciones->links() }}
-    </div>
+    
 
   @push('js')
   <script>
@@ -289,7 +347,7 @@
                     <button class="btn btn-danger" data-dismiss="modal">
                         Cerrar
                     </button>
-                    <button class="btn btn-success" wire:loading.attr="disable" wire:target="save, matriculas" type="button" wire:click="actualizarmatriculas">
+                    <button class="btn btn-success" wire:loading.attr="disabled" wire:target="save, matriculas" type="button" wire:click="actualizarmatriculas">
                         Modificar Matricula
                     </button>
           </div>

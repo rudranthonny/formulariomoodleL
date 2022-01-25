@@ -25,4 +25,8 @@ class Matricula extends Model
     public function programa(){
         return $this->belongsTo(Programa::class);
     }
+
+    public function inscripcion(){
+        return $this->belongsTo(Inscripcion::class);
+    }
 }

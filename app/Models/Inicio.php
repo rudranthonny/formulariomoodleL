@@ -12,14 +12,14 @@ class Inicio extends Model
     protected $fillable = [
         'name',
         'estado',
+        'inicio_imagen',
     ];
     //rel inv 1 a n
     public function plantilla(){
         return $this->belongsTo(Plantilla::class);
     }
-    //rela 1 a muchos
+    //relacion de muchos a muchos
     public function inscripcions(){
-        return $this->hasMany(Inscripcion::class);
+        return $this->belongsToMany(Inscripcion::class);
     }
-
 }

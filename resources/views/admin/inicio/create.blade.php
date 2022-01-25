@@ -12,7 +12,7 @@
         <center><h3>Rellene Correctenemte el formulario</h3></center>
     </div>
     <div class="card-body">
-        <form action="{{route('admin.inicios.store')}}" method="POST">
+        <form action="{{route('admin.inicios.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre del Inicio</label>
@@ -22,12 +22,19 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <input type="file" name="inicio_imagen" accept="image/*">
+                @error('comprobante_imagen')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="mb-3">
                 Activar Inicio <input type="checkbox" class="mr-1" name="estado" value='1'>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Crear Inicio</button>
                 <a class="btn btn-dark" href="{{route('admin.inicios.index')}}" role="button">Cancelar</a>
             </div>
+             
         </form>
     </div>
 </div>

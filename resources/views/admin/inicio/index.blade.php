@@ -33,7 +33,7 @@
                 @csrf
                 @method('DELETE')
                 <a class="btn btn-info" href="{{route('admin.inicios.edit',$inicio->id)}}" role="button"><i class="fas fa-edit"></i></a>
-                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                <button type="submit" class="btn btn-danger" disabled><i class="fas fa-trash-alt"></i></button>
                 @if ($inicio->estado == "1")
                 <button  class="btn btn-success" disabled><i class="fas fa-eye"></i></button>
                 @else

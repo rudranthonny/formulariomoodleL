@@ -12,7 +12,7 @@
         <center><h3>Rellene Correctenemte el formulario</h3></center>
     </div>
     <div class="card-body">
-        <form action="{{route('admin.inicios.update',$inicio->id)}}" method="POST">
+        <form action="{{route('admin.inicios.update',$inicio->id)}}" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="mb-3">
@@ -23,7 +23,13 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <input type="checkbox" class="mr-1" name="estado" value='1'>
+                <img src="{{asset($inicio->inicio_imagen)}}" alt="" width="120px" height="67.5">
+            </div>
+            <div class="mb-3">
+                <input type="file" name="inicio_imagen" accept="image/*">
+                @error('inicio_imagen')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Modificar Inicio</button>
