@@ -69,20 +69,20 @@ form.formulario-inscripcion {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     @if (session('crear') == 'Se Inscribio Correctamente')
     <script>
-    Swal.fire(
+    Swal.fire({
     title :'!Felicidades¡',
     text :'Su Inscripción se realizo Correctamente',
-    html : '<a href="https://learclass.com" target="_blank">Ingresa a Nuestra Aula Virtual</a>'
-    )
+    html : '<a href="https://learclass.com">Ingresa a Nuestra Aula Virtual</a>'
+    })
     </script>
      @endif
     @if (session('crear') == 'actualización')
     <script>
-    Swal.fire(
-    '!Felicidades¡',
-    'Su actualizo su Inscripcion',
-    html : '<a href="https://learclass.com" target="_blank">Ingresa a Nuestra Aula Virtual</a>'
-    )
+    Swal.fire({
+    title :'!Felicidades¡',
+    text : 'Su actualizo su Inscripcion',
+    html : '<a href="https://learclass.com">Ingresa a Nuestra Aula Virtual</a>'
+    })
     </script>
     @endif
    <script>
