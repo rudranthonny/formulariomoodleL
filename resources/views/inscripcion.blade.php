@@ -72,7 +72,7 @@ form.formulario-inscripcion {
     Swal.fire({
     title :'!Felicidades¡',
     text :'Su Inscripción se realizo Correctamente',
-    html : '<a href="https://learclass.com">Ingresa a Nuestra Aula Virtual</a>'
+    html : '<a href="https://learclass.com" target="_blank">Ingresa a Nuestra Aula Virtual</a>'
     })
     </script>
      @endif
@@ -81,7 +81,7 @@ form.formulario-inscripcion {
     Swal.fire({
     title :'!Felicidades¡',
     text : 'Su actualizo su Inscripcion',
-    html : '<a href="https://learclass.com">Ingresa a Nuestra Aula Virtual</a>'
+    html : '<a href="https://learclass.com" target="_blank">Ingresa a Nuestra Aula Virtual</a>'
     })
     </script>
     @endif
