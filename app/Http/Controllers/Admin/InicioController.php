@@ -46,19 +46,24 @@ class InicioController extends Controller
             'name' => 'required', 
         ]);
         if($request->file('inicio_imagen') != null)
-                {
+        {
                     $extension = $request->inicio_imagen->extension();
                     $imagenenu = $request->file('inicio_imagen')->storeAs('public/inicios',str_replace(' ','',$request->input('name'))."-".rand(1,2000).".".$extension);
                     $url = Storage::url($imagenenu);
         }
+        else{$url = null;}
+
         $inicios = Inicio::all();
-        if ($request->input('estado') != null) {
-            foreach ($inicios as $inicio) {
+        if ($request->input('estado') != null) 
+        {
+                foreach ($inicios as $inicio) 
+                {
                 $inicio->estado = "0";
                 $inicio->update();
-            }
-            $inicio = Inicio::create($request->only(['name','estado'])+['inicio_imagen' => $url]);
-        } else {
+                }
+                $inicio = Inicio::create($request->only(['name','estado'])+['inicio_imagen' => $url]);
+        } 
+        else {
             if ($inicios == "[]") {
                 $inicio = Inicio::create(
                     [

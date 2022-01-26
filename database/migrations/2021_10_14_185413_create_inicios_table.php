@@ -16,7 +16,7 @@ class CreateIniciosTable extends Migration
         Schema::create('inicios', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('inicio_imagen');
+            $table->string('inicio_imagen')->nullable();
             $table->integer('estado');
             $table->timestamps();
         });
