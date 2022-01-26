@@ -70,9 +70,9 @@ form.formulario-inscripcion {
     @if (session('crear') == 'Se Inscribio Correctamente')
     <script>
     Swal.fire(
-    '!Felicidades¡',
-    'Su Inscripción se realizo Correctamente',
-    'Visitanos : https://learclass.com'
+    title :'!Felicidades¡',
+    text :'Su Inscripción se realizo Correctamente',
+    html : '<a href="https://learclass.com" target="_blank">Ingresa a Nuestra Aula Virtual</a>'
     )
     </script>
      @endif
@@ -81,7 +81,7 @@ form.formulario-inscripcion {
     Swal.fire(
     '!Felicidades¡',
     'Su actualizo su Inscripcion',
-    'Visitanos : https://learclass.com'
+    html : '<a href="https://learclass.com" target="_blank">Ingresa a Nuestra Aula Virtual</a>'
     )
     </script>
     @endif
