@@ -4,7 +4,7 @@
             <h1 class="font-weight-bold mb-3">Inscripción 2022</h1>
         <h3>{{$inicio->name}}</h3></div>
         <div>
-            <center><img src="{{asset($inicio->inicio_imagen)}}" alt="" width="120px" height="67.5"></center>
+            <center><img src="{{asset($inicio->inicio_imagen)}}" alt="" width="78.125px" height="77.5px"></center>
         </div>
         <form action="{{route('inscripcion.registrar')}}" method="POST" class="formulario-inscripcion">
             @csrf
