@@ -1,7 +1,7 @@
 <div class="col-xl-7 col-lg-12 d-flex">
     <div class="container align-self-center p-6">
         <div id="titulo-descripcion">
-            <h1 class="font-weight-bold mb-3">Inscripsción 2022</h1>
+            <h1 class="font-weight-bold mb-3">Inscripción 2022</h1>
         <h3>{{$inicio->name}}</h3></div>
         <div>
             <center><img src="{{asset($inicio->inicio_imagen)}}" alt="" width="120px" height="67.5"></center>
