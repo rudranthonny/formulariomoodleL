@@ -17,6 +17,7 @@ class CreateIniciosTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('inicio_imagen')->nullable();
+            $table->string('inicio_imagen_fondo')->nullable();
             $table->integer('estado');
             $table->timestamps();
         });

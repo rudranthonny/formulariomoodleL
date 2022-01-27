@@ -13,6 +13,7 @@ class Inicio extends Model
         'name',
         'estado',
         'inicio_imagen',
+        'inicio_imagen_fondo',
     ];
     //rel inv 1 a n
     public function plantilla(){

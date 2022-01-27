@@ -1,10 +1,27 @@
-<div class="col-xl-7 col-lg-12 d-flex">
-    <div class="container align-self-center p-6">
+<div class="row no-gutters bg-dark">
+    <div class="col-xl-5 col-lg-12 register-bg"  
+    @if ($inicio->inicio_imagen_fondo != null)
+    style="background-image: url('{{asset($inicio->inicio_imagen_fondo)}}')"
+    @else
+    style="background-image: url('{{asset('images/hero.jpg')}}')"
+    @endif
+    >
+        <div class="position-absolute testiomonial p-4">
+        <h3 class="font-weight-bold text-light"><!--titulo--></h3>
+        <p class="lead text-light"><!--descripcion--></p>
+        </div>
+    </div>
+    <div class="col-xl-7 col-lg-12 d-flex">
+        <div class="container align-self-center p-6">
         <div id="titulo-descripcion">
             <h1 class="font-weight-bold mb-3">Inscripción 2022</h1>
         <h3>{{$inicio->name}}</h3></div>
         <div>
-            <center><img src="{{asset($inicio->inicio_imagen)}}" alt="" width="78.125px" height="77.5px"></center>
+           @if ($inicio->inicio_imagen != null)
+           <center><img src="{{asset($inicio->inicio_imagen)}}" alt=""></center>
+           @else
+           <center><img src="{{asset('images/logo-pequeno.png')}}" alt="" width="78.125px" height="77.5px"></center>
+           @endif
         </div>
         <form action="{{route('inscripcion.registrar')}}" method="POST" class="formulario-inscripcion">
             @csrf
@@ -188,5 +205,6 @@
             <button class="btn btn-primary width-100" type="submit">Regístrate</button>
         </form>
         <small class="d-inline-block text-muted mt-5">Todos los derechos reservados | ©2022 Learclass</small>
+        </div>
     </div>
 </div>

@@ -22,8 +22,18 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="inicio_imagen" class="form-label">Logotipo del Inicio</label><br>
+                <strong class="alert-danger">(*) la medida del logotipo no debe pasar el 100px ya sea largo o ancho</strong><br>
                 <input type="file" name="inicio_imagen" accept="image/*">
-                @error('comprobante_imagen')
+                @error('inicio_imagen')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="inicio_imagen_fondo" class="form-label">Fondo del Inicio</label><br>
+                <strong class="alert-danger">(*) la medida del fondo de la imagen tiene que ser de 853px - 1280px</strong><br>
+                <input type="file" name="inicio_imagen_fondo" accept="image/*">
+                @error('inicio_imagen_fondo')
                     <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>

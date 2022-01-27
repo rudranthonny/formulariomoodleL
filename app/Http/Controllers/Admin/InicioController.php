@@ -48,10 +48,17 @@ class InicioController extends Controller
         if($request->file('inicio_imagen') != null)
         {
                     $extension = $request->inicio_imagen->extension();
-                    $imagenenu = $request->file('inicio_imagen')->storeAs('public/inicios',str_replace(' ','',$request->input('name'))."-".rand(1,2000).".".$extension);
+                    $imagenenu = $request->file('inicio_imagen')->storeAs('public/inicios/logotipos',str_replace(' ','',$request->input('name'))."-".rand(1,2000).".".$extension);
                     $url = Storage::url($imagenenu);
         }
         else{$url = null;}
+        if($request->file('inicio_imagen_fondo') != null)
+        {
+                    $extension = $request->inicio_imagen->extension();
+                    $imagenenu = $request->file('inicio_imagen_fondo')->storeAs('public/inicios/fondos',str_replace(' ','',$request->input('name'))."-".rand(1,2000).".".$extension);
+                    $url2 = Storage::url($imagenenu);
+        }
+        else{$url2 = null;}
 
         $inicios = Inicio::all();
         if ($request->input('estado') != null) 
@@ -61,7 +68,7 @@ class InicioController extends Controller
                 $inicio->estado = "0";
                 $inicio->update();
                 }
-                $inicio = Inicio::create($request->only(['name','estado'])+['inicio_imagen' => $url]);
+                $inicio = Inicio::create($request->only(['name','estado'])+['inicio_imagen' => $url,'inicio_imagen_fondo' => $url2,]);
         } 
         else {
             if ($inicios == "[]") {
@@ -69,6 +76,7 @@ class InicioController extends Controller
                     [
                         'name' => $request->input('name'),
                         'inicio_imagen' => $url,
+                        'inicio_imagen_fondo' => $url2,
                         'estado' => '1',
                     ]
                 );
@@ -80,6 +88,7 @@ class InicioController extends Controller
                     [
                         'name' => $request->input('name'),
                         'inicio_imagen' => $url,
+                        'inicio_imagen_fondo' => $url2,
                         'estado' => '0',
                     ]
                 );
@@ -129,13 +138,21 @@ class InicioController extends Controller
         $inicio->save();
         if($request->file('inicio_imagen') != null)
         {
-            
                 $extension = $request->file('inicio_imagen')->extension();
                 $eliminar = str_replace('storage','public',$inicio->inicio_imagen);
                 Storage::delete([$eliminar]);
-                $imagenenu = $request->file('inicio_imagen')->storeAs('public/inicios',str_replace(' ','',$request->input('name'))."-".rand(1,2000).".".$extension);
+                $imagenenu = $request->file('inicio_imagen')->storeAs('public/inicios/logotipos',str_replace(' ','',$request->input('name'))."-".rand(1,2000).".".$extension);
                 $url = Storage::url($imagenenu);
                 $inicio->update(['inicio_imagen' => $url]);
+        }
+        if($request->file('inicio_imagen_fondo') != null)
+        {
+                $extension = $request->file('inicio_imagen_fondo')->extension();
+                $eliminar = str_replace('storage','public',$inicio->inicio_imagen_fondo);
+                Storage::delete([$eliminar]);
+                $imagenenu = $request->file('inicio_imagen_fondo')->storeAs('public/inicios/fondos',str_replace(' ','',$request->input('name'))."-".rand(1,2000).".".$extension);
+                $url2 = Storage::url($imagenenu);
+                $inicio->update(['inicio_imagen_fondo' => $url2]);
         }
 
         return redirect()->route('admin.inicios.index')->with('info','el Inicio se actualizo correctamente');

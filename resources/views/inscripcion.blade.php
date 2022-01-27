@@ -47,17 +47,9 @@ form.formulario-inscripcion {
     <title>LearClass</title>
   </head>
   <body>
-   <section class="contact-box">
-       <div class="row no-gutters bg-dark">
-           <div class="col-xl-5 col-lg-12 register-bg">
-            <div class="position-absolute testiomonial p-4">
-                <h3 class="font-weight-bold text-light"><!--titulo--></h3>
-                <p class="lead text-light"><!--descripcion--></p>
-            </div>
-           </div>
+   <section class="contact-box">     
            @livewire('consultar-inscripcion')
            @livewireScripts
-       </div>
    </section>
 
     <!-- Optional JavaScript -->
