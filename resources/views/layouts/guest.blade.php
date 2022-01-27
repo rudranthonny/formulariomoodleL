@@ -8,6 +8,8 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
+        <link rel="shortcut icon" href="{{asset('favicons/favicon.ico')}}" type="image/x-icon">
+
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
@@ -16,7 +18,7 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body>
+    <body class="fondo_color fondo_briceno_0 mb-10">
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>

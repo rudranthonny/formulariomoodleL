@@ -1836,6 +1836,28 @@ select {
 .ease-in {
 	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
+
+.min_height_22r {
+    min-height: 22rem
+}
+.min_height_6r {
+    min-height: 6rem
+}
+
+.fondo_briceno {
+    padding: 15px;
+    border-radius: 15px;
+    background: linear-gradient(to top, #41b6e6 0%, #00205b 100%);
+}
+.fondo_briceno_0 {
+    background: linear-gradient(to top, #777a83 0%, #777a83 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.fondo_color {
+    background-color: #41b6e6;
+}
+
 .hover\:border-gray-300:hover {
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
