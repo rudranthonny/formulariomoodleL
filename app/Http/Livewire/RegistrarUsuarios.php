@@ -11,7 +11,7 @@ class RegistrarUsuarios extends Component
 {   private $token = 'fc410318b59368f9245b394b209c644e';
     private $domainname = 'https://learclass.com';
     public $usuario;
-    public $name,$lastname,$email,$phone,$dni,$country;
+    public $name,$lastname,$email,$phone,$dni,$country = "AR";
     public $inicio_id;
     protected $rules = [
         'name' => 'required',
@@ -94,7 +94,15 @@ class RegistrarUsuarios extends Component
         {
             /*actualizar inscripcion*/
         $actualizar = Inscripcion::find($rinscripcion->id);
-        $actualizar->inicios()->attach($this->inicio_id);
+        $inscrito = false;
+        foreach ($actualizar->inicios as $minicio) {
+            if ($minicio->id == $this->inicio_id) {
+                $inscrito = true;
+            }
+        }
+        if($inscrito == false){
+            $actualizar->inicios()->attach($this->inicio_id);
+        }
         $actualizar->update([
             'name' => $this->name,
             'lastname' => $this->lastname,
