@@ -162,6 +162,7 @@
             <td>{{"s/. ".$tsoles}}</td>
             <td>{{"$/. ".$tdolares}}</td>
           </tr>
+          <tr><td>{{$inscripciones->count()}}</td></tr>
           @endif
         </tbody>
         @elseif($bmatriculado == "matriculados")
