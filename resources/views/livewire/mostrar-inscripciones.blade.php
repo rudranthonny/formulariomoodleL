@@ -162,7 +162,6 @@
             <td>{{"s/. ".$tsoles}}</td>
             <td>{{"$/. ".$tdolares}}</td>
           </tr>
-          <tr><td>{{$inscripciones->count()}}</td></tr>
           @endif
         </tbody>
         @elseif($bmatriculado == "matriculados")
@@ -231,6 +230,7 @@
         </tbody>
         @endif
       </table>
+      nº : {{$inscripciones->count()}}
     @else
         <div class="px-6 py-4">
                 No existe ningun registro coincidente
