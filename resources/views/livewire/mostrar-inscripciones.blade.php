@@ -229,8 +229,9 @@
           @endforeach
         </tbody>
         @endif
+        nº : {{$inscripciones->count()}}
       </table>
-      nº : {{$inscripciones->count()}}
+      
     @else
         <div class="px-6 py-4">
                 No existe ningun registro coincidente
