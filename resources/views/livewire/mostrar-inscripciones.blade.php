@@ -98,7 +98,7 @@
               <td>{{$interesado->name." ".$interesado->lastname}}</td>
               <td>{{$interesado->email}}</td>
               <td>{{$interesado->dni}}</td>
-              <td>{{$interesado->phone." ".$bprograma}}</td>
+              <td>{{$interesado->phone}}</td>
               <td><button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->id}})"><i class="fas fa-user-minus"></i></button></td>
               @php
               $existematricula = false;
