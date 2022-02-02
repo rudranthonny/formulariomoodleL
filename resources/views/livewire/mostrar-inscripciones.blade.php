@@ -186,7 +186,7 @@
             <td>{{$interesado->inscripcion->dni}}</td>
             <td>{{$interesado->inscripcion->phone}}</td>
             @php
-                $telefono=str_replace('+','',$interesado->phone);
+                $telefono=str_replace('+','',$interesado->inscripcion->phone);
                 $telefono2 = str_replace(' ','',$telefono);
             @endphp
             <td><button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->inscripcion->id}})"><i class="fas fa-user-minus"></i></button></td>
