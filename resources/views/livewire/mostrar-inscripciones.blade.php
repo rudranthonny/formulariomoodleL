@@ -99,6 +99,10 @@
               <td>{{$interesado->email}}</td>
               <td>{{$interesado->dni}}</td>
               <td>{{$interesado->phone}}</td>
+               @php
+                $telefono=str_replace('+','',$interesado->phone);
+                $telefono2 = str_replace(' ','',$telefono);
+              @endphp
               <td><button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->id}})"><i class="fas fa-user-minus"></i></button></td>
               @php
               $existematricula = false;
@@ -115,12 +119,12 @@
               @if($existematricula == true)
               <td>
                 <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$id_matricula}})"><i class="fas fa-edit"></i></a>
-                <a href="https://api.whatsapp.com/send?phone=51934665704&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
               </td>
               @else
               <td>
                 <button class="btn btn-dark" role="button" wire:click="matricularprograma({{$interesado->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button>
-                <a href="https://api.whatsapp.com/send?phone=51934665704&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
               </td>
               @endif
               @if ($matricula->comprobante_imagen)
@@ -147,7 +151,7 @@
                 @else
                 <td>
                   <button class="btn btn-dark" role="button" wire:click="matricularprograma({{$interesado->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button>
-                  <a href="https://api.whatsapp.com/send?phone=51934665704&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                  <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </td>
                 <td>no</td>
                 <td>-</td>
@@ -181,10 +185,14 @@
             <td>{{$interesado->inscripcion->email}}</td>
             <td>{{$interesado->inscripcion->dni}}</td>
             <td>{{$interesado->inscripcion->phone}}</td>
+            @php
+                $telefono=str_replace('+','',$interesado->phone);
+                $telefono2 = str_replace(' ','',$telefono);
+            @endphp
             <td><button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->inscripcion->id}})"><i class="fas fa-user-minus"></i></button></td>
             <td>
               <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$interesado->id}})"><i class="fas fa-edit"></i></a>
-              <a href="https://api.whatsapp.com/send?phone=51934665704&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+              <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </td>
             @if ($interesado->comprobante_imagen)
             <td>
@@ -231,10 +239,14 @@
             <td>{{$interesado->email}}</td>
             <td>{{$interesado->dni}}</td>
             <td>{{$interesado->phone}}</td>
+            @php
+                $telefono=str_replace('+','',$interesado->phone);
+                $telefono2 = str_replace(' ','',$telefono);
+            @endphp
             <td><button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->inscripcion_id}})"><i class="fas fa-user-minus"></i></button></td>
             <td>
               <button class="btn btn-dark" role="button" wire:click="matricularprograma({{$interesado->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button>
-              <a href="https://api.whatsapp.com/send?phone=51934665704&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+              <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </td>
             <td>-</td>
             <td>-</td>
