@@ -29,6 +29,6 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Bienvenido al Centro de Estudios LearClass')->view('emails.TestEmail');
+        return $this->subject('Bienvenido a Learclass.com "Estudia sin límites"')->view('emails.TestEmail');
     }
 }
