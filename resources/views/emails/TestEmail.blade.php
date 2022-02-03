@@ -13,7 +13,7 @@
         https://learclass.com
     </p>
     <p>
-        Usuario : {{$details['name']}}<br>
+        {{$details['name']}}<br>
     </p>
     <p>
         Usuario : {{$details['usuario']}}<br>
