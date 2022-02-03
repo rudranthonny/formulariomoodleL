@@ -41,6 +41,7 @@ Route::get('matriculas/{variable}/export',[MatriculaController::class,'matricula
 Route::resource('inscripciones', InscripcionController::class)->names('admin.inscripciones');
 Route::get('inscripciones/{eliminar}/eliminarall', [InscripcionController::class,'eliminarall'])->name('admin.inscripciones.eliminarall');
 Route::get('inscripciones/{variable}/export',[InscripcionController::class,'inscripcionesexport'])->name('admin.inscripciones.export');
-
+//enviar mensaje
+//Route::get('send-email/{estudiante_id}',[MailController::class,'sendEmail'])->name('admin.mensaje.enviar');
 
 

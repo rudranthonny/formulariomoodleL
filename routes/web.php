@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InscripcionController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
 /*
