@@ -196,7 +196,7 @@
             <div class="form-group mb-5">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="1" name="politicas" id="politicas" checked>
-                    <label class="form-check-label text-muted" for="politicas"><a onclick="document.getElementById('politicas').checked">Acepto politicas de privacidad Términos y condiciones de uso</a></label>
+                    <label class="form-check-label text-muted" for="politicas">Acepto <a href="https://learclass.com/pe/politica-de-privacidad/">politicas de privacidad</a> <a href="https://learclass.com/pe/terminos-y-condiciones-de-uso/"> Términos y condiciones de uso</a></label>
                     @error('politicas')
                         <span class="text-lightr">Aceptar nuestras políticas para realizar la inscripción.</span>
                         @enderror
