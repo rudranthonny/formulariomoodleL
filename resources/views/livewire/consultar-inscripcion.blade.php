@@ -33,7 +33,7 @@
                 <span class="text-lightr">{{$message}}</span>
                 @enderror
                 <div class="form-group col-md-6">
-                    <input type="text" name="dni" class="form-control" placeholder="DNI/CURP/DUI" @if ($inscripcion) value="{{$inscripcion->dni}}"@endif>
+                    <input type="text" name="dni" class="form-control" placeholder="DNI/CURP/DUI/CI" @if ($inscripcion) value="{{$inscripcion->dni}}"@endif>
                 </div>
                 @error('dni')
                 <span class="text-lightr">{{$message}}</span>
@@ -195,8 +195,8 @@
             </div> 
             <div class="form-group mb-5">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" name="politicas" id="politicas">
-                    <label class="form-check-label text-muted" for="politicas"><a onclick="document.getElementById('politicas').checked">Al seleccionar esta casilla aceptas nuestro aviso de privacidad y los términos y condiciones</a></label>
+                    <input class="form-check-input" type="checkbox" value="1" name="politicas" id="politicas" checked>
+                    <label class="form-check-label text-muted" for="politicas"><a onclick="document.getElementById('politicas').checked">Acepto politicas de privacidad Términos y condiciones de uso</a></label>
                     @error('politicas')
                         <span class="text-lightr">Aceptar nuestras políticas para realizar la inscripción.</span>
                         @enderror

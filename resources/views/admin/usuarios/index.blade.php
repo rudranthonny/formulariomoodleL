@@ -26,6 +26,7 @@
             <tbody>
               @foreach (json_decode($usuario)->users as $user)
               <tr>
+                <th>{{$usuario}}</th>
                 <th scope="row">{{$user->id}}</th>
                 <th scope="row">{{$user->fullname}}</th>
                 <td>{{$user->lastname}}</td>
