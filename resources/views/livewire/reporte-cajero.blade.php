@@ -1,4 +1,9 @@
 <div>
+    <div class="row mb-3">
+        <div class="col-6">Fecha Inicio : <input id="date" type="date" class="form-control" wire:model="fecha_inicio"></div>
+        <div class="col-6">Fecha Final : <input id="date" type="date" class="form-control" wire:model="fecha_final"></div>
+    </div>
+    <div>
     <table class="table" id="tabla-m" class="table table-striped">
         <thead>
             <tr class="bg-dark">
@@ -33,4 +38,5 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 </div>

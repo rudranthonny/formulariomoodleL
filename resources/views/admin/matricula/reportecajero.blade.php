@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Reporte de Matriculas por Cajero</h1>
+    <h1>Reporte de Matriculas de  {{auth()->user()->name}}</h1>
 @stop
 
 @section('content')
