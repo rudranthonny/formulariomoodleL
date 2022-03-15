@@ -12,11 +12,6 @@ class ReporteCajero extends Component
 
     public function render()
     {
-        $usuarioadmin = new User();
-        $usuarioadmin->name = 'cajera1';
-        $usuarioadmin->email = 'cajera1@learclass.com';
-        $usuarioadmin->password = bcrypt('cajera1@learclass.com');
-        $usuarioadmin->save();
         if($this->fecha_inicio != null and $this->fecha_final != null)
         {
             $matriculas = Matricula::all()
