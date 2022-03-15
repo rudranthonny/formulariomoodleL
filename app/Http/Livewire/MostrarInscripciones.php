@@ -79,6 +79,7 @@ class MostrarInscripciones extends Component
         $mmatricula->tipo =$this->etipo;
         $mmatricula->fechapago = $this->efechapago;
         $mmatricula->comprobante = $this->ecomprobante;
+        $mmatricula->cajero_id = auth()->user()->id;
         $mmatricula->save();
         //actualizar el comprobante_imagen de la tabla matricula
         $mmatricula = Matricula::find($this->eid);
@@ -113,6 +114,7 @@ class MostrarInscripciones extends Component
         $matricula->programa_id = $sprograma->id;
         $matricula->tipo = 'Soles';
         $matricula->inscripcion_id = $id_usuario;
+        $matricula->cajero_id = auth()->user()->id;
         $matricula->save();
         /*agregar cohorte*/
         $functionname = 'core_cohort_add_cohort_members';

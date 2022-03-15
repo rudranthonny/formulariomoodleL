@@ -19,6 +19,7 @@ class Matricula extends Model
         'comprobante',
         'comprobante_imagen',
         'programa_id',
+        'cajero_id',
     ];
 
     //rel 1 a n

@@ -257,6 +257,11 @@ return [
             'route'  => 'admin.programas.index',
             'icon' => 'fas fa-book',
         ],
+        [
+            'text' => 'Reporte',
+            'route'  => 'admin.matricula.reportecajero',
+            'icon' => 'fas fa-edit',
+        ],
     ],
 
     /*

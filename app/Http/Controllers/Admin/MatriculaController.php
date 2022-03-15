@@ -155,4 +155,9 @@ class MatriculaController extends Controller
     {   //return 'estoy aca';
         return Excel::download(new MatriculasExport, 'matriculas.xlsx');
     }
+
+    public function vistareporte()
+    {
+        return "ok";
+    }
 }
