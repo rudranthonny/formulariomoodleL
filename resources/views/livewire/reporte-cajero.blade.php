@@ -19,8 +19,7 @@
                 <td>{{$matricula->agente}}</td>
                 <td>{{$matricula->tipo}}</td>
                 <td>{{$matricula->fechapago}}</td>
-                <td>{{$matricula->comprobannte}}</td>
-                <td>{{$matricula->comprobannte}}</td>
+                <td>{{$matricula->comprobante}}</td>
                 @if ($matricula->comprobante_imagen)
                 <td>
                   <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a>   
