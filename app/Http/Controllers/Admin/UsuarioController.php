@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Matricula;
 use App\Models\Programa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
-    private $token = 'ff63b816357ee3098eb0504de43be96c';
-    private $domainname = 'https://jademlearning.com/aula5/';
+    private $token = 'fc410318b59368f9245b394b209c644e';
+    private $domainname = 'https://learclass.com';
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +41,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return view('admin.usuarios.create',compact('roles'));
     }
 
     /**
@@ -49,7 +53,21 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            /*DatosPersonales*/
+            'name' => 'required|regex:([a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+)',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'r_password' => 'required|same:password',
+        ]);
+
+        $usuario = new User();
+        $usuario->name = $request->input('name');
+        $usuario->email = $request->input('email');
+        $usuario->password = bcrypt($request->input('password'));
+        $usuario->save();
+        $usuario->roles()->sync($request->roles);
+        return redirect()->route('admin.usuario.listado')->with('info','se creo el estudiante correctamente');
     }
 
     /**
@@ -71,7 +89,9 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = User::find($id);
+        $roles = Role::all();
+        return view('admin.usuarios.edit',compact('usuario','roles'));
     }
 
     /**
@@ -83,7 +103,26 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $usuario = User::find($id);
+        //validación
+        $request->validate([
+            /*DatosPersonales*/
+            'name' => 'required|regex:([a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+)',
+            'email' => 'required|email|unique:users,email,'.$usuario->id,
+        ]);
+
+         /*Actualizar datos del usuario*/
+         $usuario->update($request
+         ->only(
+         'name',
+         'email',
+         ));
+         /*actualizar roles*/
+         if ($id != 1) {
+            $usuario->roles()->sync($request->roles);
+         }
+        /*redireccionar*/
+        return redirect()->route('admin.usuarios.edit',$usuario->id)->with('info','se actualizo correctamente el usuario');
     }
 
     /**
@@ -93,8 +132,17 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   //return $id;
+        $usuario = User::find($id);
+        $matriculas = Matricula::all()->where('cajero_id',$id);
+        if($matriculas->first() == null and $id != 1){ 
+        $usuario->delete();
+        return redirect()->route('admin.usuario.listado')->with('eliminar','eliminar');
+        }
+        else
+        {
+        return redirect()->route('admin.usuario.listado')->with('tienepagos','el usuario tiene registro de vital importancia para learclass');
+        }
     }
 
     public function consulta(Request $request)
@@ -135,5 +183,41 @@ class UsuarioController extends Controller
         //obtener información de las matriculas hechas
         $matriculas = Matricula::where('user_id',$id)->get();
         return view('admin.usuarios.agregarprograma',compact('usuario','programas','matriculas'));
+    }
+
+    public function cambiarpassword()
+    {  
+        $user = User::find(auth()->user()->id);
+        return view('admin.usuarios.cambiar',compact('user'));
+    }
+
+    public function change(Request $request)
+    {
+        if (Hash::check($request->input('passworda'),auth()->user()->password)) {
+        }
+        else{
+            return redirect()->route('admin.usuario.cambiarpassword')->with('info','la contraseña actual no es la correcta');
+        }
+        $request->validate([
+            'password' => 'required',
+            'password_confirmation' => 'required|same:password',
+        ]);
+        $usuario = User::find(auth()->user()->id);
+        $usuario->update([
+            'password' => bcrypt($request->input('password')),
+        ]);
+        //direccionamiento
+        return redirect()->route('admin.usuario.cambiarpassword')->with('info','la contraseña se cambio');
+    }
+
+    public function listado(){
+        return view('admin.usuarios.listado');
+    }
+    public function reiniciarpassword($usuario){
+        $usuario = User::find($usuario);
+        $usuario->update([
+            'password' => bcrypt($usuario->email),
+        ]);
+        return redirect()->route('admin.usuario.listado')->with('info','se reinicio la contraseña del usuario');;
     }
 }

@@ -13,24 +13,29 @@ Route::get('/', function () {
     return view('admin.index');
 });
 
-Route::resource('categorias', CategoriaController::class)->names('admin.categorias');
-Route::get('categorias/{id}/veliminar',[CategoriaController::class,'veliminar'])->name('admin.categorias.veliminar');
-Route::post('categorias/{id}/eliminar',[CategoriaController::class,'eliminar'])->name('admin.categorias.eliminar');
+Route::resource('categorias', CategoriaController::class)->middleware('can:admin.usuarios.administrador')->names('admin.categorias');
+Route::get('categorias/{id}/veliminar',[CategoriaController::class,'veliminar'])->middleware('can:admin.usuarios.administrador')->name('admin.categorias.veliminar');
+Route::post('categorias/{id}/eliminar',[CategoriaController::class,'eliminar'])->middleware('can:admin.usuarios.administrador')->name('admin.categorias.eliminar');
 //modulo programas
-Route::resource('programas', ProgramaController::class)->names('admin.programas');
+Route::resource('programas', ProgramaController::class)->middleware('can:admin.usuarios.administrador')->names('admin.programas');
 // modulo plantilla
-Route::resource('plantillas', PlantillaController::class)->names('admin.plantillas');
-Route::get('plantillas/{id}/asignar',[PlantillaController::class,'asignar'])->name('admin.plantillas.asignar');
-Route::post('plantillas/agregarcurso',[PlantillaController::class,'agregarcurso'])->name('admin.plantillas.agregarcurso');
-Route::post('plantillas/eliminarcurso',[PlantillaController::class,'eliminarcurso'])->name('admin.plantillas.eliminarcurso');
+Route::resource('plantillas', PlantillaController::class)->middleware('can:admin.usuarios.administrador')->names('admin.plantillas');
+Route::get('plantillas/{id}/asignar',[PlantillaController::class,'asignar'])->middleware('can:admin.usuarios.administrador')->name('admin.plantillas.asignar');
+Route::post('plantillas/agregarcurso',[PlantillaController::class,'agregarcurso'])->middleware('can:admin.usuarios.administrador')->name('admin.plantillas.agregarcurso');
+Route::post('plantillas/eliminarcurso',[PlantillaController::class,'eliminarcurso'])->middleware('can:admin.usuarios.administrador')->name('admin.plantillas.eliminarcurso');
 //modulo inicio
-Route::resource('inicios', InicioController::class)->names('admin.inicios');
-Route::get('inicios/{id}/activar', [InicioController::class,'activar'])->name('admin.inicios.activar');
+Route::resource('inicios', InicioController::class)->middleware('can:admin.usuarios.administrador')->names('admin.inicios');
+Route::get('inicios/{id}/activar', [InicioController::class,'activar'])->middleware('can:admin.usuarios.administrador')->name('admin.inicios.activar');
 //modulo usuarios
 Route::resource('usuarios', UsuarioController::class)->names('admin.usuarios');
-Route::post('usuarios/consulta',[UsuarioController::class,'consulta'])->name('admin.usuarios.consulta');
-Route::get('usuarios/{id}/agregarprograma',[UsuarioController::class,'agregarprograma'])->name('admin.usuarios.agregarprograma');
+Route::post('usuarios/consulta',[UsuarioController::class,'consulta'])->middleware('can:admin.usuarios.administrador')->name('admin.usuarios.consulta');
+Route::get('usuarios/{id}/agregarprograma',[UsuarioController::class,'agregarprograma'])->middleware('can:admin.usuarios.administrador')->name('admin.usuarios.agregarprograma');
 Route::get('usuarios/{username}/consultapdf',[UsuarioController::class,'consultapdf'])->name('admin.usuarios.consultapdf');
+Route::get('usuario/cambiarpassword',[UsuarioController::class,'cambiarpassword'])->name('admin.usuario.cambiarpassword');
+Route::post('usuario/change',[UsuarioController::class,'change'])->name('admin.usuario.change');
+Route::get('usuario/listado',[UsuarioController::class,'listado'])->middleware('can:admin.usuarios.administrador')->name('admin.usuario.listado');
+Route::get('usuario/{usuario}/reiniciarpassword',[UsuarioController::class,'reiniciarpassword'])->middleware('can:admin.usuarios.administrador')->name('admin.usuario.reiniciarpassword');
+
 //matricula
 Route::resource('matriculas', MatriculaController::class)->names('admin.matriculas');
 Route::post('matriculas/{id}/agregarprograma',[MatriculaController::class,'agregarmatricula'])->name('admin.matriculas.agregarmatricula');
