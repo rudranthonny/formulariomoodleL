@@ -6,6 +6,7 @@
             </tr>
         </thead>
         <tbody>
+            {{$matriculas}}
             @foreach ($matriculas as $matricula)
             <tr>
                 <td>
