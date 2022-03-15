@@ -241,6 +241,7 @@ return [
             'text' => 'Inicios',
             'route'  => 'admin.inicios.index',
             'icon' => 'fas fa-bookmark',
+            'can' => 'admin.usuarios.administrador'
         ],
         [
             'text' => 'inscripciones',
@@ -248,20 +249,34 @@ return [
             'icon' => 'fab fa-accusoft',
         ],
         [
+            'text' => 'Crear Usuarios',
+            'route'  => 'admin.usuario.listado',
+            'icon' => 'fas fa-user-plus',
+            'can' => 'admin.usuarios.administrador'
+        ],
+        [
             'text' => 'Usuarios',
             'route'  => 'admin.usuarios.index',
             'icon' => 'fas fa-user',
+            'can' => 'admin.usuarios.administrador'
         ],
         [
             'text' => 'programas',
             'route'  => 'admin.programas.index',
             'icon' => 'fas fa-book',
+            'can' => 'admin.usuarios.administrador'
         ],
         [
             'text' => 'Reporte',
             'route'  => 'admin.matricula.reportecajero',
             'icon' => 'fas fa-edit',
         ],
+        ['header' => 'OPCIONES GENERALES'],
+            [
+            'text' => 'Cambiar Contraseña',
+            'route'  => 'admin.usuario.cambiarpassword',
+            'icon' => 'fas fa-fw fa-lock',
+            ],
     ],
 
     /*
