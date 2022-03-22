@@ -86,8 +86,8 @@ class ShowMatriculas2 extends Component
     public function render()
     {
         if($this->fecha_inicio != null and $this->fecha_final != null){
-            $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' .$this->search2.'%')->wheredate($this->fecha_inicio,'>=','fechapago')->wheredate($this->fecha_final,'<=','fechapago')
-            ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' .$this->search2.'%')->wheredate($this->fecha_inicio,'>=','fechapago')->wheredate($this->fecha_final,'<=','fechapago')
+            $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' .$this->search2.'%')->wheredate('fechapago','>=',$this->fecha_inicio)->wheredate('fechapago','<=',$this->fecha_final)
+            ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' .$this->search2.'%')->wheredate('fechapago','>=',$this->fecha_inicio)->wheredate('fechapago','<=',$this->fecha_final)
             ->paginate(10);
         }
         else{
