@@ -14,6 +14,7 @@
                     <th>s/.</th>
                     <th>$/.</th>
                     <th>Forma de Pago</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
