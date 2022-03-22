@@ -9,7 +9,10 @@ use Livewire\Component;
 class ShowMatriculas2 extends Component
 {
     public $iteration;
-    
+    /**editar**/
+    public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$efechapago,$ecomprobante,$ecomprobante_imagen,$ecomprobante_imagen_file,$eprograma_id;
+    public $etipo = "Soles";
+
     public function editarmatricula($id_matricula){
         $ematricula = Matricula::find($id_matricula);
         $this->eid = $ematricula->id;
