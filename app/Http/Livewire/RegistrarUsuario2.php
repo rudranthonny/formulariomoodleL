@@ -118,7 +118,7 @@ class RegistrarUsuario2 extends Component
             . '&wsfunction='.$functionname
             .'&moodlewsrestformat=json&members[0][cohorttype][type]=id&members[0][cohorttype][value]='.$sprograma->cohort.'&members[0][usertype][type]=id&members[0][usertype][value]='.$user->id;
             $usuario = Http::get($serverurl);
-            $this->bprograma = $this->bprograma;
+            //$this->bprograma = $this->bprograma;
         }
         else 
         {
