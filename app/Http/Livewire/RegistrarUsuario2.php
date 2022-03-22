@@ -99,7 +99,6 @@ class RegistrarUsuario2 extends Component
             /*realizar matricula*/
             /*obtener datos*/
             $sprograma = Programa::find($this->programa_id);
-            dd($sprograma);
             /*realizar matricula*/
             $matricula = new Matricula();
             $matricula->name = $n_inscripcion->name;
@@ -159,7 +158,7 @@ class RegistrarUsuario2 extends Component
     public function render()
     {
         if($this->programa_id == null){
-            $sprograma = Inicio::where('estado',1)->first();
+            $sprograma = Inicio::all()->first();
             $this->programa_id = $sprograma->id;
         }
 
