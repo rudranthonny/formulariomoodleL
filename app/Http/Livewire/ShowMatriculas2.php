@@ -85,9 +85,16 @@ class ShowMatriculas2 extends Component
     
     public function render()
     {
-        $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' .$this->search2.'%')->where('fechapago','>=',$this->fecha_inicio)->where('fechapago','<=',$this->fecha_final)
-        ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' .$this->search2.'%')->where('fechapago','>=',$this->fecha_inicio)->where('fechapago','<=',$this->fecha_final)
-        ->paginate(10);
+        if($this->fecha_inicio != null and $this->fecha_final != null){
+            $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' .$this->search2.'%')->where('fechapago','>=',$this->fecha_inicio)->where('fechapago','<=',$this->fecha_final)
+            ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' .$this->search2.'%')->where('fechapago','>=',$this->fecha_inicio)->where('fechapago','<=',$this->fecha_final)
+            ->paginate(10);
+        }
+        else{
+            $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' .$this->search2.'%')
+            ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' .$this->search2.'%')
+            ->paginate(10);
+        }
         return view('livewire.show-matriculas2',compact('matriculas'));
     }
 }
