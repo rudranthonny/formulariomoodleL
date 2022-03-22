@@ -2,7 +2,7 @@
     <div class="row m-4 ">
         @livewire('registrar-usuario2')
         <div class="col-6">
-            <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
+            <input class="form-control" id="exampleDataList" placeholder="Buscar estudiante" wire:model="search">
         </div>
     </div>
     <div class="m-4">

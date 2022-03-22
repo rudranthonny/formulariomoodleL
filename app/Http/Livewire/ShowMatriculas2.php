@@ -83,6 +83,7 @@ class ShowMatriculas2 extends Component
     
     public function render()
     {
+        dd($this->search);
         $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' . $this->search.'%')
         ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' . $this->search.'%')
         ->paginate(10);
