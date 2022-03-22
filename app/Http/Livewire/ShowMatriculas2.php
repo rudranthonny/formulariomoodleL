@@ -5,9 +5,12 @@ namespace App\Http\Livewire;
 use App\Models\Matricula;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class ShowMatriculas2 extends Component
-{
+{   use WithFileUploads;
+    use WithPagination;
     public $iteration;
     /**editar**/
     public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$efechapago,$ecomprobante,$ecomprobante_imagen,$ecomprobante_imagen_file,$eprograma_id;
