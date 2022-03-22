@@ -183,6 +183,6 @@ class RegistrarUsuario2 extends Component
             $this->phone = $consulta->phone;
             $this->country = $consulta->country;
         }
-        return view('livewire.registrar-usuario2',compact('inicios','programas'));
+        return view('livewire.registrar-usuario2',compact('programas'));
     }
 }
