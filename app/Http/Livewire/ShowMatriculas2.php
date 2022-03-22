@@ -14,6 +14,8 @@ use Livewire\WithPagination;
 class ShowMatriculas2 extends Component
 {   use WithFileUploads;
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    public $search;
     public $iteration;
     /**editar**/
     public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$efechapago,$ecomprobante,$ecomprobante_imagen,$ecomprobante_imagen_file,$eprograma_id;
@@ -81,7 +83,11 @@ class ShowMatriculas2 extends Component
     
     public function render()
     {
-        $matriculas = Matricula::all()->where('cajero_id',auth()->user()->id);
+        $matriculas = Matricula::all()
+        ->where('cajero_id',auth()->user()->id)->where('name','like','%' . $this->search.'%')
+        ->orwhere('cajero_id',auth()->user()->id)->where('ap_paterno','like','%' . $this->search.'%')
+        ->orwhere('cajero_id',auth()->user()->id)->where('ap_materno','like','%' . $this->search.'%')
+        ->paginate(10);
         return view('livewire.show-matriculas2',compact('matriculas'));
     }
 }

@@ -1,8 +1,12 @@
 <div>
     <div class="row m-4 ">
         @livewire('registrar-usuario2')
+        <div class="col-6">
+            <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
+        </div>
     </div>
     <div class="m-4">
+        @if ($matriculas->count())
         <table class="table">
             <thead class="table-dark">
                 <tr>
@@ -61,6 +65,14 @@
                 @endforeach
             </tbody>
         </table>
+        @else
+                <div class="px-6 py-4">
+                    No existe ningun registro coincidente
+                </div>
+            @endif
+        <div class="d-flex justify-content-end">
+            {{ $matriculas->links() }}
+        </div>
     </div>
      <!--ventana editar-->
    <div wire:ignore.self class="modal face" id="ventanaModal3" tabindex="-2" role="dialog" aria-labelledby="tituloVentana3" aria-hidden="true" >
