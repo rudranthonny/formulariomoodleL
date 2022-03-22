@@ -1,9 +1,14 @@
 <div>
     <div class="row m-4">  
-        <div class="col-6">
-            <input class="form-control" id="exampleDataList" placeholder="Buscar estudiante" wire:model="search2">
+        <div class="col-4">
+            <input class="form-control" id="buscar" placeholder="Buscar estudiante" wire:model="search2">
         </div>
-        {{$search2}}
+        <div class="col-2">
+            <input type="date" class="form-control" id="fecha_inicio" wire:model="fecha_inicio">
+        </div>
+        <div class="col-2">
+            <input type="date" class="form-control" id="fecha_final" wire:model="fecha_final">
+        </div>
         @livewire('registrar-usuario2')
     </div>
     <div class="m-4">

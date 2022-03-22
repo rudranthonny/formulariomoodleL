@@ -1,4 +1,4 @@
-<div class="col-6">
+<div class="col-4">
     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ventanaModal">
         <i class="fas fa-plus-circle"></i> Nuevo Alumno
     </button>

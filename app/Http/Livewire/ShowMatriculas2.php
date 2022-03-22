@@ -17,6 +17,8 @@ class ShowMatriculas2 extends Component
     protected $paginationTheme = 'bootstrap';
     public $search2;
     public $iteration;
+    public $fecha_inicio;
+    public $fecha_final;
     /**editar**/
     public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$efechapago,$ecomprobante,$ecomprobante_imagen,$ecomprobante_imagen_file,$eprograma_id;
     public $etipo = "Soles";
@@ -83,8 +85,8 @@ class ShowMatriculas2 extends Component
     
     public function render()
     {
-        $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' .$this->search2.'%')
-        ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' .$this->search2.'%')
+        $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' .$this->search2.'%')->where('fechapago','>=','%' .$this->fecha_inicio.'%')->where('fechapago','<=','%' .$this->fecha_final.'%')
+        ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' .$this->search2.'%')->where('fechapago','>=','%' .$this->fecha_inicio.'%')->where('fechapago','<=','%' .$this->fecha_final.'%')
         ->paginate(10);
         return view('livewire.show-matriculas2',compact('matriculas'));
     }
