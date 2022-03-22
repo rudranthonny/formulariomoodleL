@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\TestMail;
+use App\Models\Inscripcion;
 use App\Models\Matricula;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -15,6 +18,18 @@ class ShowMatriculas2 extends Component
     /**editar**/
     public $eid,$ename,$elastname,$euser_id,$ecosto,$eagente,$efechapago,$ecomprobante,$ecomprobante_imagen,$ecomprobante_imagen_file,$eprograma_id;
     public $etipo = "Soles";
+    /**end**/
+    protected $listeners =['render'];
+
+    public function enviarmensaje($estudiante_id)
+    {
+        $inscripcion = Inscripcion::find($estudiante_id);
+        $details =[
+            'name' => $inscripcion->name." ".$inscripcion->lastname,
+            'usuario' => $inscripcion->email,
+        ];
+        Mail::to($inscripcion->email)->send(new TestMail($details));
+    }
 
     public function editarmatricula($id_matricula){
         $ematricula = Matricula::find($id_matricula);

@@ -55,6 +55,7 @@
                     <td>
                         <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$matricula->id}})"><i class="fas fa-edit"></i></a>
                         <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$matricula->name." ".$matricula->lastname}}%0A👤Usuario%3A%20{{$matricula->inscripcion->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$matricula->inscripcion_id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
                     </td>
                 </tr>  
                 @endforeach

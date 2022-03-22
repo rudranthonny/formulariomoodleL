@@ -163,8 +163,8 @@ class RegistrarUsuario2 extends Component
         }
         
         $this->reset('name','lastname','email','phone','dni','country');
-        $this->emitTo('mostrar-inscripciones','render');
-        $this->emit('crearinscripcion');
+        $this->emitTo('show-matriculas2','render');
+        //$this->emit('crearinscripcion');
     }
 
     public function render()
