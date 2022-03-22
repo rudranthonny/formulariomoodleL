@@ -10,6 +10,10 @@
                     <th>Apellido</th>
                     <th>DNI</th>
                     <th>PHONE</th>
+                    <th>C</th>
+                    <th>s/.</th>
+                    <th>$/.</th>
+                    <th>Forma de Pago</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,7 +22,31 @@
                     <td>{{$matricula->name}}</td>
                     <td>{{$matricula->lastname}}</td>
                     <td>{{$matricula->inscripcion->dni}}</td>
-                    <td>{{$matricula->inscripcion->email}}</td>
+                    <td>{{$matricula->inscripcion->phone}}</td>
+                    <td>
+                        @if ($matricula->comprobante_imagen)
+                        <a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a>
+                        @else
+                        no tiene
+                        @endif
+                    </td>
+                    <td>
+                        @if ($matricula->tipo == "Soles")
+                        {{"s/. ".$matricula->costo}}
+                        @else
+                        -
+                        @endif
+                    </td>
+                    <td>
+                        @if ($matricula->tipo == "Dolares")
+                        {{"$/. ".$matricula->costo}}
+                        @else
+                        -
+                        @endif
+                    </td>
+                    <td>
+                        {{$matricula->agente}}
+                    </td>
                 </tr>  
                 @endforeach
             </tbody>
