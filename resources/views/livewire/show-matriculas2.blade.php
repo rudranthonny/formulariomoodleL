@@ -1,10 +1,10 @@
 <div>
-    <div class="row m-4 ">
-        @livewire('registrar-usuario2')
+    <div class="row m-4">  
         <div class="col-6">
             <input class="form-control" id="exampleDataList" placeholder="Buscar estudiante" wire:model="search2">
-        {{$search2}}
         </div>
+        {{$search2}}
+        @livewire('registrar-usuario2')
     </div>
     <div class="m-4">
         @if ($matriculas->count())
