@@ -9,7 +9,7 @@ class ShowMatriculas2 extends Component
 {
     public function render()
     {
-        $matriculas = Matricula::where('cajero_id',auth()->user()->id);
+        $matriculas = Matricula::all()->where('cajero_id',auth()->user()->id);
         return view('livewire.show-matriculas2',compact('matriculas'));
     }
 }
