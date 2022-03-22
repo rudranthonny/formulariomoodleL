@@ -18,7 +18,8 @@ class Inscripcion extends Model
         'user_id',
         'politicas',
         'country',
-        'inicio_id'
+        'inicio_id',
+        'cajero_id',
     ];
 
    //relacion de muchos a muchos

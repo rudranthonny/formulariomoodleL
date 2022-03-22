@@ -15,7 +15,6 @@ class RegistrarUsuario2 extends Component
     private $domainname = 'https://learclass.com';
     public $usuario;
     public $name,$lastname,$email,$phone,$dni,$country = "AR";
-    public $programas;
     public $programa_id;
     public $inicio_id;
     protected $rules = [
@@ -158,12 +157,17 @@ class RegistrarUsuario2 extends Component
 
     public function render()
     {
-        $this->programas = Programa::all();
+        if($this->programa_id == null){
+            $sprograma = Inicio::where('estado',1)->first();
+            $this->programa_id = $sprograma->id;
+        }
+
         if($this->inicio_id == null){
             $sinicio = Inicio::where('estado',1)->first();
             $this->inicio_id = $sinicio->id;
         }
         $emaila = strtolower($this->email);
+        $programas = Programa::all();
         $inicios = Inicio::all();
         $consulta = Inscripcion::where('email',$emaila)->first();
         if (isset($consulta)) {
@@ -173,6 +177,6 @@ class RegistrarUsuario2 extends Component
             $this->phone = $consulta->phone;
             $this->country = $consulta->country;
         }
-        return view('livewire.registrar-usuario2',compact('inicios'));
+        return view('livewire.registrar-usuario2',compact('inicios','programas'));
     }
 }
