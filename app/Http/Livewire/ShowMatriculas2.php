@@ -84,8 +84,8 @@ class ShowMatriculas2 extends Component
     public function render()
     {
         //dd($this->search);
-        $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' .$this->$search2.'%')
-        ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' .$this->$search2.'%')
+        $matriculas = Matricula::where('cajero_id',auth()->user()->id)->where('name','like','%' .$this->search2.'%')
+        ->orwhere('cajero_id',auth()->user()->id)->where('lastname','like','%' .$this->search2.'%')
         ->paginate(10);
         return view('livewire.show-matriculas2',compact('matriculas'));
     }
