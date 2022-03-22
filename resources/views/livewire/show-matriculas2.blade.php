@@ -2,12 +2,12 @@
     <div class="row m-4 ">
         @livewire('registrar-usuario2')
     </div>
-    <div>
+    <div class="m-4">
         <table class="table">
             <thead class="table-dark">
                 <tr>
-                    <th></th>
-                    <th></th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
                 </tr>
             </thead>
             <tbody>
