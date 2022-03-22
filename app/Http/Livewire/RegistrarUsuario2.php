@@ -148,6 +148,29 @@ class RegistrarUsuario2 extends Component
         . '&wsfunction='.$functionname
         .'&moodlewsrestformat=json&users[0][id]='.$actualizar->user_id.'&users[0][firstname]='.$this->name.'&users[0][lastname]='.$this->lastname.'&users[0][phone1]='.$this->phone.'&users[0][country]='.$this->country;
         Http::get($serverurl);
+        /*realizar matricula*/
+            /*obtener datos*/
+            $sprograma = Programa::find($this->programa_id);
+            /*realizar matricula*/
+            $matricula = new Matricula();
+            $matricula->name = $actualizar->name;
+            $matricula->lastname = $actualizar->lastname;
+            $matricula->user_id = $actualizar->user_id;
+            //falta matricula
+            $matricula->costo = $sprograma->costo;
+            $matricula->programa_id = $sprograma->id;
+            $matricula->tipo = 'Soles';
+            $matricula->inscripcion_id = $actualizar->id;
+            $matricula->cajero_id = auth()->user()->id;
+            $matricula->save();
+            /*agregar cohorte*/
+            $functionname = 'core_cohort_add_cohort_members';
+            $serverurl = $this->domainname . '/webservice/rest/server.php'
+            . '?wstoken=' . $this->token 
+            . '&wsfunction='.$functionname
+            .'&moodlewsrestformat=json&members[0][cohorttype][type]=id&members[0][cohorttype][value]='.$sprograma->cohort.'&members[0][usertype][type]=id&members[0][usertype][value]='.$actualizar->user_id;
+            $usuario = Http::get($serverurl);
+            //$this->bprograma = $this->bprograma;
         }
         
         $this->reset('name','lastname','email','phone','dni','country');
