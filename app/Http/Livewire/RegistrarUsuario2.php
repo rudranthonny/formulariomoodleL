@@ -16,7 +16,6 @@ class RegistrarUsuario2 extends Component
     public $usuario;
     public $name,$lastname,$email,$phone,$dni,$country = "AR";
     public $programa_id;
-    public $inicio_id;
     protected $rules = [
         'name' => 'required',
         'lastname' => 'required',
@@ -95,7 +94,6 @@ class RegistrarUsuario2 extends Component
             $n_inscripcion->country = $this->country;
             $n_inscripcion->cajero_id = auth()->user()->id;
             $n_inscripcion->save();
-            $n_inscripcion->inicios()->attach($this->inicio_id);
             /*realizar matricula*/
             /*obtener datos*/
             $sprograma = Programa::find($this->programa_id);
@@ -124,15 +122,6 @@ class RegistrarUsuario2 extends Component
         {
             /*actualizar inscripcion*/
         $actualizar = Inscripcion::find($rinscripcion->id);
-        $inscrito = false;
-        foreach ($actualizar->inicios as $minicio) {
-            if ($minicio->id == $this->inicio_id) {
-                $inscrito = true;
-            }
-        }
-        if($inscrito == false){
-            $actualizar->inicios()->attach($this->inicio_id);
-        }
         $actualizar->update([
             'name' => $this->name,
             'lastname' => $this->lastname,

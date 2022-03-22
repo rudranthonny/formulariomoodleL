@@ -76,13 +76,6 @@
                             <span>{{$message}}</span>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <select class="form-select" name="inicio" wire:model.defer="inicio_id">
-                        @foreach ($inicios as $inicio)
-                        <option value="{{$inicio->id}}">{{$inicio->name}}</option>
-                        @endforeach                                    
-                        </select>        
-                    </div>
                     <!--programa a matricular-->
                     <div class="mb-3">
                         <select class="form-select" name="programa_id" wire:model.defer="programa_id">
