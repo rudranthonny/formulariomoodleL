@@ -173,14 +173,8 @@ class RegistrarUsuario2 extends Component
             $sprograma = Inicio::all()->first();
             $this->programa_id = $sprograma->id;
         }
-
-        if($this->inicio_id == null){
-            $sinicio = Inicio::where('estado',1)->first();
-            $this->inicio_id = $sinicio->id;
-        }
         $emaila = strtolower($this->email);
         $programas = Programa::all();
-        $inicios = Inicio::all();
         $consulta = Inscripcion::where('email',$emaila)->first();
         if (isset($consulta)) {
             $this->name = $consulta->name;
