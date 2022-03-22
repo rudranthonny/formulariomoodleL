@@ -42,6 +42,8 @@ Route::post('matriculas/{id}/agregarprograma',[MatriculaController::class,'agreg
 Route::delete('matriculas/{id}/eliminarprograma',[MatriculaController::class,'eliminarprograma'])->name('admin.matriculas.eliminarprograma');
 Route::get('matriculas/{variable}/export',[MatriculaController::class,'matriculasexport'])->name('admin.matriculas.export');
 Route::view('reporte','admin.matricula.reportecajero')->name('admin.matricula.reportecajero');
+Route::view('matricula/ventas','admin.matricula.ventas')->name('admin.matricula.ventas');
+
 //inscripciones
 Route::resource('inscripciones', InscripcionController::class)->names('admin.inscripciones');
 Route::get('inscripciones/{eliminar}/eliminarall', [InscripcionController::class,'eliminarall'])->name('admin.inscripciones.eliminarall');

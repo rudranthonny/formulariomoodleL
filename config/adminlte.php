@@ -249,6 +249,11 @@ return [
             'icon' => 'fab fa-accusoft',
         ],
         [
+            'text' => 'matriculaciones',
+            'route'  => 'admin.matricula.ventas',
+            'icon' => 'fab fa-accusoft',
+        ],
+        [
             'text' => 'Crear Usuarios',
             'route'  => 'admin.usuario.listado',
             'icon' => 'fas fa-user-plus',

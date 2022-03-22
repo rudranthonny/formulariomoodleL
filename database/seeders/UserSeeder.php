@@ -14,7 +14,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $usuarioadmin = user::find(1);
+        $usuarioadmin = new User();
+        $usuarioadmin->email = "arnaldo@learclass.com";
+        $usuarioadmin->password = bcrypt("arnaldo@learclass.com");
+        $usuarioadmin->name = "Arnaldo";
+        $usuarioadmin->save();
         $usuarioadmin->assignRole('Administrador');
     }
 }
