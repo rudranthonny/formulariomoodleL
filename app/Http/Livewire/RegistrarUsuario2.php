@@ -99,6 +99,7 @@ class RegistrarUsuario2 extends Component
             /*realizar matricula*/
             /*obtener datos*/
             $sprograma = Programa::find($this->programa_id);
+            dd($sprograma);
             /*realizar matricula*/
             $matricula = new Matricula();
             $matricula->name = $n_inscripcion->name;
