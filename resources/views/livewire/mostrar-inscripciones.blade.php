@@ -194,9 +194,8 @@
         @elseif($bmatriculado == "matriculados")
         <tbody>
           
-            
-          
           @foreach ($inscripciones as $interesado)
+          <tr><td>{{$interesado->inscripcion->programa_id}}</td></tr>
           @if($interesado->inscripcion->programa_id == $bprograma)
           <tr>
             <td>{{$interesado->inscripcion->name." ".$interesado->inscripcion->lastname}}</td>
