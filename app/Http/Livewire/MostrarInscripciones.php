@@ -193,32 +193,17 @@ class MostrarInscripciones extends Component
         }
         /*-------------------------*/
        if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="pagante" && $this->bagente == "") {
-        if( auth()->user()->id == 1)
-        {
-        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',"<>",null);
+        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',"<>",null);  
         }
-        else 
-        {
-        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',"<>",null)->where('cajero_id',auth()->user()->id);
-        }
-    }
+
        if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="pagante" && $this->bagente != "" ) {
-        if( auth()->user()->id == 1)
-        {
             $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',"<>",null)->where('agente',$this->bagente);
-        }
-        else {
-            $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',"<>",null)->where('agente',$this->bagente)->where('cajero_id',auth()->user()->id);
-        }
        }
-       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="deudor") {
-        if( auth()->user()->id == 1){    
+       
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="deudor") 
+       {
         $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',null);
-        }
-        else {
-        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',null)->where('cajero_id',auth()->user()->id);   
-        }
-    }
+       }
 
        if ($this->bmatriculado == "nomatriculados" && $this->binicio != null && $this->bprograma != "no") {
         $this->inscripciones = DB::table('inscripcions')
@@ -231,13 +216,7 @@ class MostrarInscripciones extends Component
                   ->where('matriculas.programa_id',$this->bprograma);
         })->get();
        }
-       if(auth()->user()->id == 1){
         $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
-       }
-       else {
-        $matriculas = Matricula::where('programa_id',$this->bprograma)->where('cajero_id',auth()->user()->id)->get();
-       }
-       
         $programas = Programa::all();
         $inicios = Inicio::all();
         return view('livewire.mostrar-inscripciones',compact('matriculas','programas','inicios'));
