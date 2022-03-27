@@ -194,13 +194,13 @@
         @elseif($bmatriculado == "matriculados")
         <tbody>
           @foreach ($inscripciones as $interesado)
-            <tr>
-            <td>{{$interesado->inscripcion->name." ".$interesado->inscripcion->lastname}}</td>
-            <td>{{$interesado->inscripcion->email}}</td>
-            <td>{{$interesado->inscripcion->dni}}</td>
-            <td>{{$interesado->inscripcion->phone}}</td>
+          <tr>
+            <td>{{$interesado->name." ".$interesado->lastname}}</td>
+            <td>{{$interesado->email}}</td>
+            <td>{{$interesado->dni}}</td>
+            <td>{{$interesado->phone}}</td>
             @php
-                $telefono  = str_replace('+','',$interesado->inscripcion->phone);
+                $telefono=str_replace('+','',$interesado->phone);
                 $telefono2 = str_replace(' ','',$telefono);
             @endphp
             <td>
