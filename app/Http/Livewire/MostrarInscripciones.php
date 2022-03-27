@@ -202,7 +202,6 @@ class MostrarInscripciones extends Component
                   ->whereColumn('inscripcions.id', 'matriculas.inscripcion_id')
                   ->where('matriculas.programa_id',$this->bprograma);
         })->get();
-        dd($this->inscripciones);
         }
         /*-------------------------*/
        if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="pagante" && $this->bagente == "") {
