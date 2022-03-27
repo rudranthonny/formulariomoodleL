@@ -192,7 +192,6 @@ class MostrarInscripciones extends Component
        /*-------------------------*/
        if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="") {
             $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma);  
-            dd($this->inscripciones);
         }
         /*-------------------------*/
        if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="pagante" && $this->bagente == "") {
@@ -205,8 +204,17 @@ class MostrarInscripciones extends Component
        
        if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="deudor") 
        {
-        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',null);
-       }
+        //$this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',null);
+        $this->inscripciones = DB::table('inscripcions')
+        ->join('inicio_inscripcion', 'inicio_inscripcion.inscripcion_id', '=', 'inscripcions.id')
+        ->where('inicio_inscripcion.inicio_id',$this->binicio)
+        ->whereExists(function ($query) {
+            $query->select(DB::raw('*'))
+                  ->from('matriculas')
+                  ->whereColumn('inscripcions.id', 'matriculas.inscripcion_id')
+                  ->where('matriculas.programa_id',$this->bprograma);
+        })->get();
+        }
 
        if ($this->bmatriculado == "nomatriculados" && $this->binicio != null && $this->bprograma != "no") {
         $this->inscripciones = DB::table('inscripcions')
