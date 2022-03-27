@@ -195,8 +195,15 @@
         <tbody>
           
           @foreach ($inscripciones as $interesado)
-          <tr><td>{{$interesado->inscripcion->programa_id}}</td></tr>
-          @if($interesado->inscripcion->programa_id == $bprograma)
+          @php
+              $pertence = false;
+              foreach ($interesado->inscripcion->inicios as $inicio) {
+                if ($inicio->id == $binicio) {
+                  $pertence = true;
+                }
+              }
+          @endphp
+          @if( $pertence == true)
           <tr>
             <td>{{$interesado->inscripcion->name." ".$interesado->inscripcion->lastname}}</td>
             <td>{{$interesado->inscripcion->email}}</td>
