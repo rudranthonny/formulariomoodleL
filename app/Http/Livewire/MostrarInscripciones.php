@@ -97,11 +97,13 @@ class MostrarInscripciones extends Component
         }
     }
 
-    public function eliminar_inscripcion($id_inscripcion){
+    public function eliminar_inscripcion($id_inscripcion)
+    {
         $e_inscripcion = Inscripcion::find($id_inscripcion);
         $e_inscripcion->inicios()->detach($this->binicio);
     }
-    public function matricularprograma($id_usuario){
+    public function matricularprograma($id_usuario)
+    {
         /*obtener datos*/
         $usuario = Inscripcion::find($id_usuario);
         $sprograma = Programa::find($this->bprograma);
@@ -190,6 +192,7 @@ class MostrarInscripciones extends Component
        /*-------------------------*/
        if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="") {
             $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma);  
+            dd($this->bprograma);
         }
         /*-------------------------*/
        if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="pagante" && $this->bagente == "") {
