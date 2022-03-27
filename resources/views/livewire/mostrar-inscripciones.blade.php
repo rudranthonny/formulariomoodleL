@@ -194,23 +194,23 @@
         @elseif($bmatriculado == "matriculados")
         <tbody>
           @foreach ($inscripciones as $interesado)
-          <tr>
-            <td>{{$interesado->name." ".$interesado->lastname}}</td>
-            <td>{{$interesado->email}}</td>
-            <td>{{$interesado->dni}}</td>
-            <td>{{$interesado->phone}}</td>
+            <tr>
+            <td>{{$interesado->inscripcion->name." ".$interesado->inscripcion->lastname}}</td>
+            <td>{{$interesado->inscripcion->email}}</td>
+            <td>{{$interesado->inscripcion->dni}}</td>
+            <td>{{$interesado->inscripcion->phone}}</td>
             @php
-                $telefono=str_replace('+','',$interesado->phone);
+                $telefono  = str_replace('+','',$interesado->inscripcion->phone);
                 $telefono2 = str_replace(' ','',$telefono);
             @endphp
             <td>
               @can('admin.usuarios.administrador')
-              <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->id}})"><i class="fas fa-user-minus"></i></button></td>
+              <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->inscripcion->id}})"><i class="fas fa-user-minus"></i></button></td>
               @endcan
               <td>
               <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$interesado->id}})"><i class="fas fa-edit"></i></a>
-              <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
-              <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$interesado->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
+              <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->inscripcion->name." ".$interesado->inscripcion->lastname}}%0A👤Usuario%3A%20{{$interesado->inscripcion->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+              <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$interesado->inscripcion->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
             </td>
             @if ($interesado->comprobante_imagen)
             <td>
