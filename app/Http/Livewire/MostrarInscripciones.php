@@ -190,7 +190,8 @@ class MostrarInscripciones extends Component
         $this->inscripciones = $inicio->inscripcions;
        }
        /*-------------------------*/
-       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="") {
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="") 
+        {   dd("estoy aca");
             $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma);
         }
         /*-------------------------*/
