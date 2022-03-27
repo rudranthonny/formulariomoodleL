@@ -204,7 +204,7 @@
                   }
                 } 
             @endphp
-            @if ($tienematricula == false)
+            @if ($tienematricula == true)
             <tr>
               <td>{{$interesado->name." ".$interesado->lastname}}</td>
               <td>{{$interesado->email}}</td>
