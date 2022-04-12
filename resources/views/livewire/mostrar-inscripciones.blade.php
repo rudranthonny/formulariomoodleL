@@ -1,15 +1,15 @@
-<div class="card-body">
+<div class="card-body p-0 pt-2">
   @php
       $tsoles = 0;
       $tdolares = 0;
   @endphp
-  <div class="container p-4">
+  <div class="container p-lg-4">
     <div class="row">
-      <div class="col-3">
+      <div class="col-12 col-lg-3">
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
       </div>
       <!---->
-      <div class="col-3">
+      <div class="col-12 col-lg-3">
         <select class="form-select" aria-label="Default select example" wire:model="binicio">
           <option value="no">Elegir Inicio</option>
           @foreach ($inicios as $inicio)
@@ -18,7 +18,7 @@
         </select>
       <!---->
       </div>
-      <div class="col-3">
+      <div class="col-12 col-lg-3">
         <select class="form-select" aria-label="Default select example" wire:model="bprograma">
           <option value="no">Elegir programa</option>
           @foreach ($programas as $programa)
@@ -27,7 +27,7 @@
         </select>
       </div>
       @if ($bprograma != "no")
-      <div class="col-3"> 
+      <div class="col-12 col-lg-3"> 
         <select class="form-select" aria-label="Default select example" wire:model="bmatriculado">
           <option value="todos">Todos</option>
           <option value="matriculados">matriculados</option>
@@ -46,7 +46,7 @@
     </div>
     @if ($bmatriculado == "matriculados")
     <div class="row pt-1">
-      <div class="col-3">   
+      <div class="col-12 col-lg-3">   
         <select class="form-select" aria-label="Default select example" wire:model="bestado">
           <option value=''>todos</option>
           <option value="pagante">Pagante</option>
@@ -54,7 +54,7 @@
         </select>
       </div>
       @if ($bestado == 'pagante')
-      <div class="col-3">   
+      <div class="col-12 col-lg-3">   
         <select class="form-select"  aria-label="Default select example" wire:model="bagente">
           <option value="">Elegir Agente</option> 
           <option value="Banco/Agencia">Banco/Agencia</option> 
@@ -76,6 +76,7 @@
     @endif
   </div>
     @if ($inscripciones)
+    <div class="table-responsive">
     <table class="table" id="tabla-m" class="table table-striped">
         <thead>
             <tr class="bg-dark">
@@ -290,8 +291,8 @@
         @endif
         nº : {{$inscripciones->count()}}
       </table>
-      
-    @else
+    </div>  
+      @else
         <div class="px-6 py-4">
                 No existe ningun registro coincidente
         </div>

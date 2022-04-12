@@ -16,7 +16,7 @@
     <div class="card-header">
         <a class="btn btn-primary" href="{{route('admin.plantillas.create')}}" role="button">Crear Plantilla</a>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive">
         <table class="table">
             <thead>
               <tr class="bg-dark">
@@ -42,7 +42,7 @@
               </tr>
               @endforeach
             </tbody>
-          </table>
+        </table>
     </div>
    </div>
 @stop
