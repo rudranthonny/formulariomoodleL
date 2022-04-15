@@ -16,7 +16,7 @@
     <div class="card-header">
         <a class="btn btn-primary" href="{{route('admin.programas.create')}}" role="button">Crear Programa</a>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive">
         <table class="table">
             <thead>
               <tr class="bg-dark">

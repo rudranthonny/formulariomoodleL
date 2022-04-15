@@ -17,7 +17,8 @@
         <a class="btn btn-primary" href="{{route('admin.inicios.create')}}" role="button">Crear Inicio</a>
     </div>
     <div class="card-body">
-        <table class="table">
+      <div class="table-responsive">
+        <table id="tablaA" class="table table-striped">
             <thead>
               <tr class="bg-dark">
                 <th scope="col">Name</th>
@@ -45,14 +46,25 @@
               @endforeach
             </tbody>
           </table>
+        </div>
     </div>
    </div>
 @stop
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script>
-@stop
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+   <script>
+     $(document).ready(function() {
+    $('#tablaA').DataTable();
+} );
+   </script>
+    @stop

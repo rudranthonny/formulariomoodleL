@@ -5,9 +5,9 @@
     <div class="m-4">
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
     </div>
-    <div class="m-4">
+    <div class="m-4 ">
         @if ($usuarios->count())
-
+        <div class="table-responsive">
             <table class="table">
                 <thead class="table-dark">
                     <tr>
@@ -53,7 +53,8 @@
                     @endforeach
                     </tbody>
                 </table>
-            @else
+            </div>
+                @else
                 <div class="px-6 py-4">
                     No existe ningun registro coincidente
                 </div>

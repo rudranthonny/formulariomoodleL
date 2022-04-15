@@ -13,6 +13,7 @@
         <a class="btn btn-primary" href="{{route('admin.usuarios.create')}}" role="button">Crear estudiante</a>
     </div>
         <hr>
+        <div class="table-responsive">
         <table class="table" id="tabla-m" class="table table-striped">
             <thead>
               <tr class="bg-dark">
@@ -38,6 +39,7 @@
               @endforeach
             </tbody>
           </table>
+        </div>
     </div>
    </div>
 @stop

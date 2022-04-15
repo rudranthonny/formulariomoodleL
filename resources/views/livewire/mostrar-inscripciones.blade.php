@@ -5,9 +5,9 @@
   @endphp
   <div class="container p-lg-4">
     <div class="row">
-      <div class="col-12 col-lg-3">
+      <!--<div class="col-12 col-lg-3">
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
-      </div>
+      </div>-->
       <!---->
       <div class="col-12 col-lg-3">
         <select class="form-select" aria-label="Default select example" wire:model="binicio">
