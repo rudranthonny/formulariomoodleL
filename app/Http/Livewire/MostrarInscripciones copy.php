@@ -28,9 +28,8 @@ class MostrarInscripciones extends Component
     public $inscripciones;
     public $inscripciones2;
     public $binicio="no";
-    public $tinicio;
-    public $bestado="todos";
-    public $bagente="todos";
+    public $bestado="";
+    public $bagente="";
     public $iteration;
     public $blista="30";
     public $sort = "id";
@@ -129,26 +128,102 @@ class MostrarInscripciones extends Component
         $this->bprograma = $this->bprograma;
     }
     public function render()    
-    {  
-      if($this->binicio == "no")
-      {
+    {  /* 
+        if ($this->bmatriculado == "nomatriculados") {
+            $inscripciones = DB::table('inscripcions')
+            ->where('inicio_id',$this->binicio)
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw('NULL'))
+                      ->from('matriculas')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
+                      ->where('matriculas.programa_id',$this->bprograma);
+            })->paginate($this->blista);
+        }
+        elseif($this->bestado == "pagante" && $this->bmatriculado == "matriculados"){
+          
+            $inscripciones = DB::table('inscripcions')
+            ->where('inicio_id',$this->binicio)
+            ->whereExists(function ($query) {
+                $query->select(DB::raw('*'))
+                      ->from('matriculas')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
+                      ->wherenotnull('matriculas.comprobante_imagen')
+                      ->where('matriculas.programa_id',$this->bprograma)
+                      ->where('agente','like','%'.$this->bagente.'%');
+            })->paginate($this->blista);
+        }
+        elseif($this->bestado == "deudor" && $this->bmatriculado == "matriculados"){
+            $inscripciones = DB::table('inscripcions')
+            ->where('inicio_id',$this->binicio)
+            ->whereExists(function ($query) {
+                $query->select(DB::raw('*'))
+                      ->from('matriculas')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
+                      ->wherenull('matriculas.comprobante_imagen')
+                      ->where('matriculas.programa_id',$this->bprograma);
+            })->paginate($this->blista);
+        }
+        elseif ($this->bmatriculado == "matriculados" && $this->bestado == "") {
+            $inscripciones = DB::table('inscripcions')
+            ->where('inicio_id',$this->binicio)
+            ->whereExists(function ($query) {
+                $query->select(DB::raw('*'))
+                      ->from('matriculas')
+                      ->whereColumn('inscripcions.user_id', 'matriculas.user_id')
+                      ->where('matriculas.programa_id',$this->bprograma);
+            })->paginate($this->blista);
+        }
+       
+        else{
+            $inscripciones = Inscripcion::where('name','like','%' . $this->search.'%')
+            ->where('inicio_id',$this->binicio)
+            ->paginate($this->blista);
+        }
+       
+       */
+      if($this->binicio == "no"){
         $this->inscripciones = "";
-      }
+       }
        /*-------------------------*/
-      if($this->binicio != "no")
-      {
-        $this->tinicio = Inicio::find($this->binicio);
-        $this->inscripciones = Inscripcion::where('name','like','%'.$this->search.'%')
-        ->orwhere('lastname','like','%' . $this->search.'%')
-        ->orwhere('email','like','%' . $this->search.'%')
-        ->orwhere('phone','like','%' . $this->search.'%')
-        ->orwhere('dni','like','%' . $this->search.'%')->get();   
-      }
-     
+       if(($this->binicio != "no") && ($this->bmatriculado == "todos")){
+        $inicio = Inicio::find($this->binicio);
+        $this->inscripciones = $inicio->inscripcions;
+       }
+       /*-------------------------*/
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="") 
+        {   //aca solo los matriculados
+            $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma);
+            //$inicio = Inicio::find($this->binicio);
+            //$this->inscripciones = $inicio->inscripcions;
+        }
+        /*-------------------------*/
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="pagante" && $this->bagente == "") {
+        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',"<>",null);  
+        }
+
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="pagante" && $this->bagente != "" ) {
+            $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',"<>",null)->where('agente',$this->bagente);
+       }
+       
+       if ($this->bmatriculado == "matriculados"  && $this->binicio != null && $this->bprograma != "no" && $this->bestado=="deudor") 
+       {
+        $this->inscripciones = Matricula::all()->where('programa_id',$this->bprograma)->where('comprobante',null);           
+        }
+
+       if ($this->bmatriculado == "nomatriculados" && $this->binicio != null && $this->bprograma != "no") {
+        $this->inscripciones = DB::table('inscripcions')
+        ->join('inicio_inscripcion', 'inicio_inscripcion.inscripcion_id', '=', 'inscripcions.id')
+        ->where('inicio_inscripcion.inicio_id',$this->binicio)
+        ->whereNotExists(function ($query) {
+            $query->select(DB::raw('*'))
+                  ->from('matriculas')
+                  ->whereColumn('inscripcions.id', 'matriculas.inscripcion_id')
+                  ->where('matriculas.programa_id',$this->bprograma);
+        })->get();
+       }
         $matriculas = Matricula::where('programa_id',$this->bprograma)->get();
         $programas = Programa::all();
         $inicios = Inicio::all();
         return view('livewire.mostrar-inscripciones',compact('matriculas','programas','inicios'));
     }
-
 }

@@ -9,6 +9,10 @@
         <input class="form-control" id="exampleDataList" placeholder="Buscar usuario" wire:model="search">
       </div>-->
       <!---->
+      <div class="col-12 pb-2">
+        <input type="search" class="form-control" id="search" placeholder="Buscar estudiante" wire:model="search">
+      <!---->
+      </div>
       <div class="col-12 col-lg-3">
         <select class="form-select" aria-label="Default select example" wire:model="binicio">
           <option value="no">Elegir Inicio</option>
@@ -48,7 +52,7 @@
     <div class="row pt-1">
       <div class="col-12 col-lg-3">   
         <select class="form-select" aria-label="Default select example" wire:model="bestado">
-          <option value=''>todos</option>
+          <option value='todos'>todos</option>
           <option value="pagante">Pagante</option>
           <option value="deudor">Deudor</option>
         </select>
@@ -56,7 +60,7 @@
       @if ($bestado == 'pagante')
       <div class="col-12 col-lg-3">   
         <select class="form-select"  aria-label="Default select example" wire:model="bagente">
-          <option value="">Elegir Agente</option> 
+          <option value="todos">Elegir Agente</option> 
           <option value="Banco/Agencia">Banco/Agencia</option> 
           <option value="BancoNacion">Banco de la Nación</option> 
           <option value="BBVA">BBVA</option>
@@ -74,11 +78,12 @@
       @endif
     </div>
     @endif
+
   </div>
     @if ($inscripciones)
-    <div class="table-responsive">
-    <table class="table" id="tabla-m" class="table table-striped">
-        <thead>
+      <div class="table-responsive">
+        <table class="table" id="tablaA" class="table table-striped">
+          <thead>
             <tr class="bg-dark">
               <th scope="col">ESTUDIANTE</th>
               <th scope="col">EMAIL</th>
@@ -91,215 +96,330 @@
               <th scope="col">$/.</th>
               <th scope="col">Forma de Pago</th>
             </tr>
-        </thead>
-        @if ($bmatriculado == "todos")
-        <tbody>
-          @foreach ($inscripciones as $interesado)
-            <tr>
-              <td>{{$interesado->name." ".$interesado->lastname}}</td>
-              <td>{{$interesado->email}}</td>
-              <td>{{$interesado->dni}}</td>
-              <td>{{$interesado->phone}}</td>
-               @php
-                $telefono=str_replace('+','',$interesado->phone);
-                $telefono2 = str_replace(' ','',$telefono);
-              @endphp
-              <td>
-              @can('admin.usuarios.administrador')
-                <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->id}})"><i class="fas fa-user-minus"></i></button>
-              @endcan
-              </td>
+          </thead>
+          <tbody>
+            @foreach ($inscripciones as $usuario)
               @php
-              $existematricula = false;
-              $pertenece = false;
-              foreach($interesado->matriculas as $matricula){
-                if ($matricula->programa_id == $bprograma) {
-                  $existematricula = true;
-                  if($matricula->cajero_id == auth()->user()->id)
-                  {
-                    $pertenece = true;
+                $pertenece = false;
+                
+                  foreach ($tinicio->inscripcions as $usuario2) {
+                    if ($usuario->id == $usuario2->id) {
+                      $pertenece = true;
+                      break;
+                    }
                   }
-                  $id_matricula = $matricula->id;
-                  break;
-                }
-              }
+                  if($bprograma !="no")
+                  { 
+                    $matriculado = false;
+                    $lagente = false;
+                    foreach ($matriculas as $matricula) 
+                    {
+                      if ($usuario->id == $matricula->inscripcion->id) {
+                        $matriculado = true;
+                        $lpagante = $matricula->comprobante;
+                        $id_matricula = $matricula->id;
+                        if($bagente == $matricula->agente){
+                          $lagente = true;
+                        }
+                        break;
+                      }
+                    }
+                  }
               @endphp
-              @if ($bprograma != "no")
-              @if ($interesado->matriculas != "[]")
-              @if($existematricula == true)
-              <td>
-                @if ($pertenece == true or auth()->user()->id == 1)
-                <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$id_matricula}})"><i class="fas fa-edit"></i></a>
-                <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$interesado->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
-                @endif
-              </td>
-              @else
-              <td>
-                <button class="btn btn-dark" role="button" wire:click="matricularprograma({{$interesado->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button>
-                <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$interesado->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
-              </td>
-              @endif
-              @if ($matricula->comprobante_imagen)
-              <td><a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a></td>
-               @if ($matricula->tipo == "Soles")
-                 <td>{{"s/. ".$matricula->costo}}</td>
-                 @php $tsoles = $tsoles + $matricula->costo;@endphp  
-                 @else
-                 <td>-</td>
-                 @endif
-                 @if ($matricula->tipo == "Dolares")
-                 <td>{{"$/. ".$matricula->costo}}</td>  
-                 @php $tdolares = $tdolares + $matricula->costo;@endphp 
-                 @else
-                 <td>-</td>
-                 @endif
-                 <td>{{$matricula->agente}}</td>
-                @else
-                <td>no</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                @endif
-                @else
-                <td>
-                  <button class="btn btn-dark" role="button" wire:click="matricularprograma({{$interesado->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button>
-                  <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                  <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$interesado->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
-                </td>
-                <td>no</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                @endif
-                @else
-                <td>-</td>
-                @endif
-          </tr>
-          @endforeach
-          @if ($bprograma != "no")
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Total</td>
-            <td>{{"s/. ".$tsoles}}</td>
-            <td>{{"$/. ".$tdolares}}</td>
-          </tr>
-          @endif
-        </tbody>
-        @elseif($bmatriculado == "matriculados")
-        <tbody>
-          
-          @foreach ($inscripciones as $interesado)
-          @php
-              $pertence = false;
-              foreach ($interesado->inscripcion->inicios as $inicio) {
-                if ($inicio->id == $binicio) {
-                  $pertence = true;
-                }
-              }
-          @endphp
-          @if( $pertence == true)
-          <tr>
-            <td>{{$interesado->inscripcion->name." ".$interesado->inscripcion->lastname}}</td>
-            <td>{{$interesado->inscripcion->email}}</td>
-            <td>{{$interesado->inscripcion->dni}}</td>
-            <td>{{$interesado->inscripcion->phone}}</td>
+            @if ($bmatriculado == 'todos')
+            @if ($pertenece == true)
+            <tr>
+            <td>{{$usuario->name}}</td>
+            <td>{{$usuario->email}}</td>
+            <td>{{$usuario->dni}}</td>
+            <td>{{$usuario->phone}}</td>
             @php
-                $telefono  = str_replace('+','',$interesado->inscripcion->phone);
-                $telefono2 = str_replace(' ','',$telefono);
+              $telefono=str_replace('+','',$usuario->phone);
+              $telefono2 = str_replace(' ','',$telefono);
             @endphp
             <td>
-              @can('admin.usuarios.administrador')
-              <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->inscripcion->id}})"><i class="fas fa-user-minus"></i></button></td>
-              @endcan
+            @can('admin.usuarios.administrador')
+              <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$usuario->id}})"><i class="fas fa-user-minus"></i></button>
+            @endcan
+            </td>
+            @if ($bprograma !="no")
+              @if($matriculado == true)
+                <td>
+                  @if (auth()->user()->id == 1)
+                  <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$id_matricula}})"><i class="fas fa-edit"></i></a>
+                  <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$usuario->name." ".$usuario->lastname}}%0A👤Usuario%3A%20{{$usuario->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                  <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$usuario->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
+                  @endif
+                </td>
+                @if ($matricula->comprobante_imagen)
+                  <td><a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a></td>
+                  @if ($matricula->tipo == "Soles")
+                  <td>{{"s/. ".$matricula->costo}}</td>
+                  @php $tsoles = $tsoles + $matricula->costo;@endphp  
+                  @else
+                  <td>-</td>
+                  @endif
+                  @if ($matricula->tipo == "Dolares")
+                  <td>{{"$/. ".$matricula->costo}}</td>  
+                  @php $tdolares = $tdolares + $matricula->costo;@endphp 
+                  @else
+                  <td>-</td>
+                  @endif
+                  <td>{{$matricula->agente}}</td>
+                  @else
+                  <td>no</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                @endif
+          @elseif($matriculado == false)
               <td>
-              <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$interesado->id}})"><i class="fas fa-edit"></i></a>
-              <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->inscripcion->name." ".$interesado->inscripcion->lastname}}%0A👤Usuario%3A%20{{$interesado->inscripcion->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
-              <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$interesado->inscripcion->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
-            </td>
-            @if ($interesado->comprobante_imagen)
-            <td>
-              <a href="{{asset($interesado->comprobante_imagen)}}" target="_blank">ver</a>   
-            </td>
-            @if ($interesado->tipo == "Soles")
-                  <td>{{"s/. ".$interesado->costo}}</td>
-                  @php $tsoles = $tsoles + $interesado->costo;@endphp  
-                  @else
-                  <td>-</td>
-                  @endif
-                  @if ($interesado->tipo == "Dolares")
-                  <td>{{"$/. ".$interesado->costo}}</td>  
-                  @php $tdolares = $tdolares + $interesado->costo;@endphp 
-                  @else
-                  <td>-</td>
-                  @endif
-                  <td>{{$interesado->agente}}</td>
-              @else
+                <button class="btn btn-dark" role="button" wire:click="matricularprograma({{$usuario->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button>
+              </td>
               <td>no</td>
               <td>-</td>
               <td>-</td>
               <td>-</td>
               @endif
-          </tr>
+            @else
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            @endif
+            </tr>
           @endif
-          @endforeach
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Total</td>
-            <td>{{"s/. ".$tsoles}}</td>
-            <td>{{"$/. ".$tdolares}}</td>
-          </tr>
-        </tbody>
-        @elseif($bmatriculado == "nomatriculados")
-        <tbody>
-          @foreach ($inscripciones as $interesado)
-            <tr>
-            <td>{{$interesado->name." ".$interesado->lastname}}</td>
-            <td>{{$interesado->email}}</td>
-            <td>{{$interesado->dni}}</td>
-            <td>{{$interesado->phone}}</td>
-            @php
-                $telefono=str_replace('+','',$interesado->phone);
-                $telefono2 = str_replace(' ','',$telefono);
-            @endphp
-            @can('admin.usuarios.administrador')
-            <td><button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$interesado->inscripcion_id}})"><i class="fas fa-user-minus"></i></button></td>
-            @endcan
-            <td>
-              <button class="btn btn-dark" role="button" wire:click="matricularprograma({{$interesado->inscripcion_id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button>
-              <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$interesado->name." ".$interesado->lastname}}%0A👤Usuario%3A%20{{$interesado->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
-              <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$interesado->inscripcion_id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
-            </td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-          @endforeach
-        </tbody>
-        @endif
-        nº : {{$inscripciones->count()}}
-      </table>
-    </div>  
-      @else
+          <!--matriculados-->
+            @elseif ($bmatriculado == 'matriculados' && $matriculado == true)
+            @if($bestado == "todos")
+              <tr>
+                <td>{{$usuario->name}}</td>
+                <td>{{$usuario->email}}</td>
+                <td>{{$usuario->dni}}</td>
+                <td>{{$usuario->phone}}</td>
+                @php
+                  $telefono=str_replace('+','',$usuario->phone);
+                  $telefono2 = str_replace(' ','',$telefono);
+                @endphp
+                <td>
+                @can('admin.usuarios.administrador')
+                  <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$usuario->id}})"><i class="fas fa-user-minus"></i></button>
+                @endcan
+                </td>
+                <td>
+                  @if (auth()->user()->id == 1)
+                        <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$id_matricula}})"><i class="fas fa-edit"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$usuario->name." ".$usuario->lastname}}%0A👤Usuario%3A%20{{$usuario->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$usuario->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
+                  @endif
+                </td>
+                      @if ($matricula->comprobante_imagen)
+                        <td><a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a></td>
+                        @if ($matricula->tipo == "Soles")
+                        <td>{{"s/. ".$matricula->costo}}</td>
+                        @php $tsoles = $tsoles + $matricula->costo;@endphp  
+                        @else
+                        <td>-</td>
+                        @endif
+                        @if ($matricula->tipo == "Dolares")
+                        <td>{{"$/. ".$matricula->costo}}</td>  
+                        @php $tdolares = $tdolares + $matricula->costo;@endphp 
+                        @else
+                        <td>-</td>
+                        @endif
+                        <td>{{$matricula->agente}}</td>
+                      @else
+                        <td>no</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      @endif
+                  </tr>
+            @elseif($bestado == "pagante" && $lpagante == true)
+                @if ($bagente == "todos")
+                <tr>
+                  <td>{{$usuario->name}}</td>
+                  <td>{{$usuario->email}}</td>
+                  <td>{{$usuario->dni}}</td>
+                  <td>{{$usuario->phone}}</td>
+                  @php
+                    $telefono=str_replace('+','',$usuario->phone);
+                    $telefono2 = str_replace(' ','',$telefono);
+                  @endphp
+                  <td>
+                  @can('admin.usuarios.administrador')
+                    <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$usuario->id}})"><i class="fas fa-user-minus"></i></button>
+                  @endcan
+                  </td>
+                  <td>
+                    @if (auth()->user()->id == 1)
+                          <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$id_matricula}})"><i class="fas fa-edit"></i></a>
+                          <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$usuario->name." ".$usuario->lastname}}%0A👤Usuario%3A%20{{$usuario->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                          <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$usuario->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
+                    @endif
+                  </td>
+                        @if ($matricula->comprobante_imagen)
+                          <td><a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a></td>
+                          @if ($matricula->tipo == "Soles")
+                          <td>{{"s/. ".$matricula->costo}}</td>
+                          @php $tsoles = $tsoles + $matricula->costo;@endphp  
+                          @else
+                          <td>-</td>
+                          @endif
+                          @if ($matricula->tipo == "Dolares")
+                          <td>{{"$/. ".$matricula->costo}}</td>  
+                          @php $tdolares = $tdolares + $matricula->costo;@endphp 
+                          @else
+                          <td>-</td>
+                          @endif
+                          <td>{{$matricula->agente}}</td>
+                        @else
+                          <td>no</td>
+                          <td>-</td>
+                          <td>-</td>
+                          <td>-</td>
+                        @endif
+                    </tr>
+                @else
+                  @if($lagente == true)
+                  <tr>
+                    <td>{{$usuario->name}}</td>
+                    <td>{{$usuario->email}}</td>
+                    <td>{{$usuario->dni}}</td>
+                    <td>{{$usuario->phone}}</td>
+                    @php
+                      $telefono=str_replace('+','',$usuario->phone);
+                      $telefono2 = str_replace(' ','',$telefono);
+                    @endphp
+                    <td>
+                    @can('admin.usuarios.administrador')
+                      <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$usuario->id}})"><i class="fas fa-user-minus"></i></button>
+                    @endcan
+                    </td>
+                    <td>
+                      @if (auth()->user()->id == 1)
+                            <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$id_matricula}})"><i class="fas fa-edit"></i></a>
+                            <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$usuario->name." ".$usuario->lastname}}%0A👤Usuario%3A%20{{$usuario->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$usuario->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
+                      @endif
+                    </td>
+                          @if ($matricula->comprobante_imagen)
+                            <td><a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a></td>
+                            @if ($matricula->tipo == "Soles")
+                            <td>{{"s/. ".$matricula->costo}}</td>
+                            @php $tsoles = $tsoles + $matricula->costo;@endphp  
+                            @else
+                            <td>-</td>
+                            @endif
+                            @if ($matricula->tipo == "Dolares")
+                            <td>{{"$/. ".$matricula->costo}}</td>  
+                            @php $tdolares = $tdolares + $matricula->costo;@endphp 
+                            @else
+                            <td>-</td>
+                            @endif
+                            <td>{{$matricula->agente}}</td>
+                          @else
+                            <td>no</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                          @endif
+                      </tr>
+                  @endif
+                @endif
+           
+            @elseif($bestado == "deudor" && $lpagante == false)
+              <tr>
+                <td>{{$usuario->name}}</td>
+                <td>{{$usuario->email}}</td>
+                <td>{{$usuario->dni}}</td>
+                <td>{{$usuario->phone}}</td>
+                @php
+                  $telefono=str_replace('+','',$usuario->phone);
+                  $telefono2 = str_replace(' ','',$telefono);
+                @endphp
+                <td>
+                @can('admin.usuarios.administrador')
+                  <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$usuario->id}})"><i class="fas fa-user-minus"></i></button>
+                @endcan
+                </td>
+                <td>
+                  @if (auth()->user()->id == 1)
+                        <a class="btn btn-success" data-toggle="modal" data-target="#ventanaModal3" wire:click="editarmatricula({{$id_matricula}})"><i class="fas fa-edit"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone={{$telefono2}}&text=Bienvenido%20a%20Learclass.com%20'Estudia%20sin%20límites'%0AAquí%20te%20brindo%20los%20accesos%20a%20la%20plataforma%20de%3A%0A%0Ahttps%3A%2F%2Flearclass.com%0A{{$usuario->name." ".$usuario->lastname}}%0A👤Usuario%3A%20{{$usuario->email}}%0A👁%E2%80%8D🗨Contraseña%3A%20123456789%0A%0ARecuerda%20cambiar%20tu%20contraseña%0A%0APara%20consultas%20agréganos%20en%20tus%20contactos%3A%20%0A📞💬%20%2B51%20986%20682%20565%0A📧%20hola%40learclass.com%0A%0ATutorial%20como%20acceder%20a%20la%20plataforma%0Ahttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNOzThM7FtiI" class="btn btn-success" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <button class="btn btn-danger" role="button" wire:click="enviarmensaje({{$usuario->id}})" wire:loading.attr="disabled" wire:target="enviarmensaje"><i class="fas fa-envelope"></i></button>
+                  @endif
+                </td>
+                      @if ($matricula->comprobante_imagen)
+                        <td><a href="{{asset($matricula->comprobante_imagen)}}" target="_blank">ver</a></td>
+                        @if ($matricula->tipo == "Soles")
+                        <td>{{"s/. ".$matricula->costo}}</td>
+                        @php $tsoles = $tsoles + $matricula->costo;@endphp  
+                        @else
+                        <td>-</td>
+                        @endif
+                        @if ($matricula->tipo == "Dolares")
+                        <td>{{"$/. ".$matricula->costo}}</td>  
+                        @php $tdolares = $tdolares + $matricula->costo;@endphp 
+                        @else
+                        <td>-</td>
+                        @endif
+                        <td>{{$matricula->agente}}</td>
+                      @else
+                        <td>no</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      @endif
+                  </tr>
+            @endif
+              @elseif ($bmatriculado == 'nomatriculados' && $matriculado == false)
+                  <tr>
+                  <td>{{$usuario->name}}</td>
+                  <td>{{$usuario->email}}</td>
+                  <td>{{$usuario->dni}}</td>
+                  <td>{{$usuario->phone}}</td>
+                  @php
+                    $telefono=str_replace('+','',$usuario->phone);
+                    $telefono2 = str_replace(' ','',$telefono);
+                  @endphp
+                  <td>
+                  @can('admin.usuarios.administrador')
+                    <button  class="btn btn-danger" wire:click="$emit('deleteInscripcion',{{$usuario->id}})"><i class="fas fa-user-minus"></i></button>
+                  @endcan
+                  </td>
+                  @if ($bprograma !="no")
+                    @if($matriculado == false)
+                    <td>
+                      <button class="btn btn-dark" role="button" wire:click="matricularprograma({{$usuario->id}})" wire:loading.attr="disabled" wire:target="matricularprograma"><i class="fas fa-plus-circle"></i></button>
+                    </td>
+                    <td>no</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    @endif
+                  </tr>
+              @endif
+            @endif
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    @else
         <div class="px-6 py-4">
                 No existe ningun registro coincidente
         </div>
     @endif
-    
-
   @push('js')
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+   <script>
+        $(document).ready(function() {
+        $('#tablaA').DataTable();
+        } );
+   </script>
   <script>
     livewire.on('deleteInscripcion', iscID =>{
       Swal.fire({
