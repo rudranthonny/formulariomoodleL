@@ -416,12 +416,12 @@
             @endif
             @endforeach
           </tbody>
-          @if ($bmatriculado == "matriculados")
+          @if($bmatriculado == "matriculados" && $bestado == "pagante")
+          nº :  {{$n_pagante}} 
+          @elseif ($bmatriculado == "matriculados")
           nº : {{$n_pertence2}}
           @elseif($bmatriculado == "nomatriculados")
           nº : {{($n_pertence - $n_pertence2)}}
-          @elseif($bmatriculado == "matriculados" && $bestado == "pagante")
-          nº :  {{$n_pagante}} 
           @else  
           nº :  {{$n_pertence}}  
           @endif  
