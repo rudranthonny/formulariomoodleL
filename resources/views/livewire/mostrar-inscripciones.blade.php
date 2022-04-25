@@ -98,13 +98,16 @@
             </tr>
           </thead>
           <tbody>
+            @php
+                 $n_pertence = 0;
+            @endphp
             @foreach ($inscripciones as $usuario)
               @php
                 $pertenece = false;
-                
                   foreach ($tinicio->inscripcions as $usuario2) {
                     if ($usuario->id == $usuario2->id) {
                       $pertenece = true;
+                      $n_pertence = $n_pertence+1;
                       break;
                     }
                   }
@@ -404,6 +407,7 @@
             @endif
             @endforeach
           </tbody>
+          nº :  {{$n_pertence}}
         </table>
       </div>
     @else
