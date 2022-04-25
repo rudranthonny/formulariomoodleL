@@ -130,6 +130,11 @@ class MostrarInscripciones extends Component
     }
     public function render()    
     {  
+        if($this->bprograma == "no")
+      {
+        $this->bmatriculado = "todos";
+      }
+
       if($this->binicio == "no")
       {
         $this->inscripciones = "";
