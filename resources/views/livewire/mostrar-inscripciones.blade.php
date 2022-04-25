@@ -120,7 +120,11 @@
                     {
                       if ($usuario->id == $matricula->inscripcion->id) {
                         $matriculado = true;
-                        $n_pertence2 = $n_pertence2+1;
+                        if ($pertenece == true) {
+                          $n_pertence2 = $n_pertence2+1;
+                        }
+                        
+                        
                         $lpagante = $matricula->comprobante;
                         $id_matricula = $matricula->id;
                         if($bagente == $matricula->agente){
