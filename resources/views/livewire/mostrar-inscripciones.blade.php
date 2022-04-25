@@ -196,7 +196,7 @@
             </tr>
           @endif
           <!--matriculados-->
-            @elseif ($bmatriculado == 'matriculados' && $matriculado == true && $pertence == true)
+            @elseif ($bmatriculado == 'matriculados' && $matriculado == true && $pertenece == true)
             @if($bestado == "todos")
               <tr>
                 <td>{{$usuario->name}}</td>
@@ -379,7 +379,7 @@
                       @endif
                   </tr>
             @endif
-              @elseif ($bmatriculado == 'nomatriculados' && $matriculado == false && $pertence == true)
+              @elseif ($bmatriculado == 'nomatriculados' && $matriculado == false && $pertenece == true)
                   <tr>
                   <td>{{$usuario->name}}</td>
                   <td>{{$usuario->email}}</td>
