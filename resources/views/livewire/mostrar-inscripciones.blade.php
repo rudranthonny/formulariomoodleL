@@ -101,6 +101,7 @@
             @php
                  $n_pertence = 0;
                  $n_pertence2 = 0;
+                 $n_pagante = 0;
             @endphp
             @foreach ($inscripciones as $usuario)
               @php
@@ -124,11 +125,13 @@
                           $n_pertence2 = $n_pertence2+1;
                         }
                         
-                        
                         $lpagante = $matricula->comprobante;
                         $id_matricula = $matricula->id;
                         if($bagente == $matricula->agente){
                           $lagente = true;
+                          if ($pertenece == true) {
+                            $n_pagante = $n_pagante+1;
+                          }
                         }
                         break;
                       }
@@ -417,6 +420,8 @@
           nº : {{$n_pertence2}}
           @elseif($bmatriculado == "nomatriculados")
           nº : {{($n_pertence - $n_pertence2)}}
+          @elseif($bmatriculado == "matriculados" && $bestado == "pagante")
+          nº :  {{$n_pagante}} 
           @else  
           nº :  {{$n_pertence}}  
           @endif  
