@@ -1,0 +1,35 @@
+.cursor:hover {
+    cursor: pointer;
+    background-color: #e0e3e3;
+}
+
+#divdatosalumno .form-group {
+    margin-bottom: .3rem;
+}
+
+.divpagos {
+    font-size: 14px;
+}
+
+.p-inherit {
+    padding: inherit
+}
+
+.no-pointer-event {
+    pointer-events: none;
+}
+
+.btn-outline-secondary:focus {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.text-red-600 {
+    --tw-text-opacity: 1;
+    color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
+.hidden {
+    display: none;
+}

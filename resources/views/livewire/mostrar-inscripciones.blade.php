@@ -17,7 +17,7 @@
         <select class="form-select" aria-label="Default select example" wire:model="binicio">
           <option value="no">Elegir Inicio</option>
           @foreach ($inicios as $inicio)
-          <option value="{{$inicio->id}}">{{$inicio->name}}</option>
+          <option val ue="{{$inicio->id}}">{{$inicio->name}}</option>
           @endforeach    
         </select>
       <!---->
