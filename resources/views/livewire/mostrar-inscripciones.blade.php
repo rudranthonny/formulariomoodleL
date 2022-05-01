@@ -416,16 +416,17 @@
             @endif
             @endforeach
           </tbody>
-          @if($bmatriculado == "matriculados" && $bestado == "pagante")
-          nº :  {{$n_pagante}} 
-          @elseif ($bmatriculado == "matriculados")
-          nº : {{$n_pertence2}}
-          @elseif($bmatriculado == "nomatriculados")
-          nº : {{($n_pertence - $n_pertence2)}}
-          @else  
-          nº :  {{$n_pertence}}  
-          @endif  
+          
         </table>
+        @if($bmatriculado == "matriculados" && $bestado == "pagante")
+        nº :  {{$n_pagante}} 
+        @elseif ($bmatriculado == "matriculados")
+        nº : {{$n_pertence2}}
+        @elseif($bmatriculado == "nomatriculados")
+        nº : {{($n_pertence - $n_pertence2)}}
+        @else  
+        nº :  {{$n_pertence}}  
+        @endif 
       </div>
     @else
         <div class="px-6 py-4">
