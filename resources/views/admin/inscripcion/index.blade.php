@@ -28,8 +28,6 @@
         )
     })
 </script>
-<br>
-<br>
 @stop
 
 @section('css')
