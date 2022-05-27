@@ -276,6 +276,7 @@ return [
             'text' => 'Reporte',
             'route'  => 'admin.matricula.reportecajero',
             'icon' => 'fas fa-edit',
+            'can' => 'admin.usuarios.administrador'
         ],
         ['header' => 'OPCIONES GENERALES'],
             [
