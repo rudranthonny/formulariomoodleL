@@ -88,7 +88,7 @@
                         Cerrar
                     </button>
                     <button class="btn btn-success" wire:loading.attr="disabled" wire:target="registrarinscripcion" type="button" wire:click="registrarinscripcion">
-                        Subir Matriculas
+                        Subir Inscripción
                     </button>
                 </div>
         </div>
