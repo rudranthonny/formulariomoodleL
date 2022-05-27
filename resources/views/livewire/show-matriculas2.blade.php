@@ -27,7 +27,7 @@
                     <th>Estado</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-white"> 
                 @foreach ($matriculas as $matricula)
                 <tr>
                     <td>{{$matricula->name}}</td>
