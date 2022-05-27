@@ -253,7 +253,6 @@ return [
             'text' => 'matriculaciones',
             'route'  => 'admin.matricula.ventas',
             'icon' => 'fab fa-accusoft',
-            'can' => 'admin.usuarios.cajero'
         ],
         [
             'text' => 'Crear Usuarios',
