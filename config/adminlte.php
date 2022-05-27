@@ -261,12 +261,6 @@ return [
             'can' => 'admin.usuarios.administrador'
         ],
         [
-            'text' => 'Usuarios',
-            'route'  => 'admin.usuarios.index',
-            'icon' => 'fas fa-user',
-            'can' => 'admin.usuarios.administrador'
-        ],
-        [
             'text' => 'programas',
             'route'  => 'admin.programas.index',
             'icon' => 'fas fa-book',
