@@ -247,6 +247,7 @@ return [
             'text' => 'inscripciones',
             'route'  => 'admin.inscripciones.index',
             'icon' => 'fab fa-accusoft',
+            'can' => 'admin.usuarios.administrador'
         ],
         [
             'text' => 'matriculaciones',

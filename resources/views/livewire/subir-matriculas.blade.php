@@ -28,7 +28,7 @@
                         Cerrar
                     </button>
                     <button class="btn btn-success" wire:loading.attr="disable" wire:target="save, matriculas" type="button" wire:click="subirmatriculas">
-                        Subir Matriculas
+                        Matricular
                     </button>
                 </div>
         </div>
